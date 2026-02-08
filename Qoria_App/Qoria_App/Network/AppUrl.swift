@@ -7,25 +7,28 @@
 
 import Foundation
 
-class AppUrl {
-    
+final class AppUrl {
+
     static let shared = AppUrl()
-    
-    // base URL
+    private init() {}
+
+    // Example base
     private let baseURL = "https://apple.com"
     
-    // login URL
+    public func refreshURL() -> String {
+        return baseURL + "/auth/refresh"
+    }
+
     public func loginURL() -> String {
-        return baseURL + "ohohohoohoo"
+        // TODO: Replace with your real API
+        return baseURL + "/ohohohoohoo"
     }
-    
-    // privacy policy URL
-    public func privacyPolicyURL() -> String {
-        return baseURL + ""
+
+    // Quick test endpoint that returns JSON
+    public func testTodoURL() -> String {
+        return "https://jsonplaceholder.typicode.com/todos/1"
     }
-    
-    // terms and conditions URL
-    public func termsAndConditionsURL() -> String {
-        return baseURL + ""
-    }
+
+    public func privacyPolicyURL() -> String { baseURL + "/privacy" }
+    public func termsAndConditionsURL() -> String { baseURL + "/terms" }
 }

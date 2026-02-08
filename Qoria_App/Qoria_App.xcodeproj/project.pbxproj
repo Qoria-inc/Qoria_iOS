@@ -23,6 +23,11 @@
 		FF8CD8872F38DFA400017908 /* PhotosPicker in Frameworks */ = {isa = PBXBuildFile; productRef = FF8CD8862F38DFA400017908 /* PhotosPicker */; };
 		FF8CD88A2F38DFC100017908 /* WebViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF8CD8892F38DFC100017908 /* WebViewKit */; };
 		FF8CD88C2F38E00600017908 /* DynamicJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD88B2F38E00600017908 /* DynamicJSON.swift */; };
+		FF8CD8902F38E96E00017908 /* AuthTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD88F2F38E96C00017908 /* AuthTokenStore.swift */; };
+		FF8CD8922F38E98300017908 /* TokenRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8912F38E98100017908 /* TokenRefresher.swift */; };
+		FF8CD8942F38E9BD00017908 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8932F38E9BB00017908 /* AuthInterceptor.swift */; };
+		FF8CD8962F38E9D800017908 /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8952F38E9D600017908 /* NetworkLogger.swift */; };
+		FF8CD8982F38EAA200017908 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8972F38EAA100017908 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,12 @@
 		FF8CD87B2F38DCB300017908 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FF8CD87D2F38DCD100017908 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		FF8CD88B2F38E00600017908 /* DynamicJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicJSON.swift; sourceTree = "<group>"; };
+		FF8CD88F2F38E96C00017908 /* AuthTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenStore.swift; sourceTree = "<group>"; };
+		FF8CD8912F38E98100017908 /* TokenRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefresher.swift; sourceTree = "<group>"; };
+		FF8CD8932F38E9BB00017908 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		FF8CD8952F38E9D600017908 /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
+		FF8CD8972F38EAA100017908 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Qoria-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -180,6 +191,11 @@
 				FF8CD86F2F38DBC300017908 /* AppUrl.swift */,
 				FF8CD8712F38DBDB00017908 /* NetworkManager.swift */,
 				FF8CD8732F38DBE600017908 /* NetworkCall.swift */,
+				FF8CD88F2F38E96C00017908 /* AuthTokenStore.swift */,
+				FF8CD8912F38E98100017908 /* TokenRefresher.swift */,
+				FF8CD8932F38E9BB00017908 /* AuthInterceptor.swift */,
+				FF8CD8972F38EAA100017908 /* NetworkError.swift */,
+				FF8CD8952F38E9D600017908 /* NetworkLogger.swift */,
 				FF8CD88B2F38E00600017908 /* DynamicJSON.swift */,
 			);
 			path = Network;
@@ -197,6 +213,7 @@
 		FF8CD8672F38DAB100017908 /* Qoria_App */ = {
 			isa = PBXGroup;
 			children = (
+				FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */,
 				FF8CD85F2F38DAB100017908 /* App */,
 				FF8CD8652F38DAB100017908 /* View */,
 				FF8CD8642F38DAB100017908 /* Network */,
@@ -365,17 +382,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF8CD8962F38E9D800017908 /* NetworkLogger.swift in Sources */,
+				FF8CD8982F38EAA200017908 /* NetworkError.swift in Sources */,
 				FF8CD8762F38DC6700017908 /* ScreenSize.swift in Sources */,
+				FF8CD8942F38E9BD00017908 /* AuthInterceptor.swift in Sources */,
 				FF8CD87E2F38DCD400017908 /* AppColor.swift in Sources */,
 				FF8CD8722F38DBE100017908 /* NetworkManager.swift in Sources */,
 				FF8CD8702F38DBCA00017908 /* AppUrl.swift in Sources */,
 				FF8CD88C2F38E00600017908 /* DynamicJSON.swift in Sources */,
+				FF8CD8922F38E98300017908 /* TokenRefresher.swift in Sources */,
 				FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */,
 				FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */,
 				FF8CD8742F38DBEC00017908 /* NetworkCall.swift in Sources */,
 				FF8CD8782F38DC8600017908 /* Validation.swift in Sources */,
 				FF8CD87A2F38DCA200017908 /* Device.swift in Sources */,
 				FF8CD87C2F38DCBC00017908 /* Constants.swift in Sources */,
+				FF8CD8902F38E96E00017908 /* AuthTokenStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,11 +562,15 @@
 				DEVELOPMENT_TEAM = 4JWUSF25X2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Qoria-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Qoria;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -578,11 +604,15 @@
 				DEVELOPMENT_TEAM = 4JWUSF25X2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Qoria-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Qoria;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (

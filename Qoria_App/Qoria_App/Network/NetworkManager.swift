@@ -8,29 +8,75 @@
 import Foundation
 import Alamofire
 
-class NetworkManager {
-    
+final class NetworkManager {
+
     static let shared = NetworkManager()
-    
-    func makeGenericAPIRequestWithoutModel(url: String, method: HTTPMethod, parameters: Parameters? = nil, headers: HTTPHeaders? = nil, completion: @escaping (Result<Any, Error>) -> Void) {
-        AF.request(url, method: method, parameters: parameters, headers: headers).response { response in
-            switch response.result {
-                case .success(let data):
-                    completion(.success(data as Any))
-                case .failure(let error):
-                    completion(.failure(error))
-            }
-        }
+
+    private let session: Session
+
+    private init() {
+        let interceptor = AuthInterceptor()
+        #if DEBUG
+        let logger = NetworkLogger(level: .verbose)
+        #else
+        let logger = NetworkLogger(level: .basic)
+        #endif
+
+        session = Session(
+            interceptor: interceptor,
+            eventMonitors: [logger]
+        )
     }
-    
-    func makeGenericAPIRequestWithModel<T: Decodable>(url: String, method: HTTPMethod, parameters: Parameters? = nil, headers: HTTPHeaders? = nil, completion: @escaping (Result<T, Error>) -> Void) {
-        AF.request(url, method: method, parameters: parameters, headers: headers).responseDecodable { (response: DataResponse<T, AFError>) in
-            switch response.result {
-                case .success(let data):
-                    completion(.success(data))
-                case .failure(let error):
-                    completion(.failure(error))
+
+    func requestData(
+        url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        headers: HTTPHeaders? = nil,
+        timeout: TimeInterval = 30
+    ) async throws -> Data {
+
+        let encoding: ParameterEncoding = {
+            switch method {
+            case .get, .head, .delete:
+                return URLEncoding.default
+            default:
+                return JSONEncoding.default
             }
+        }()
+
+        let response = await session.request(
+            url,
+            method: method,
+            parameters: parameters,
+            encoding: encoding,
+            headers: headers,
+            requestModifier: { $0.timeoutInterval = timeout }
+        )
+        .validate()
+        .serializingData()
+        .response
+
+        if response.error != nil {
+            let statusCode = response.response?.statusCode
+            throw NetworkError.httpStatus(statusCode ?? -1, response.data)
         }
+
+        guard let data = response.data else {
+            throw NetworkError.emptyResponse
+        }
+
+        return data
+    }
+
+    func requestJSON(
+        url: String,
+        method: HTTPMethod,
+        parameters: Parameters? = nil,
+        headers: HTTPHeaders? = nil,
+        timeout: TimeInterval = 30
+    ) async throws -> JSON {
+        let data = try await requestData(url: url, method: method, parameters: parameters, headers: headers, timeout: timeout)
+        return try JSON(data: data)
     }
 }

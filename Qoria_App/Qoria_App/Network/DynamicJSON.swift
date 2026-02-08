@@ -240,7 +240,6 @@ extension JSON: Swift.ExpressibleByBooleanLiteral {
 }
 
 // MARK: - Pretty Print
-
 extension JSON: Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
 	
 	public var description: String {

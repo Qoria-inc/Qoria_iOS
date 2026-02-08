@@ -15,3 +15,10 @@ struct Qoria_AppApp: App {
         }
     }
 }
+
+
+// Mark: - Important stuff
+//After login succeeds, store tokens:
+//let json = try await NetworkCall.shared.postLogin(...)
+//AuthTokenStore.shared.accessToken = json.data.accessToken.string
+//AuthTokenStore.shared.refreshToken = json.data.refreshToken.string
