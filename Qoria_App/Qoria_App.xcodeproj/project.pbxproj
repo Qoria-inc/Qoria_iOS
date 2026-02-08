@@ -1,0 +1,793 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD85D2F38DAB100017908 /* ContentView.swift */; };
+		FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */; };
+		FF8CD86A2F38DAB100017908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF8CD8662F38DAB100017908 /* Assets.xcassets */; };
+		FF8CD8702F38DBCA00017908 /* AppUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD86F2F38DBC300017908 /* AppUrl.swift */; };
+		FF8CD8722F38DBE100017908 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8712F38DBDB00017908 /* NetworkManager.swift */; };
+		FF8CD8742F38DBEC00017908 /* NetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8732F38DBE600017908 /* NetworkCall.swift */; };
+		FF8CD8762F38DC6700017908 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8752F38DC6200017908 /* ScreenSize.swift */; };
+		FF8CD8782F38DC8600017908 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8772F38DC8000017908 /* Validation.swift */; };
+		FF8CD87A2F38DCA200017908 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8792F38DC9E00017908 /* Device.swift */; };
+		FF8CD87C2F38DCBC00017908 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD87B2F38DCB300017908 /* Constants.swift */; };
+		FF8CD87E2F38DCD400017908 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD87D2F38DCD100017908 /* AppColor.swift */; };
+		FF8CD8812F38DF5500017908 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = FF8CD8802F38DF5500017908 /* Alamofire */; };
+		FF8CD8842F38DF6A00017908 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FF8CD8832F38DF6A00017908 /* Kingfisher */; };
+		FF8CD8872F38DFA400017908 /* PhotosPicker in Frameworks */ = {isa = PBXBuildFile; productRef = FF8CD8862F38DFA400017908 /* PhotosPicker */; };
+		FF8CD88A2F38DFC100017908 /* WebViewKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF8CD8892F38DFC100017908 /* WebViewKit */; };
+		FF8CD88C2F38E00600017908 /* DynamicJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD88B2F38E00600017908 /* DynamicJSON.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FF8CD82C2F3820A800017908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF8CD8162F3820A500017908 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF8CD81D2F3820A500017908;
+			remoteInfo = Qoria_App;
+		};
+		FF8CD8362F3820A800017908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF8CD8162F3820A500017908 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF8CD81D2F3820A500017908;
+			remoteInfo = Qoria_App;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FF8CD81E2F3820A500017908 /* Qoria_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qoria_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF8CD82B2F3820A800017908 /* Qoria_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Qoria_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF8CD8352F3820A800017908 /* Qoria_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Qoria_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF8CD85D2F38DAB100017908 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qoria_AppApp.swift; sourceTree = "<group>"; };
+		FF8CD8662F38DAB100017908 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF8CD86F2F38DBC300017908 /* AppUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUrl.swift; sourceTree = "<group>"; };
+		FF8CD8712F38DBDB00017908 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FF8CD8732F38DBE600017908 /* NetworkCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCall.swift; sourceTree = "<group>"; };
+		FF8CD8752F38DC6200017908 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		FF8CD8772F38DC8000017908 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		FF8CD8792F38DC9E00017908 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		FF8CD87B2F38DCB300017908 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FF8CD87D2F38DCD100017908 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		FF8CD88B2F38E00600017908 /* DynamicJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicJSON.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FF8CD82E2F3820A800017908 /* Qoria_AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Qoria_AppTests;
+			sourceTree = "<group>";
+		};
+		FF8CD8382F3820A800017908 /* Qoria_AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Qoria_AppUITests;
+			sourceTree = "<group>";
+		};
+		FF8CD86B2F38DB3A00017908 /* Auth */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FF8CD86C2F38DB4500017908 /* TabView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TabView;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF8CD81B2F3820A500017908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF8CD8872F38DFA400017908 /* PhotosPicker in Frameworks */,
+				FF8CD8842F38DF6A00017908 /* Kingfisher in Frameworks */,
+				FF8CD8812F38DF5500017908 /* Alamofire in Frameworks */,
+				FF8CD88A2F38DFC100017908 /* WebViewKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8CD8282F3820A800017908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8CD8322F3820A800017908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FF8CD8152F3820A500017908 = {
+			isa = PBXGroup;
+			children = (
+				FF8CD8672F38DAB100017908 /* Qoria_App */,
+				FF8CD82E2F3820A800017908 /* Qoria_AppTests */,
+				FF8CD8382F3820A800017908 /* Qoria_AppUITests */,
+				FF8CD81F2F3820A500017908 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FF8CD81F2F3820A500017908 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD81E2F3820A500017908 /* Qoria_App.app */,
+				FF8CD82B2F3820A800017908 /* Qoria_AppTests.xctest */,
+				FF8CD8352F3820A800017908 /* Qoria_AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF8CD85F2F38DAB100017908 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD85D2F38DAB100017908 /* ContentView.swift */,
+				FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FF8CD8602F38DAB100017908 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD87D2F38DCD100017908 /* AppColor.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		FF8CD8612F38DAB100017908 /* Constants + Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD8752F38DC6200017908 /* ScreenSize.swift */,
+				FF8CD8772F38DC8000017908 /* Validation.swift */,
+				FF8CD8792F38DC9E00017908 /* Device.swift */,
+				FF8CD87B2F38DCB300017908 /* Constants.swift */,
+			);
+			path = "Constants + Extensions";
+			sourceTree = "<group>";
+		};
+		FF8CD8622F38DAB100017908 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		FF8CD8632F38DAB100017908 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		FF8CD8642F38DAB100017908 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD86F2F38DBC300017908 /* AppUrl.swift */,
+				FF8CD8712F38DBDB00017908 /* NetworkManager.swift */,
+				FF8CD8732F38DBE600017908 /* NetworkCall.swift */,
+				FF8CD88B2F38E00600017908 /* DynamicJSON.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FF8CD8652F38DAB100017908 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD86B2F38DB3A00017908 /* Auth */,
+				FF8CD86C2F38DB4500017908 /* TabView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF8CD8672F38DAB100017908 /* Qoria_App */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD85F2F38DAB100017908 /* App */,
+				FF8CD8652F38DAB100017908 /* View */,
+				FF8CD8642F38DAB100017908 /* Network */,
+				FF8CD8622F38DAB100017908 /* Helper */,
+				FF8CD8612F38DAB100017908 /* Constants + Extensions */,
+				FF8CD8602F38DAB100017908 /* Colors */,
+				FF8CD8632F38DAB100017908 /* Media */,
+				FF8CD8662F38DAB100017908 /* Assets.xcassets */,
+			);
+			path = Qoria_App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF8CD81D2F3820A500017908 /* Qoria_App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF8CD83F2F3820A800017908 /* Build configuration list for PBXNativeTarget "Qoria_App" */;
+			buildPhases = (
+				FF8CD81A2F3820A500017908 /* Sources */,
+				FF8CD81B2F3820A500017908 /* Frameworks */,
+				FF8CD81C2F3820A500017908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FF8CD86B2F38DB3A00017908 /* Auth */,
+				FF8CD86C2F38DB4500017908 /* TabView */,
+			);
+			name = Qoria_App;
+			packageProductDependencies = (
+				FF8CD8802F38DF5500017908 /* Alamofire */,
+				FF8CD8832F38DF6A00017908 /* Kingfisher */,
+				FF8CD8862F38DFA400017908 /* PhotosPicker */,
+				FF8CD8892F38DFC100017908 /* WebViewKit */,
+			);
+			productName = Qoria_App;
+			productReference = FF8CD81E2F3820A500017908 /* Qoria_App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FF8CD82A2F3820A800017908 /* Qoria_AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF8CD8422F3820A800017908 /* Build configuration list for PBXNativeTarget "Qoria_AppTests" */;
+			buildPhases = (
+				FF8CD8272F3820A800017908 /* Sources */,
+				FF8CD8282F3820A800017908 /* Frameworks */,
+				FF8CD8292F3820A800017908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF8CD82D2F3820A800017908 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FF8CD82E2F3820A800017908 /* Qoria_AppTests */,
+			);
+			name = Qoria_AppTests;
+			packageProductDependencies = (
+			);
+			productName = Qoria_AppTests;
+			productReference = FF8CD82B2F3820A800017908 /* Qoria_AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FF8CD8342F3820A800017908 /* Qoria_AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF8CD8452F3820A800017908 /* Build configuration list for PBXNativeTarget "Qoria_AppUITests" */;
+			buildPhases = (
+				FF8CD8312F3820A800017908 /* Sources */,
+				FF8CD8322F3820A800017908 /* Frameworks */,
+				FF8CD8332F3820A800017908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF8CD8372F3820A800017908 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FF8CD8382F3820A800017908 /* Qoria_AppUITests */,
+			);
+			name = Qoria_AppUITests;
+			packageProductDependencies = (
+			);
+			productName = Qoria_AppUITests;
+			productReference = FF8CD8352F3820A800017908 /* Qoria_AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF8CD8162F3820A500017908 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					FF8CD81D2F3820A500017908 = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					FF8CD82A2F3820A800017908 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = FF8CD81D2F3820A500017908;
+					};
+					FF8CD8342F3820A800017908 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = FF8CD81D2F3820A500017908;
+					};
+				};
+			};
+			buildConfigurationList = FF8CD8192F3820A500017908 /* Build configuration list for PBXProject "Qoria_App" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF8CD8152F3820A500017908;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FF8CD87F2F38DF5500017908 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				FF8CD8822F38DF6A00017908 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				FF8CD8852F38DFA400017908 /* XCRemoteSwiftPackageReference "SwiftUI-PhotosPicker" */,
+				FF8CD8882F38DFC100017908 /* XCRemoteSwiftPackageReference "WebViewKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FF8CD81F2F3820A500017908 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF8CD81D2F3820A500017908 /* Qoria_App */,
+				FF8CD82A2F3820A800017908 /* Qoria_AppTests */,
+				FF8CD8342F3820A800017908 /* Qoria_AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF8CD81C2F3820A500017908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF8CD86A2F38DAB100017908 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8CD8292F3820A800017908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8CD8332F3820A800017908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF8CD81A2F3820A500017908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF8CD8762F38DC6700017908 /* ScreenSize.swift in Sources */,
+				FF8CD87E2F38DCD400017908 /* AppColor.swift in Sources */,
+				FF8CD8722F38DBE100017908 /* NetworkManager.swift in Sources */,
+				FF8CD8702F38DBCA00017908 /* AppUrl.swift in Sources */,
+				FF8CD88C2F38E00600017908 /* DynamicJSON.swift in Sources */,
+				FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */,
+				FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */,
+				FF8CD8742F38DBEC00017908 /* NetworkCall.swift in Sources */,
+				FF8CD8782F38DC8600017908 /* Validation.swift in Sources */,
+				FF8CD87A2F38DCA200017908 /* Device.swift in Sources */,
+				FF8CD87C2F38DCBC00017908 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8CD8272F3820A800017908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF8CD8312F3820A800017908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF8CD82D2F3820A800017908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF8CD81D2F3820A500017908 /* Qoria_App */;
+			targetProxy = FF8CD82C2F3820A800017908 /* PBXContainerItemProxy */;
+		};
+		FF8CD8372F3820A800017908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF8CD81D2F3820A500017908 /* Qoria_App */;
+			targetProxy = FF8CD8362F3820A800017908 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FF8CD83D2F3820A800017908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FF8CD83E2F3820A800017908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF8CD8402F3820A800017908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Qoria;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qoriaios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF8CD8412F3820A800017908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Qoria;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qoriaios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FF8CD8432F3820A800017908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Qoria-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qoria_App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Qoria_App";
+			};
+			name = Debug;
+		};
+		FF8CD8442F3820A800017908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Qoria-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qoria_App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Qoria_App";
+			};
+			name = Release;
+		};
+		FF8CD8462F3820A800017908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Qoria-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Qoria_App;
+			};
+			name = Debug;
+		};
+		FF8CD8472F3820A800017908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JWUSF25X2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Qoria-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Qoria_App;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF8CD8192F3820A500017908 /* Build configuration list for PBXProject "Qoria_App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF8CD83D2F3820A800017908 /* Debug */,
+				FF8CD83E2F3820A800017908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF8CD83F2F3820A800017908 /* Build configuration list for PBXNativeTarget "Qoria_App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF8CD8402F3820A800017908 /* Debug */,
+				FF8CD8412F3820A800017908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF8CD8422F3820A800017908 /* Build configuration list for PBXNativeTarget "Qoria_AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF8CD8432F3820A800017908 /* Debug */,
+				FF8CD8442F3820A800017908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF8CD8452F3820A800017908 /* Build configuration list for PBXNativeTarget "Qoria_AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF8CD8462F3820A800017908 /* Debug */,
+				FF8CD8472F3820A800017908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF8CD87F2F38DF5500017908 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
+		FF8CD8822F38DF6A00017908 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
+		FF8CD8852F38DFA400017908 /* XCRemoteSwiftPackageReference "SwiftUI-PhotosPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/SwiftUI-PhotosPicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		FF8CD8882F38DFC100017908 /* XCRemoteSwiftPackageReference "WebViewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/WebViewKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF8CD8802F38DF5500017908 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF8CD87F2F38DF5500017908 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		FF8CD8832F38DF6A00017908 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF8CD8822F38DF6A00017908 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		FF8CD8862F38DFA400017908 /* PhotosPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF8CD8852F38DFA400017908 /* XCRemoteSwiftPackageReference "SwiftUI-PhotosPicker" */;
+			productName = PhotosPicker;
+		};
+		FF8CD8892F38DFC100017908 /* WebViewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF8CD8882F38DFC100017908 /* XCRemoteSwiftPackageReference "WebViewKit" */;
+			productName = WebViewKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = FF8CD8162F3820A500017908 /* Project object */;
+}
