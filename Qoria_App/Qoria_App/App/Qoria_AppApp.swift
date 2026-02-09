@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Qoria_AppApp: App {
+    
+    @AppStorage("isDarkMode") private var isDarkMode = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            QoriaTabView()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }

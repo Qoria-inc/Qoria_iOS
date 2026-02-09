@@ -7,11 +7,71 @@
 
 import SwiftUI
 
-class AppColor {
-    static let shared = AppColor()
-    let mmblThemeDarkColor: Color = Color(red: 100/255, green: 46/255, blue: 44/255)
-    let mmblThemeLightColor: Color = Color(red: 185/255, green: 77/255, blue: 73/255)
-    let mmblPrimaryBackgroundColor: Color = Color(red: 255/255, green: 255/255, blue: 255/255)
-    let mmblSecondaryBackgroundColor: Color = Color(red: 248/255, green: 250/255, blue: 252/255)
-    let mmblFieldBackgroundColor: Color = Color(red: 229/255, green: 231/255, blue: 235/255)
+extension Color {
+
+    // MARK: - App Surface & Background
+    enum Surface {
+        /// App bar background #17171A
+        static let appBar = Color(red: 0x17/255, green: 0x17/255, blue: 0x1A/255)
+
+        /// Post / card background #232328
+        static let post = Color(red: 0x23/255, green: 0x23/255, blue: 0x28/255)
+
+        /// Icon / button background #232328
+        static let iconButton = Color(red: 0x23/255, green: 0x23/255, blue: 0x28/255)
+
+        /// Slightly lighter grey (placeholders) #383838
+        static let placeholder = Color(red: 0x38/255, green: 0x38/255, blue: 0x38/255)
+    }
+
+    // MARK: - Text
+    enum Text {
+        /// Primary content on dark background
+        static let onDark = Color.white
+
+        /// Secondary text on dark #B0B0B5
+        static let secondary = Color(red: 0xB0/255, green: 0xB0/255, blue: 0xB5/255)
+    }
+
+    // MARK: - Profile & Avatars
+    enum Profile {
+        /// Avatar ring inner #E0E0E0
+        static let ringInner = Color(red: 0xE0/255, green: 0xE0/255, blue: 0xE0/255)
+
+        /// Avatar ring outer #BDBDBD
+        static let ringOuter = Color(red: 0xBD/255, green: 0xBD/255, blue: 0xBD/255)
+
+        /// App bar profile border blue base #D1E1FF
+        static let borderBlueBase = Color(red: 0xD1/255, green: 0xE1/255, blue: 0xFF/255)
+
+        /// App bar profile border white base
+        static let borderWhiteBase = Color.white
+    }
+
+    // MARK: - Tags & Badges
+    enum Tag {
+        /// Teacher / tag fallback teal #2AB5AD
+        static let teal = Color(red: 0x2A/255, green: 0xB5/255, blue: 0xAD/255)
+    }
+
+    enum Badge {
+        /// PRO purple accent #582EA5
+        static let purple = Color(red: 0x58/255, green: 0x2E/255, blue: 0xA5/255)
+    }
+
+    // MARK: - Gradients (colors only)
+    enum Gradient {
+        // Premium banner
+        static let bannerLeft   = Color(red: 0x1B/255, green: 0x8D/255, blue: 0xB1/255)
+        static let bannerMiddle = Color(red: 0x27/255, green: 0x2E/255, blue: 0xA5/255)
+        static let bannerRight  = Color(red: 0x70/255, green: 0x05/255, blue: 0x6E/255)
+
+        // User tag
+        static let tagLeft  = Color(UIColor(red: 68/255, green: 102/255, blue: 147/255, alpha: 1))
+        static let tagRight = Color(UIColor(red: 73/255, green: 136/255, blue: 146/255, alpha: 1))
+
+        // PRO badge
+        static let proStart = Color(red: 0x29/255, green: 0x2B/255, blue: 0xA5/255)
+        static let proEnd   = Color(red: 0x10/255, green: 0xB0/255, blue: 0xB4/255)
+    }
 }

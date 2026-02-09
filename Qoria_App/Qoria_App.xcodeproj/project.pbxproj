@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F132F3A693200F7008E /* QoriaTabView.swift */; };
+		FF8A6F182F3A697400F7008E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F172F3A697400F7008E /* HomeView.swift */; };
+		FF8A6F1A2F3A698100F7008E /* FeedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F192F3A698100F7008E /* FeedPostView.swift */; };
+		FF8A6F1C2F3A698F00F7008E /* PremiumBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */; };
+		FF8A6F1E2F3A699900F7008E /* QoriaAppBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */; };
 		FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD85D2F38DAB100017908 /* ContentView.swift */; };
 		FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */; };
 		FF8CD86A2F38DAB100017908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF8CD8662F38DAB100017908 /* Assets.xcassets */; };
@@ -48,6 +53,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF8A6F132F3A693200F7008E /* QoriaTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaTabView.swift; sourceTree = "<group>"; };
+		FF8A6F172F3A697400F7008E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FF8A6F192F3A698100F7008E /* FeedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostView.swift; sourceTree = "<group>"; };
+		FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumBannerView.swift; sourceTree = "<group>"; };
+		FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaAppBarView.swift; sourceTree = "<group>"; };
 		FF8CD81E2F3820A500017908 /* Qoria_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qoria_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8CD82B2F3820A800017908 /* Qoria_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Qoria_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8CD8352F3820A800017908 /* Qoria_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Qoria_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,11 +97,6 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		FF8CD86C2F38DB4500017908 /* TabView */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TabView;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +128,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF8A6F122F3A693200F7008E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FF8A6F172F3A697400F7008E /* HomeView.swift */,
+				FF8A6F192F3A698100F7008E /* FeedPostView.swift */,
+				FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */,
+				FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FF8A6F142F3A693200F7008E /* QoriaTabView */ = {
+			isa = PBXGroup;
+			children = (
+				FF8A6F132F3A693200F7008E /* QoriaTabView.swift */,
+			);
+			path = QoriaTabView;
+			sourceTree = "<group>";
+		};
+		FF8A6F152F3A693200F7008E /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				FF8A6F142F3A693200F7008E /* QoriaTabView */,
+				FF8A6F122F3A693200F7008E /* Home */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
 		FF8CD8152F3820A500017908 = {
 			isa = PBXGroup;
 			children = (
@@ -146,8 +179,8 @@
 		FF8CD85F2F38DAB100017908 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				FF8CD85D2F38DAB100017908 /* ContentView.swift */,
 				FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */,
+				FF8CD85D2F38DAB100017908 /* ContentView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -205,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				FF8CD86B2F38DB3A00017908 /* Auth */,
-				FF8CD86C2F38DB4500017908 /* TabView */,
+				FF8A6F152F3A693200F7008E /* TabView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -243,7 +276,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				FF8CD86B2F38DB3A00017908 /* Auth */,
-				FF8CD86C2F38DB4500017908 /* TabView */,
 			);
 			name = Qoria_App;
 			packageProductDependencies = (
@@ -385,18 +417,23 @@
 				FF8CD8962F38E9D800017908 /* NetworkLogger.swift in Sources */,
 				FF8CD8982F38EAA200017908 /* NetworkError.swift in Sources */,
 				FF8CD8762F38DC6700017908 /* ScreenSize.swift in Sources */,
+				FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */,
 				FF8CD8942F38E9BD00017908 /* AuthInterceptor.swift in Sources */,
 				FF8CD87E2F38DCD400017908 /* AppColor.swift in Sources */,
 				FF8CD8722F38DBE100017908 /* NetworkManager.swift in Sources */,
 				FF8CD8702F38DBCA00017908 /* AppUrl.swift in Sources */,
 				FF8CD88C2F38E00600017908 /* DynamicJSON.swift in Sources */,
+				FF8A6F182F3A697400F7008E /* HomeView.swift in Sources */,
 				FF8CD8922F38E98300017908 /* TokenRefresher.swift in Sources */,
 				FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */,
 				FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */,
+				FF8A6F1A2F3A698100F7008E /* FeedPostView.swift in Sources */,
 				FF8CD8742F38DBEC00017908 /* NetworkCall.swift in Sources */,
+				FF8A6F1E2F3A699900F7008E /* QoriaAppBarView.swift in Sources */,
 				FF8CD8782F38DC8600017908 /* Validation.swift in Sources */,
 				FF8CD87A2F38DCA200017908 /* Device.swift in Sources */,
 				FF8CD87C2F38DCBC00017908 /* Constants.swift in Sources */,
+				FF8A6F1C2F3A698F00F7008E /* PremiumBannerView.swift in Sources */,
 				FF8CD8902F38E96E00017908 /* AuthTokenStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,7 +607,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
-				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -612,7 +649,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
-				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
