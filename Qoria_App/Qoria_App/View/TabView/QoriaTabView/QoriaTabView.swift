@@ -18,7 +18,7 @@ struct QoriaTabView: View {
             Group {
                 switch selection {
                 case .home:
-                    NavigationStack { ContentView(heading: "Home") }
+                    NavigationStack { HomeView() }
                 case .learn:
                     NavigationStack { ContentView(heading: "Learn") }
                 case .post:
@@ -31,13 +31,9 @@ struct QoriaTabView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .safeAreaInset(edge: .bottom) {
-                Color.clear.frame(height: 78)
-            }
 
             QoriaTabBar(selection: $selection)
                 .padding(.horizontal, 18)
-                .padding(.bottom, 10)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
