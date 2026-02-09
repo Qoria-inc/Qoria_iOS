@@ -13,18 +13,22 @@ struct ContentView: View {
     @State private var output = ""
     @State private var errorText: String?
     @State private var didAutoRun = false
+    var heading: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
 
             HStack(spacing: 10) {
+                Spacer()
                 Image(systemName: "network")
-                Text("Network Test")
+                Text(heading)
                     .font(.headline)
+                Spacer()
             }
 
             if isLoading {
                 ProgressView("Loading…")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
 
             if let errorText {
@@ -33,20 +37,22 @@ struct ContentView: View {
                     .font(.subheadline)
             }
 
-            ScrollView {
-                Text(output.isEmpty ? "No data yet." : output)
-                    .font(.system(.body, design: .monospaced))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .textSelection(.enabled)
-            }
+            Text(output.isEmpty ? "No data yet." : output)
+                .font(.system(.body, design: .monospaced))
+                .frame(maxWidth: .infinity, alignment: .center)
+                .textSelection(.enabled)
+                .padding()
 
             Button {
                 Task { await runTestCall() }
             } label: {
-                Text("Run Test Call").frame(maxWidth: .infinity)
+                Text("Run Test Call")
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .disabled(isLoading)
+            
+            Spacer()
         }
         .padding()
         .task {
@@ -72,11 +78,10 @@ struct ContentView: View {
             errorText = (error as? LocalizedError)?.errorDescription
                 ?? error.localizedDescription
         }
-
         isLoading = false
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(heading: "Content View")
 }
