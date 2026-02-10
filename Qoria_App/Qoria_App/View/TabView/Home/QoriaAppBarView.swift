@@ -2,11 +2,11 @@
 //  QoriaAppBarView.swift
 //  qoria_dev
 //
-//
 
 import SwiftUI
 
 struct QoriaAppBarView: View {
+    
     var profileImage: Image? = Image("ic_proImg")
     var onProfileTap: (() -> Void)? = nil
     var onNotificationTap: (() -> Void)? = nil
@@ -17,9 +17,6 @@ struct QoriaAppBarView: View {
     @State private var showChatUnderDevelopment = false
 
     var body: some View {
-        let outerSize: CGFloat = 46
-        let innerProfileSize: CGFloat = 38
-
         ZStack {
             HStack(spacing: 8) {
 
@@ -56,14 +53,14 @@ struct QoriaAppBarView: View {
                             } else {
                                 Circle().fill(Color.Profile.ringInner)
                                 Image(systemName: "person")
-                                    .font(.system(size: innerProfileSize * 0.4))
+                                    .font(.system(size: 38 * 0.4))
                                     .foregroundStyle(Color.Text.onDark.opacity(0.7))
                             }
                         }
-                        .frame(width: innerProfileSize, height: innerProfileSize)
+                        .frame(width: 38, height: 38)
                         .clipShape(Circle())
                     }
-                    .frame(width: outerSize, height: outerSize)
+                    .frame(width: 46, height: 46)
                 }
                 .buttonStyle(.plain)
 
@@ -74,7 +71,7 @@ struct QoriaAppBarView: View {
 
                     actionButton(
                         asset: "ic_notification",
-                        size: outerSize
+                        size: 46
                     ) {
                         showNotificationUnderDevelopment = true
                         onNotificationTap?()
@@ -82,7 +79,7 @@ struct QoriaAppBarView: View {
 
                     actionButton(
                         asset: "ic_chat",
-                        size: outerSize
+                        size: 46
                     ) {
                         showChatUnderDevelopment = true
                         onChatTap?()

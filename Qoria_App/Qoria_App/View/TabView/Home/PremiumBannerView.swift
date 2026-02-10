@@ -2,7 +2,6 @@
 //  PremiumBannerView.swift
 //  qoria_dev
 //
-//
 
 import SwiftUI
 
@@ -10,20 +9,17 @@ struct PremiumBannerView: View {
     
     var onDismiss: () -> Void
 
-    private let cornerRadius: CGFloat = 20
-    private let horizontalPadding: CGFloat = 16
-    private let verticalPadding: CGFloat = 16
     @State private var showUnderDevelopment = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Top row: left badge frame asset, title text, right-aligned close button
+            
             HStack(alignment: .top, spacing: 12) {
                 Image("ic_bannerProBadgeFrame")
                     .resizable()
-                    .scaledToFit() // keep original aspect ratio, show full image
-                    .frame(height: 56) // controls size without forcing extra width
-                    .fixedSize(horizontal: true, vertical: false) // don't eat extra horizontal space
+                    .scaledToFit()
+                    .frame(height: 56)
+                    .fixedSize(horizontal: true, vertical: false)
 
                 Text("Try one month of Qoria Premium")
                     .font(.system(size: 20, weight: .medium))
@@ -50,7 +46,7 @@ struct PremiumBannerView: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             Button(action: {
-                showUnderDevelopment = true
+                self.showUnderDevelopment = true
             }) {
                 Text("Start Free Trial")
                     .font(.headline)
@@ -58,36 +54,17 @@ struct PremiumBannerView: View {
                     .foregroundStyle(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(
-                        LinearGradient(
-                            colors: [.white.opacity(0.9), .white.opacity(0.7)],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ),
-                        in: RoundedRectangle(cornerRadius: 22)
-                    )
+                    .background(LinearGradient(colors: [.white.opacity(0.9), .white.opacity(0.7)], startPoint: .top, endPoint: .bottom), in: RoundedRectangle(cornerRadius: 22))
             }
             .buttonStyle(.plain)
             .padding(.top, 6) 
         }
-        .padding(EdgeInsets(top: verticalPadding,
-                            leading: horizontalPadding,
-                            bottom: verticalPadding,
-                            trailing: horizontalPadding))
+        .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color.Gradient.bannerLeft,
-                    Color.Gradient.bannerMiddle,
-                    Color.Gradient.bannerRight
-                ],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .background(LinearGradient(colors: [Color.Gradient.bannerLeft, Color.Gradient.bannerMiddle, Color.Gradient.bannerRight], startPoint: .leading, endPoint: .trailing)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
         )
-        .padding(.all, horizontalPadding)
+        .padding(.all, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.Surface.post)
         .frame(maxWidth: .infinity)

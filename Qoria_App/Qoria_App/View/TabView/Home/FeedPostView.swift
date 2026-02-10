@@ -6,10 +6,10 @@
 import SwiftUI
 
 struct FeedPostView: View {
-
+    
     @State private var showUnderDevelopment = false
     var image: String?
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -23,16 +23,7 @@ struct FeedPostView: View {
                             
                             Circle()
                                 .stroke(
-                                    LinearGradient(
-                                        colors: [
-                                            Color.Gradient.proStart,
-                                            Color.Gradient.proEnd
-                                        ],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    ),
-                                    lineWidth: 1
-                                )
+                                    LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
                                 .frame(width: 52, height: 52)
                             
                             Image("ic_proImg")
@@ -62,41 +53,19 @@ struct FeedPostView: View {
                                 .foregroundStyle(Color.Text.onDark)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(
-                                    LinearGradient(
-                                        colors: [
-                                            Color.Gradient.tagLeft,
-                                            Color.Gradient.tagRight
-                                        ],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    ),
-                                    in: Capsule()
-                                )
+                                .background(LinearGradient(colors: [Color.Gradient.tagLeft, Color.Gradient.tagRight], startPoint: .leading, endPoint: .trailing), in: Capsule())
                                 .overlay(
-                                    Capsule().stroke(
-                                        AngularGradient(
-                                            colors: [
-                                                .white,
-                                                .white,
-                                                Color.Gradient.tagRight,
-                                                .white
-                                            ],
-                                            center: .center
-                                        ),
-                                        lineWidth: 0.5
-                                    )
-                                )
+                                    Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
                         }
-
+                        
                         Text("2h ago")
                             .font(.system(size: 14))
                             .foregroundStyle(Color.Text.secondary)
                     }
                 }
-
+                
                 Spacer()
-
+                
                 Button {
                     showUnderDevelopment = true
                 } label: {
@@ -107,12 +76,12 @@ struct FeedPostView: View {
                 }
                 .buttonStyle(.plain)
             }
-
+            
             Text("Exploring trust and balance through simple partner movements.")
                 .font(.body)
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
-
+            
             Image(image ?? "ic_postImg1")
                 .resizable()
                 .scaledToFill()
@@ -131,9 +100,9 @@ struct FeedPostView: View {
                     .buttonStyle(.plain)
                 }
                 .padding(.horizontal, -16)
-
+            
             HStack(spacing: 20) {
-
+                
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_clap")
@@ -146,7 +115,7 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-
+                
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_comment")
@@ -160,9 +129,9 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-
+                
                 Spacer(minLength: 0)
-
+                
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_share")
@@ -175,7 +144,7 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-
+                
                 Button { showUnderDevelopment = true } label: {
                     Image("ic_save")
                         .resizable()

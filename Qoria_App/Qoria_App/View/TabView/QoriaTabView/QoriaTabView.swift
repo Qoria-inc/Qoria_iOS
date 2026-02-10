@@ -48,11 +48,11 @@ struct QoriaTabBar: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            tabItem(.home, title: "Home", icon: "house.circle")
-            tabItem(.learn, title: "Learn", icon: "info.circle")
-            tabItem(.post, title: "Post", icon: "arrow.up.circle", isPrimary: true)
-            tabItem(.discover, title: "Discover", icon: "magnifyingglass.circle")
-            tabItem(.settings, title: "Settings", icon: "gearshape.circle")
+            tabItem(.home, title: "Home", icon: "homeTabIconOff", selectedIcon: "homeTabIconOn")
+            tabItem(.learn, title: "Learn", icon: "learnTabIconOff", selectedIcon: "learnTabIconOn")
+            tabItem(.post, title: "Post", icon: "postTabIconOff", selectedIcon: "postTabIconOn",isPrimary: true)
+            tabItem(.discover, title: "Discover", icon: "discoverTabIconOff", selectedIcon: "discoverTabIconOn")
+            tabItem(.settings, title: "Settings", icon: "settingsTabIconOff", selectedIcon: "settingsTabIconOn")
         }
         .frame(height: 65)
         .background {
@@ -70,28 +70,27 @@ struct QoriaTabBar: View {
         .clipShape(Capsule(style: .continuous))
     }
 
-    private func tabItem(
-        _ tab: QoriaTabView.Tab,
-        title: String,
-        icon: String,
-        isPrimary: Bool = false
-    ) -> some View {
+    private func tabItem(_ tab: QoriaTabView.Tab, title: String, icon: String, selectedIcon: String? = nil, isPrimary: Bool = false) -> some View {
+
         let isSelected = (selection == tab)
-        let fg = isPrimary ? Color.white : (isSelected ? activeColor : inactiveColor)
+
+        let imageName = isSelected ? (selectedIcon ?? icon) : icon
+
+        let textColor = isPrimary ? Color.white : (isSelected ? activeColor : inactiveColor)
 
         return Button {
             selection = tab
         } label: {
             VStack(spacing: 0) {
-                Image(systemName: icon)
+                Image(imageName)
                     .resizable()
+                    .scaledToFit()
                     .frame(width: 28, height: 28)
-                    .foregroundStyle(fg)
                     .padding(.bottom, 6)
 
                 Text(title)
                     .font(.system(size: 10))
-                    .foregroundStyle(fg)
+                    .foregroundStyle(textColor)
             }
             .padding(.vertical, 6)
             .padding(.horizontal, 8)
