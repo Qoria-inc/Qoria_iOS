@@ -32,3 +32,4 @@ final class AppUrl {
     public func privacyPolicyURL() -> String { baseURL + "/privacy" }
     public func termsAndConditionsURL() -> String { baseURL + "/terms" }
 }
+

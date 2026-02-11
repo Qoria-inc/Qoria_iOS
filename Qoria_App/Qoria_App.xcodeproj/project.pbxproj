@@ -92,11 +92,6 @@
 			path = Qoria_AppUITests;
 			sourceTree = "<group>";
 		};
-		FF8CD86B2F38DB3A00017908 /* Auth */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Auth;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +149,13 @@
 				FF8A6F122F3A693200F7008E /* Home */,
 			);
 			path = TabView;
+			sourceTree = "<group>";
+		};
+		FF8A6F3D2F3D06D500F7008E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		FF8CD8152F3820A500017908 = {
@@ -237,7 +239,7 @@
 		FF8CD8652F38DAB100017908 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FF8CD86B2F38DB3A00017908 /* Auth */,
+				FF8A6F3D2F3D06D500F7008E /* Auth */,
 				FF8A6F152F3A693200F7008E /* TabView */,
 			);
 			path = View;
@@ -273,9 +275,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				FF8CD86B2F38DB3A00017908 /* Auth */,
 			);
 			name = Qoria_App;
 			packageProductDependencies = (
