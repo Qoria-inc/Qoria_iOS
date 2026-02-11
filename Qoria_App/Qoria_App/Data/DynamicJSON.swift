@@ -250,3 +250,7 @@ extension JSON: Swift.CustomStringConvertible, Swift.CustomDebugStringConvertibl
 		return description
 	}
 }
+
+// MARK: - Alias for project convention
+/// Alias to match `dynamicJSON` naming convention used in the app.
+public typealias dynamicJSON = JSON

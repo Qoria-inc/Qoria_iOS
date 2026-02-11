@@ -8,7 +8,12 @@
 import Foundation
 import Alamofire
 
-final class NetworkCall {
+protocol NetworkCalling {
+    func postLogin(username: String, password: String) async throws -> JSON
+    func getTestTodo() async throws -> JSON
+}
+
+final class NetworkCall: NetworkCalling {
 
     static let shared = NetworkCall()
     private init() {}
