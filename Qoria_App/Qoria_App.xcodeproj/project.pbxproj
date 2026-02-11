@@ -33,6 +33,11 @@
 		FF8CD8942F38E9BD00017908 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8932F38E9BB00017908 /* AuthInterceptor.swift */; };
 		FF8CD8962F38E9D800017908 /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8952F38E9D600017908 /* NetworkLogger.swift */; };
 		FF8CD8982F38EAA200017908 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD8972F38EAA100017908 /* NetworkError.swift */; };
+		FFA494CF2F3D0CA1007D1B90 /* HomeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494CC2F3D0CA1007D1B90 /* HomeRepositoryImpl.swift */; };
+		FFA494D42F3D0CB5007D1B90 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494D12F3D0CB5007D1B90 /* HomeRepository.swift */; };
+		FFA494D52F3D0CB5007D1B90 /* GetHomeDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494D02F3D0CB5007D1B90 /* GetHomeDataUseCase.swift */; };
+		FFA494D72F3D0E3A007D1B90 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */; };
+		FFA494DF2F3D12C6007D1B90 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494DE2F3D12C3007D1B90 /* AppContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +84,11 @@
 		FF8CD8952F38E9D600017908 /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
 		FF8CD8972F38EAA100017908 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Qoria-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FFA494CC2F3D0CA1007D1B90 /* HomeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepositoryImpl.swift; sourceTree = "<group>"; };
+		FFA494D02F3D0CB5007D1B90 /* GetHomeDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHomeDataUseCase.swift; sourceTree = "<group>"; };
+		FFA494D12F3D0CB5007D1B90 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
+		FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		FFA494DE2F3D12C3007D1B90 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -126,6 +136,7 @@
 		FF8A6F122F3A693200F7008E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */,
 				FF8A6F172F3A697400F7008E /* HomeView.swift */,
 				FF8A6F192F3A698100F7008E /* FeedPostView.swift */,
 				FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */,
@@ -151,13 +162,6 @@
 			path = TabView;
 			sourceTree = "<group>";
 		};
-		FF8A6F3D2F3D06D500F7008E /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
 		FF8CD8152F3820A500017908 = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +185,7 @@
 		FF8CD85F2F38DAB100017908 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				FFA494DE2F3D12C3007D1B90 /* AppContainer.swift */,
 				FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */,
 				FF8CD85D2F38DAB100017908 /* ContentView.swift */,
 			);
@@ -206,20 +211,6 @@
 			path = "Constants + Extensions";
 			sourceTree = "<group>";
 		};
-		FF8CD8622F38DAB100017908 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		FF8CD8632F38DAB100017908 /* Media */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Media;
-			sourceTree = "<group>";
-		};
 		FF8CD8642F38DAB100017908 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,34 +222,66 @@
 				FF8CD8932F38E9BB00017908 /* AuthInterceptor.swift */,
 				FF8CD8972F38EAA100017908 /* NetworkError.swift */,
 				FF8CD8952F38E9D600017908 /* NetworkLogger.swift */,
-				FF8CD88B2F38E00600017908 /* DynamicJSON.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		FF8CD8652F38DAB100017908 /* View */ = {
+		FF8CD8652F38DAB100017908 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				FF8A6F3D2F3D06D500F7008E /* Auth */,
 				FF8A6F152F3A693200F7008E /* TabView */,
 			);
-			path = View;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		FF8CD8672F38DAB100017908 /* Qoria_App */ = {
 			isa = PBXGroup;
 			children = (
+				FFA494D32F3D0CB5007D1B90 /* Domain */,
 				FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */,
 				FF8CD85F2F38DAB100017908 /* App */,
-				FF8CD8652F38DAB100017908 /* View */,
+				FF8CD8652F38DAB100017908 /* Presentation */,
 				FF8CD8642F38DAB100017908 /* Network */,
-				FF8CD8622F38DAB100017908 /* Helper */,
 				FF8CD8612F38DAB100017908 /* Constants + Extensions */,
 				FF8CD8602F38DAB100017908 /* Colors */,
-				FF8CD8632F38DAB100017908 /* Media */,
 				FF8CD8662F38DAB100017908 /* Assets.xcassets */,
+				FFA494CE2F3D0CA1007D1B90 /* Data */,
 			);
 			path = Qoria_App;
+			sourceTree = "<group>";
+		};
+		FFA494CD2F3D0CA1007D1B90 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FFA494CC2F3D0CA1007D1B90 /* HomeRepositoryImpl.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FFA494CE2F3D0CA1007D1B90 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FF8CD88B2F38E00600017908 /* DynamicJSON.swift */,
+				FFA494CD2F3D0CA1007D1B90 /* Home */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FFA494D22F3D0CB5007D1B90 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FFA494D02F3D0CB5007D1B90 /* GetHomeDataUseCase.swift */,
+				FFA494D12F3D0CB5007D1B90 /* HomeRepository.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FFA494D32F3D0CB5007D1B90 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				FFA494D22F3D0CB5007D1B90 /* Home */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,15 +436,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA494CF2F3D0CA1007D1B90 /* HomeRepositoryImpl.swift in Sources */,
 				FF8CD8962F38E9D800017908 /* NetworkLogger.swift in Sources */,
 				FF8CD8982F38EAA200017908 /* NetworkError.swift in Sources */,
+				FFA494D72F3D0E3A007D1B90 /* HomeViewModel.swift in Sources */,
 				FF8CD8762F38DC6700017908 /* ScreenSize.swift in Sources */,
 				FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */,
 				FF8CD8942F38E9BD00017908 /* AuthInterceptor.swift in Sources */,
+				FFA494D42F3D0CB5007D1B90 /* HomeRepository.swift in Sources */,
+				FFA494D52F3D0CB5007D1B90 /* GetHomeDataUseCase.swift in Sources */,
 				FF8CD87E2F38DCD400017908 /* AppColor.swift in Sources */,
 				FF8CD8722F38DBE100017908 /* NetworkManager.swift in Sources */,
 				FF8CD8702F38DBCA00017908 /* AppUrl.swift in Sources */,
 				FF8CD88C2F38E00600017908 /* DynamicJSON.swift in Sources */,
+				FFA494DF2F3D12C6007D1B90 /* AppContainer.swift in Sources */,
 				FF8A6F182F3A697400F7008E /* HomeView.swift in Sources */,
 				FF8CD8922F38E98300017908 /* TokenRefresher.swift in Sources */,
 				FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */,

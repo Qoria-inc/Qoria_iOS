@@ -12,13 +12,14 @@ struct QoriaTabView: View {
     enum Tab: Hashable { case home, learn, post, discover, settings }
 
     @State private var selection: Tab = .home
+    @StateObject private var homeViewModel = AppContainer.shared.makeHomeViewModel()
 
     var body: some View {
         ZStack(alignment: .bottom) {
             Group {
                 switch selection {
                 case .home:
-                    NavigationStack { HomeView() }
+                    NavigationStack { HomeView(viewModel: homeViewModel) }
                 case .learn:
                     NavigationStack { ContentView(heading: "Learn") }
                 case .post:

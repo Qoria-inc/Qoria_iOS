@@ -16,10 +16,8 @@ struct HomeView: View {
     
     // MARK: - Init (simple manual DI)
     
-    init() {
-        let repository = HomeRepositoryImpl()
-        let useCase = GetHomeDataUseCase(repository: repository)
-        _viewModel = StateObject(wrappedValue: HomeViewModel(getHomeDataUseCase: useCase))
+    init(viewModel: HomeViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     // MARK: - Body
@@ -67,11 +65,14 @@ struct HomeView: View {
         }
         .background(Color.Surface.appBar)
         .task {
-            viewModel.onAppear()
+            self.viewModel.loadHome()
         }
     }
 }
 
 #Preview {
-    HomeView()
+    let repo = HomeRepositoryImpl()
+    let useCase = GetHomeDataUseCase(repository: repo)
+    let vm = HomeViewModel(getHomeDataUseCase: useCase)
+    return HomeView(viewModel: vm)
 }

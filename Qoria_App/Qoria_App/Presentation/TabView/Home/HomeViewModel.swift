@@ -7,30 +7,29 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 @MainActor
 final class HomeViewModel: ObservableObject {
 
     // MARK: - Published State
 
-    @Published var isLoading: Bool = false
+    @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var homeData: dynamicJSON?
-
-    // MARK: - Dependencies
-
+    
     private let getHomeDataUseCase: GetHomeDataUseCase
-
-    // MARK: - Init
-
+    private var loadTask: Task<Void, Never>?
+    
     init(getHomeDataUseCase: GetHomeDataUseCase) {
         self.getHomeDataUseCase = getHomeDataUseCase
     }
 
     // MARK: - Lifecycle
 
-    func onAppear() {
-        Task { await loadHome() }
+    func loadHome() {
+        self.loadTask?.cancel()
+        self.loadTask = Task { await loadHome() }
     }
 
     // MARK: - Intent
@@ -38,16 +37,15 @@ final class HomeViewModel: ObservableObject {
     func loadHome() async {
         isLoading = true
         errorMessage = nil
-
+        defer { isLoading = false }
+        
         do {
-            let data = try await getHomeDataUseCase.execute()
-            homeData = data
+            self.homeData = try await getHomeDataUseCase.execute()
+        } catch is CancellationError {
+            // ignore
         } catch {
-            errorMessage = (error as? LocalizedError)?.errorDescription
-                ?? error.localizedDescription
+            self.errorMessage = (error as? LocalizedError)?.errorDescription
+            ?? error.localizedDescription
         }
-
-        isLoading = false
     }
 }
-
