@@ -83,7 +83,7 @@
 		FF8CD8932F38E9BB00017908 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		FF8CD8952F38E9D600017908 /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
 		FF8CD8972F38EAA100017908 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Qoria-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Qoria-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		FFA494CC2F3D0CA1007D1B90 /* HomeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepositoryImpl.swift; sourceTree = "<group>"; };
 		FFA494D02F3D0CB5007D1B90 /* GetHomeDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHomeDataUseCase.swift; sourceTree = "<group>"; };
 		FFA494D12F3D0CB5007D1B90 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
@@ -237,15 +237,15 @@
 		FF8CD8672F38DAB100017908 /* Qoria_App */ = {
 			isa = PBXGroup;
 			children = (
+				FFA494CE2F3D0CA1007D1B90 /* Data */,
 				FFA494D32F3D0CB5007D1B90 /* Domain */,
-				FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */,
 				FF8CD85F2F38DAB100017908 /* App */,
 				FF8CD8652F38DAB100017908 /* Presentation */,
 				FF8CD8642F38DAB100017908 /* Network */,
 				FF8CD8612F38DAB100017908 /* Constants + Extensions */,
 				FF8CD8602F38DAB100017908 /* Colors */,
 				FF8CD8662F38DAB100017908 /* Assets.xcassets */,
-				FFA494CE2F3D0CA1007D1B90 /* Data */,
+				FF8CD8992F38ECA400017908 /* Qoria-App-Info.plist */,
 			);
 			path = Qoria_App;
 			sourceTree = "<group>";

@@ -11,4 +11,3 @@ import Foundation
 protocol HomeRepository {
     func fetchHomeData() async throws -> dynamicJSON
 }
-
