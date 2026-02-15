@@ -1,13 +1,13 @@
 //
-//  FeedPostView.swift
+//  FeedPostViewArtist.swift
 //  Qoria_App
 //
-//  Feed post content view for Teacher user type.
+//  Feed post content view for Artist user type. Layout identical to Teacher (FeedPostView).
 //
 
 import SwiftUI
 
-struct FeedPostView: View {
+struct FeedPostViewArtist: View {
 
     // MARK: - State
 
@@ -21,24 +21,24 @@ struct FeedPostView: View {
             HStack {
                 HStack {
                     ZStack(alignment: .bottomTrailing) {
-                        
+
                         ZStack {
                             Circle()
                                 .fill(Color.clear)
                                 .frame(width: 52, height: 52)
-                            
+
                             Circle()
                                 .stroke(
                                     LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
                                 .frame(width: 52, height: 52)
-                            
+
                             Image("ic_proImg")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 44, height: 44)
                                 .clipShape(Circle())
                         }
-                        
+
                         Image("ic_proBadgeBlue")
                             .resizable()
                             .scaledToFit()
@@ -46,15 +46,15 @@ struct FeedPostView: View {
                             .offset(x: 3, y: 2)
                     }
                     .frame(width: 52, height: 52)
-                    
+
                     VStack(alignment: .leading) {
                         HStack {
                             Text("Sarah Morgan")
                                 .font(.system(size: 16, weight: .medium))
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color.Text.onDark)
-                            
-                            Text("Teacher")
+
+                            Text("Artist")
                                 .font(.system(size: 12))
                                 .foregroundStyle(Color.Text.onDark)
                                 .padding(.horizontal, 8)
@@ -63,15 +63,15 @@ struct FeedPostView: View {
                                 .overlay(
                                     Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
                         }
-                        
+
                         Text("2h ago")
                             .font(.system(size: 14))
                             .foregroundStyle(Color.Text.secondary)
                     }
                 }
-                
+
                 Spacer()
-                
+
                 Button {
                     showUnderDevelopment = true
                 } label: {
@@ -82,12 +82,12 @@ struct FeedPostView: View {
                 }
                 .buttonStyle(.plain)
             }
-            
+
             Text("Exploring trust and balance through simple partner movements.")
                 .font(.body)
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
-            
+
             Image(image ?? "ic_postImg1")
                 .resizable()
                 .scaledToFill()
@@ -106,9 +106,9 @@ struct FeedPostView: View {
                     .buttonStyle(.plain)
                 }
                 .padding(.horizontal, -16)
-            
+
             HStack(spacing: 20) {
-                
+
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_clap")
@@ -121,7 +121,7 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-                
+
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_comment")
@@ -135,9 +135,9 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-                
+
                 Spacer(minLength: 0)
-                
+
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_share")
@@ -150,7 +150,7 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-                
+
                 Button { showUnderDevelopment = true } label: {
                     Image("ic_save")
                         .resizable()
@@ -169,9 +169,7 @@ struct FeedPostView: View {
         .clipped()
         .background(Color.Surface.post)
         .alert("Under development", isPresented: $showUnderDevelopment) {
-            Button("OK", role: .cancel) {
-                
-            }
+            Button("OK", role: .cancel) {}
         } message: {
             Text("This feature is under development.")
         }
@@ -181,7 +179,7 @@ struct FeedPostView: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        FeedPostView(image: "ic_postImg1")
+        FeedPostViewArtist(image: "ic_postImg1")
             .padding(.top, 16)
             .padding(.horizontal, 0)
     }
