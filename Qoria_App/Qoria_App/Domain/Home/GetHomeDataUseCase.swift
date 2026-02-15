@@ -19,4 +19,3 @@ struct GetHomeDataUseCase {
         try await repository.fetchHomeData()
     }
 }
-
