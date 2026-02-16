@@ -46,6 +46,20 @@ extension Color {
 
         /// App bar profile border white base
         static let borderWhiteBase = Color.white
+
+        /// Artist colors (base, apply opacity where needed)
+        /// Base color #E73B2F
+        static let artistRed = Color(red: 0xE7/255, green: 0x3B/255, blue: 0x2F/255)
+        /// Base color #790166 (reused from ContentTypeBorder.medalRight)
+        static let artistPurple = Color(red: 0x79/255, green: 0x01/255, blue: 0x66/255)
+
+        /// Artist profile border: #E73B2F at 60% opacity, #790166 at 50% opacity
+        static let artistBorderLeft  = artistRed.opacity(0.60)
+        static let artistBorderRight = artistPurple.opacity(0.50)
+
+        /// Teacher/Artist colors (base, apply opacity where needed)
+        /// Base color #730162
+        static let teacherArtistPurple = Color(red: 0x73/255, green: 0x01/255, blue: 0x62/255)
     }
 
     // MARK: - Tags & Badges

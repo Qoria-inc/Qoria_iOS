@@ -29,7 +29,13 @@ struct FeedPostViewArtist: View {
 
                             Circle()
                                 .stroke(
-                                    LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                                    LinearGradient(
+                                        colors: [Color.Profile.artistBorderLeft, Color.Profile.artistBorderRight],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    ),
+                                    lineWidth: 1
+                                )
                                 .frame(width: 52, height: 52)
 
                             Image("ic_proImg")
@@ -39,7 +45,7 @@ struct FeedPostViewArtist: View {
                                 .clipShape(Circle())
                         }
 
-                        Image("ic_proBadgeBlue")
+                        Image("ic_proBadgeRed")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 26)
@@ -59,9 +65,30 @@ struct FeedPostViewArtist: View {
                                 .foregroundStyle(Color.Text.onDark)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(LinearGradient(colors: [Color.Gradient.tagLeft, Color.Gradient.tagRight], startPoint: .leading, endPoint: .trailing), in: Capsule())
+                                .background(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.Profile.artistRed.opacity(0.40),
+                                            Color.Profile.artistPurple.opacity(0.30)
+                                        ],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    ),
+                                    in: Capsule()
+                                )
                                 .overlay(
-                                    Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
+                                    Capsule().stroke(
+                                        LinearGradient(
+                                            colors: [
+                                                Color.Profile.artistRed.opacity(0.40),
+                                                Color.Profile.artistPurple.opacity(0.30)
+                                            ],
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        ),
+                                        lineWidth: 0.5
+                                    )
+                                )
 
                             FeedContentTypeView(isCrown: true)
                         }
