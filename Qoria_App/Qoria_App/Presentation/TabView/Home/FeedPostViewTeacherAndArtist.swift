@@ -1,13 +1,13 @@
 //
-//  FeedPostViewStudent.swift
+//  FeedPostViewTeacherAndArtist.swift
 //  Qoria_App
 //
-//  Feed post content view for Student user type. Layout identical to Teacher (FeedPostView).
+//  Feed post content view for Teacher/Artist user type. Layout identical to Teacher (FeedPostView).
 //
 
 import SwiftUI
 
-struct FeedPostViewStudent: View {
+struct FeedPostViewTeacherAndArtist: View {
 
     // MARK: - State
 
@@ -20,29 +20,51 @@ struct FeedPostViewStudent: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 HStack {
-                    ZStack {
-                        Circle()
-                            .fill(Color.clear)
-                            .frame(width: 52, height: 52)
+                    ZStack(alignment: .bottomTrailing) {
 
-                        Circle()
-                            .stroke(
-                                LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
-                            .frame(width: 52, height: 52)
+                        ZStack {
+                            Circle()
+                                .fill(Color.clear)
+                                .frame(width: 52, height: 52)
 
-                        Image("ic_proImg")
+                            Circle()
+                                .stroke(
+                                    LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                                .frame(width: 52, height: 52)
+
+                            Image("ic_proImg")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 44, height: 44)
+                                .clipShape(Circle())
+                        }
+
+                        Image("ic_proBadgeBlue")
                             .resizable()
-                            .scaledToFill()
-                            .frame(width: 44, height: 44)
-                            .clipShape(Circle())
+                            .scaledToFit()
+                            .frame(width: 32, height: 26)
+                            .offset(x: 3, y: 2)
                     }
                     .frame(width: 52, height: 52)
 
                     VStack(alignment: .leading) {
-                        Text("Sarah Morgan")
-                            .font(.system(size: 16, weight: .medium))
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color.Text.onDark)
+                        HStack(spacing: 6) {
+                            Text("Sarah Morgan")
+                                .font(.system(size: 16, weight: .medium))
+                                .fontWeight(.semibold)
+                                .foregroundStyle(Color.Text.onDark)
+
+                            Text("Teacher/Artist")
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color.Text.onDark)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(LinearGradient(colors: [Color.Gradient.tagLeft, Color.Gradient.tagRight], startPoint: .leading, endPoint: .trailing), in: Capsule())
+                                .overlay(
+                                    Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
+
+                            FeedContentTypeView(isCrown: true)
+                        }
 
                         Text("2h ago")
                             .font(.system(size: 14))
@@ -159,7 +181,7 @@ struct FeedPostViewStudent: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        FeedPostViewStudent(image: "ic_postImg1")
+        FeedPostViewTeacherAndArtist(image: "ic_postImg1")
             .padding(.top, 16)
             .padding(.horizontal, 0)
     }

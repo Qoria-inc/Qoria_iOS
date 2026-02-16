@@ -1,18 +1,49 @@
 //
 //  HomeView.swift
-//  qoria_dev
+//  Qoria_App
 //
 
 import SwiftUI
 
+// MARK: - Dummy feed model (replace with API model later)
+
+private enum FeedUserType: String, CaseIterable {
+    case teacher
+    case artist
+    case student
+    case teacherAndArtist
+}
+
+private struct FeedPostItem: Identifiable {
+    let id: UUID
+    let image: String
+    let userType: FeedUserType
+
+    init(id: UUID = UUID(), image: String, userType: FeedUserType) {
+        self.id = id
+        self.image = image
+        self.userType = userType
+    }
+}
+
 struct HomeView: View {
-    
+
     // MARK: - State
-    
+
     @StateObject private var viewModel: HomeViewModel
     @State private var isBannerVisible = true
-    
-    let images = ["ic_postImg1", "ic_postImg2", "ic_postImg1", "ic_postImg2", "ic_postImg1", "ic_postImg2", "ic_postImg1", "ic_postImg2"]
+
+    /// Dummy feed items: mix of teacher, artist, student, teacherAndArtist posts.
+    private let feedItems: [FeedPostItem] = [
+        FeedPostItem(image: "ic_postImg1", userType: .teacher),
+        FeedPostItem(image: "ic_postImg2", userType: .artist),
+        FeedPostItem(image: "ic_postImg1", userType: .student),
+        FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
+        FeedPostItem(image: "ic_postImg1", userType: .teacher),
+        FeedPostItem(image: "ic_postImg2", userType: .artist),
+        FeedPostItem(image: "ic_postImg1", userType: .student),
+        FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
+    ]
     
     // MARK: - Init (simple manual DI)
     
@@ -39,8 +70,19 @@ struct HomeView: View {
                             }
                         })
                     }
-                    ForEach(0..<images.count, id: \.self) { i in
-                        FeedPostView(image: images[i])
+                    // ForEach(0..<images.count, id: \.self) { i in
+                    //     FeedPostView(image: images[i])}
+                    ForEach(feedItems) { item in
+                        switch item.userType {
+                        case .teacher:
+                            FeedPostView(image: item.image)
+                        case .artist:
+                            FeedPostViewArtist(image: item.image)
+                        case .student:
+                            FeedPostViewStudent(image: item.image)
+                        case .teacherAndArtist:
+                            FeedPostViewTeacherAndArtist(image: item.image)
+                        }
                     }
                     
                     // Optional debug section to verify Home API
