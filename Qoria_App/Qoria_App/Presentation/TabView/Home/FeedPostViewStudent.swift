@@ -27,7 +27,18 @@ struct FeedPostViewStudent: View {
 
                         Circle()
                             .stroke(
-                                LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                                AngularGradient(
+                                    colors: [
+                                        Color.Profile.borderWhiteBase.opacity(1),
+                                        Color.Profile.borderBlueBase.opacity(0.5),
+                                        Color.Profile.borderWhiteBase.opacity(1),
+                                        Color.Profile.borderBlueBase.opacity(0.5),
+                                        Color.Profile.borderWhiteBase.opacity(1)
+                                    ],
+                                    center: .center
+                                ),
+                                lineWidth: 1
+                            )
                             .frame(width: 52, height: 52)
 
                         Image("ic_proImg")

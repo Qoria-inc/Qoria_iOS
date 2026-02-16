@@ -13,6 +13,7 @@ struct FeedPostViewTeacherAndArtist: View {
 
     @State private var showUnderDevelopment = false
     var image: String?
+    var showsLearnThis: Bool = false
 
     // MARK: - Body
 
@@ -120,24 +121,33 @@ struct FeedPostViewTeacherAndArtist: View {
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Image(image ?? "ic_postImg1")
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
-                .clipped()
-                .overlay(alignment: .bottomTrailing) {
-                    Button {
-                        showUnderDevelopment = true
-                    } label: {
-                        Image("ic_volumeWithBG")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                            .padding(8)
+            VStack(spacing: 0) {
+                Image(image ?? "ic_postImg1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
+                    .clipped()
+                    .overlay(alignment: .bottomTrailing) {
+                        Button {
+                            showUnderDevelopment = true
+                        } label: {
+                            Image("ic_volumeWithBG")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                                .padding(8)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
+                    .padding(.horizontal, -16)
+
+                if showsLearnThis {
+                    LearnThisButtonView {
+                        showUnderDevelopment = true
+                    }
+                    .padding(.horizontal, -16)
                 }
-                .padding(.horizontal, -16)
+            }
 
             HStack(spacing: 20) {
 

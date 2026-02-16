@@ -55,7 +55,7 @@ Under `Qoria_App/Qoria_App/`:
 | Folder | Purpose |
 |--------|--------|
 | **App** | Entry point (`Qoria_AppApp.swift`), DI container (`AppContainer.swift`), shared `ContentView` placeholder. |
-| **Presentation** | UI only. `TabView/` → `QoriaTabView/`, `Home/` (HomeView, HomeViewModel; feed content views: FeedPostView [Teacher], FeedPostViewArtist, FeedPostViewStudent; FeedContentTypeView [content type badges]; PremiumCrownTag [unused]; PremiumBannerView, QoriaAppBarView). |
+| **Presentation** | UI only. `TabView/` → `QoriaTabView/`, `Home/` (HomeView, HomeViewModel; feed content views: FeedPostView [Teacher], FeedPostViewArtist, FeedPostViewStudent, FeedPostViewTeacherAndArtist; FeedContentTypeView [content type badges]; LearnThisButtonView [CTA under media]; PremiumCrownTag [unused]; PremiumBannerView, QoriaAppBarView). |
 | **Domain** | Feature-specific protocols and use cases. No UIKit/SwiftUI. Example: `Home/HomeRepository.swift`, `GetHomeDataUseCase.swift`. |
 | **Data** | Implementations of domain protocols and shared data types. Example: `Home/HomeRepositoryImpl.swift`, `DynamicJSON.swift`. |
 | **Network** | All HTTP/auth: `NetworkManager`, `NetworkCall` (and `NetworkCalling`), `AppUrl`, `AuthInterceptor`, `TokenRefresher`, `AuthTokenStore`, `NetworkError`, `NetworkLogger`. |

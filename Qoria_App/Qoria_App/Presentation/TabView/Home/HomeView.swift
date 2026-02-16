@@ -18,11 +18,13 @@ private struct FeedPostItem: Identifiable {
     let id: UUID
     let image: String
     let userType: FeedUserType
+    let showsLearnThis: Bool
 
-    init(id: UUID = UUID(), image: String, userType: FeedUserType) {
+    init(id: UUID = UUID(), image: String, userType: FeedUserType, showsLearnThis: Bool = false) {
         self.id = id
         self.image = image
         self.userType = userType
+        self.showsLearnThis = showsLearnThis
     }
 }
 
@@ -35,7 +37,7 @@ struct HomeView: View {
 
     /// Dummy feed items: mix of teacher, artist, student, teacherAndArtist posts.
     private let feedItems: [FeedPostItem] = [
-        FeedPostItem(image: "ic_postImg1", userType: .teacher),
+        FeedPostItem(image: "ic_postImg1", userType: .teacher, showsLearnThis: true),
         FeedPostItem(image: "ic_postImg2", userType: .artist),
         FeedPostItem(image: "ic_postImg1", userType: .student),
         FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
@@ -75,13 +77,13 @@ struct HomeView: View {
                     ForEach(feedItems) { item in
                         switch item.userType {
                         case .teacher:
-                            FeedPostView(image: item.image)
+                            FeedPostView(image: item.image, showsLearnThis: item.showsLearnThis)
                         case .artist:
                             FeedPostViewArtist(image: item.image)
                         case .student:
                             FeedPostViewStudent(image: item.image)
                         case .teacherAndArtist:
-                            FeedPostViewTeacherAndArtist(image: item.image)
+                            FeedPostViewTeacherAndArtist(image: item.image, showsLearnThis: item.showsLearnThis)
                         }
                     }
                     

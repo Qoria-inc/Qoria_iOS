@@ -104,5 +104,9 @@ extension Color {
         // PRO badge
         static let proStart = Color(red: 0x29/255, green: 0x2B/255, blue: 0xA5/255)
         static let proEnd   = Color(red: 0x10/255, green: 0xB0/255, blue: 0xB4/255)
+
+        // Learn This CTA
+        /// Start color #374AC2 (apply opacity where needed)
+        static let learnThisStart = Color(red: 0x37/255, green: 0x4A/255, blue: 0xC2/255)
     }
 }
