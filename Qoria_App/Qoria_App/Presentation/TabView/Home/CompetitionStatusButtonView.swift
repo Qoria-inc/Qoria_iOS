@@ -14,11 +14,13 @@ struct CompetitionStatusButtonView: View {
 
     // MARK: - Constants
 
-    /// Match visual height of volume button (32 icon + 8pt padding × 2)
+    /// Match visual height of volume button (32 icon)
     static let height: CGFloat = 32
 
     let title: String
     var onTap: () -> Void = {}
+
+    // MARK: - Body
 
     var body: some View {
         Button(action: onTap) {
@@ -46,6 +48,23 @@ struct CompetitionStatusButtonView: View {
                             startPoint: .leading,
                             endPoint: .trailing
                         )
+                    )
+            )
+            .overlay(
+                Capsule()
+                    .stroke(
+                        LinearGradient(
+                            colors: [
+                                Color.Text.onDark.opacity(0.45),
+                                Color.Text.onDark.opacity(0.25),
+                                Color.Text.onDark.opacity(0.08),
+                                Color.Text.onDark.opacity(0.25),
+                                Color.Text.onDark.opacity(0.45)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
                     )
             )
             .shadow(
