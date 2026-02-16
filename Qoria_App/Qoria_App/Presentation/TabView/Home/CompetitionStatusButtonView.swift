@@ -28,7 +28,7 @@ struct CompetitionStatusButtonView: View {
                 Image("ic_trophy")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 16, height: 16)
+                    .frame(width: 18, height: 18)
 
                 Text(title)
                     .font(.system(size: 16, weight: .semibold))

@@ -119,5 +119,13 @@ extension Color {
     enum Competition {
         /// Glow color #D72744 (use with ~18% opacity)
         static let glow = Color(red: 0xD7/255, green: 0x27/255, blue: 0x44/255)
+
+        /// Winners announced yellow #FDB022
+        static let winnersYellow = Color(red: 0xFD/255, green: 0xB0/255, blue: 0x22/255)
+
+        /// Voting status green #47CD89
+        static let votingGreen = Color(red: 0x47/255, green: 0xCD/255, blue: 0x89/255)
+        /// Voting status background base #17B26A
+        static let votingGreenBg = Color(red: 0x17/255, green: 0xB2/255, blue: 0x6A/255)
     }
 }

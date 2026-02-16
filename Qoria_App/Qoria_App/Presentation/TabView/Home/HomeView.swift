@@ -20,19 +20,22 @@ private struct FeedPostItem: Identifiable {
     let userType: FeedUserType
     let showsLearnThis: Bool
     let competitionStatusTitle: String?
+    let competitionCurrentStatusTitle: String?
 
     init(
         id: UUID = UUID(),
         image: String,
         userType: FeedUserType,
         showsLearnThis: Bool = false,
-        competitionStatusTitle: String? = nil
+        competitionStatusTitle: String? = nil,
+        competitionCurrentStatusTitle: String? = nil
     ) {
         self.id = id
         self.image = image
         self.userType = userType
         self.showsLearnThis = showsLearnThis
         self.competitionStatusTitle = competitionStatusTitle
+        self.competitionCurrentStatusTitle = competitionCurrentStatusTitle
     }
 }
 
@@ -50,9 +53,24 @@ struct HomeView: View {
         FeedPostItem(image: "ic_postImg2", userType: .artist),
         FeedPostItem(image: "ic_postImg1", userType: .student),
         // Bottom 3 competition CTAs
-        FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist, competitionStatusTitle: "Winners Pending"),
-        FeedPostItem(image: "ic_postImg1", userType: .teacher, competitionStatusTitle: "See Winners"),
-        FeedPostItem(image: "ic_postImg2", userType: .artist, competitionStatusTitle: "See the Competition"),
+        FeedPostItem(
+            image: "ic_postImg2",
+            userType: .teacherAndArtist,
+            competitionStatusTitle: "Winners Pending",
+            competitionCurrentStatusTitle: "Voting is over"
+        ),
+        FeedPostItem(
+            image: "ic_postImg1",
+            userType: .teacher,
+            competitionStatusTitle: "See Winners",
+            competitionCurrentStatusTitle: "Winners Announced"
+        ),
+        FeedPostItem(
+            image: "ic_postImg2",
+            userType: .artist,
+            competitionStatusTitle: "See the Competition",
+            competitionCurrentStatusTitle: "Voting ends in 4h"
+        ),
         FeedPostItem(image: "ic_postImg1", userType: .student),
         FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
     ]
@@ -90,12 +108,14 @@ struct HomeView: View {
                             FeedPostView(
                                 image: item.image,
                                 showsLearnThis: item.showsLearnThis,
-                                competitionStatusTitle: item.competitionStatusTitle
+                                competitionStatusTitle: item.competitionStatusTitle,
+                                competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
                         case .artist:
                             FeedPostViewArtist(
                                 image: item.image,
-                                competitionStatusTitle: item.competitionStatusTitle
+                                competitionStatusTitle: item.competitionStatusTitle,
+                                competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
                         case .student:
                             FeedPostViewStudent(image: item.image)
@@ -103,7 +123,8 @@ struct HomeView: View {
                             FeedPostViewTeacherAndArtist(
                                 image: item.image,
                                 showsLearnThis: item.showsLearnThis,
-                                competitionStatusTitle: item.competitionStatusTitle
+                                competitionStatusTitle: item.competitionStatusTitle,
+                                competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
                         }
                     }

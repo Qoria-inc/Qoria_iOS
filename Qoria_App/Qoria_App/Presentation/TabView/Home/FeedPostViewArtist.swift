@@ -14,6 +14,19 @@ struct FeedPostViewArtist: View {
     @State private var showUnderDevelopment = false
     var image: String?
     var competitionStatusTitle: String? = nil
+    var competitionCurrentStatusTitle: String? = nil
+
+    // MARK: - Helpers
+
+    private func styleForStatus(title: String) -> CompetitionCurrentStatusTagView.Style {
+        if title.lowercased().contains("winners announced") {
+            return .winnersAnnounced
+        } else if title.lowercased().contains("voting ends") {
+            return .votingEndsSoon
+        } else {
+            return .neutral
+        }
+    }
 
     // MARK: - Body
 
@@ -54,7 +67,7 @@ struct FeedPostViewArtist: View {
                     }
                     .frame(width: 52, height: 52)
 
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 4) {
                         HStack(spacing: 6) {
                             Text("Sarah Morgan")
                                 .font(.system(size: 16, weight: .medium))
@@ -117,6 +130,14 @@ struct FeedPostViewArtist: View {
                 .font(.body)
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
+
+            if let statusTitle = competitionCurrentStatusTitle {
+                CompetitionCurrentStatusTagView(
+                    title: statusTitle,
+                    style: styleForStatus(title: statusTitle)
+                )
+                .padding(.top, 2)
+            }
 
             VStack(spacing: 0) {
                 Image(image ?? "ic_postImg1")
