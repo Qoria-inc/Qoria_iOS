@@ -18,6 +18,7 @@
 		FF8A6F242F3A69B000F7008E /* PremiumCrownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */; };
 		FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */; };
 		FF8A6F2A2F3A69E000F7008E /* LearnThisButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F292F3A69E000F7008E /* LearnThisButtonView.swift */; };
+		FF8A6F2C2F3A69F000F7008E /* CompetitionStatusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F2B2F3A69F000F7008E /* CompetitionStatusButtonView.swift */; };
 		FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD85D2F38DAB100017908 /* ContentView.swift */; };
 		FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8CD85E2F38DAB100017908 /* Qoria_AppApp.swift */; };
 		FF8CD86A2F38DAB100017908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF8CD8662F38DAB100017908 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCrownTag.swift; sourceTree = "<group>"; };
 		FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentTypeView.swift; sourceTree = "<group>"; };
 		FF8A6F292F3A69E000F7008E /* LearnThisButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnThisButtonView.swift; sourceTree = "<group>"; };
+		FF8A6F2B2F3A69F000F7008E /* CompetitionStatusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStatusButtonView.swift; sourceTree = "<group>"; };
 		FF8CD81E2F3820A500017908 /* Qoria_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qoria_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8CD82B2F3820A800017908 /* Qoria_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Qoria_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8CD8352F3820A800017908 /* Qoria_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Qoria_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 				FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */,
 				FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */,
 				FF8A6F292F3A69E000F7008E /* LearnThisButtonView.swift */,
+				FF8A6F2B2F3A69F000F7008E /* CompetitionStatusButtonView.swift */,
 				FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */,
 				FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */,
 			);
@@ -479,6 +482,7 @@
 				FF8A6F242F3A69B000F7008E /* PremiumCrownTag.swift in Sources */,
 				FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */,
 				FF8A6F2A2F3A69E000F7008E /* LearnThisButtonView.swift in Sources */,
+				FF8A6F2C2F3A69F000F7008E /* CompetitionStatusButtonView.swift in Sources */,
 				FF8CD8742F38DBEC00017908 /* NetworkCall.swift in Sources */,
 				FF8A6F1E2F3A699900F7008E /* QoriaAppBarView.swift in Sources */,
 				FF8CD8782F38DC8600017908 /* Validation.swift in Sources */,

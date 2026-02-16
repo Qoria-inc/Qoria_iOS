@@ -108,5 +108,16 @@ extension Color {
         // Learn This CTA
         /// Start color #374AC2 (apply opacity where needed)
         static let learnThisStart = Color(red: 0x37/255, green: 0x4A/255, blue: 0xC2/255)
+
+        // Competition CTA (See Winners / See the Competition / Winners Pending)
+        /// Start color #790166, end color #E73B2F
+        static let competitionStart = Color(red: 0x79/255, green: 0x01/255, blue: 0x66/255)
+        static let competitionEnd   = Color(red: 0xE7/255, green: 0x3B/255, blue: 0x2F/255)
+    }
+
+    // MARK: - Competition Glow
+    enum Competition {
+        /// Glow color #D72744 (use with ~18% opacity)
+        static let glow = Color(red: 0xD7/255, green: 0x27/255, blue: 0x44/255)
     }
 }

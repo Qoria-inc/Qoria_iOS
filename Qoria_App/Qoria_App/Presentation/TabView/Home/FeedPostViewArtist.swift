@@ -13,6 +13,7 @@ struct FeedPostViewArtist: View {
 
     @State private var showUnderDevelopment = false
     var image: String?
+    var competitionStatusTitle: String? = nil
 
     // MARK: - Body
 
@@ -68,8 +69,8 @@ struct FeedPostViewArtist: View {
                                 .background(
                                     LinearGradient(
                                         colors: [
-                                            Color.Profile.artistRed.opacity(0.40),
-                                            Color.Profile.artistPurple.opacity(0.30)
+                                            Color.Profile.artistPurple.opacity(0.30),
+                                            Color.Profile.artistRed.opacity(0.40)
                                         ],
                                         startPoint: .leading,
                                         endPoint: .trailing
@@ -117,24 +118,43 @@ struct FeedPostViewArtist: View {
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Image(image ?? "ic_postImg1")
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
-                .clipped()
-                .overlay(alignment: .bottomTrailing) {
-                    Button {
-                        showUnderDevelopment = true
-                    } label: {
-                        Image("ic_volumeWithBG")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                            .padding(8)
+            VStack(spacing: 0) {
+                Image(image ?? "ic_postImg1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
+                    .clipped()
+                    .overlay(alignment: .bottom) {
+                        ZStack {
+                            if let title = competitionStatusTitle {
+                                HStack {
+                                    Spacer()
+                                    CompetitionStatusButtonView(title: title) {
+                                        showUnderDevelopment = true
+                                    }
+                                    Spacer()
+                                }
+                            }
+
+                            HStack {
+                                Spacer()
+                                Button {
+                                    showUnderDevelopment = true
+                                } label: {
+                                    Image("ic_volumeWithBG")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32, height: 32)
+                                        .padding(8)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                     }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal, -16)
+                    .padding(.horizontal, -16)
+            }
 
             HStack(spacing: 20) {
 

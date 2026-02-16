@@ -19,12 +19,20 @@ private struct FeedPostItem: Identifiable {
     let image: String
     let userType: FeedUserType
     let showsLearnThis: Bool
+    let competitionStatusTitle: String?
 
-    init(id: UUID = UUID(), image: String, userType: FeedUserType, showsLearnThis: Bool = false) {
+    init(
+        id: UUID = UUID(),
+        image: String,
+        userType: FeedUserType,
+        showsLearnThis: Bool = false,
+        competitionStatusTitle: String? = nil
+    ) {
         self.id = id
         self.image = image
         self.userType = userType
         self.showsLearnThis = showsLearnThis
+        self.competitionStatusTitle = competitionStatusTitle
     }
 }
 
@@ -36,13 +44,15 @@ struct HomeView: View {
     @State private var isBannerVisible = true
 
     /// Dummy feed items: mix of teacher, artist, student, teacherAndArtist posts.
+    /// Bottom 3 show competition CTA buttons with different labels.
     private let feedItems: [FeedPostItem] = [
         FeedPostItem(image: "ic_postImg1", userType: .teacher, showsLearnThis: true),
         FeedPostItem(image: "ic_postImg2", userType: .artist),
         FeedPostItem(image: "ic_postImg1", userType: .student),
-        FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
-        FeedPostItem(image: "ic_postImg1", userType: .teacher),
-        FeedPostItem(image: "ic_postImg2", userType: .artist),
+        // Bottom 3 competition CTAs
+        FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist, competitionStatusTitle: "Winners Pending"),
+        FeedPostItem(image: "ic_postImg1", userType: .teacher, competitionStatusTitle: "See Winners"),
+        FeedPostItem(image: "ic_postImg2", userType: .artist, competitionStatusTitle: "See the Competition"),
         FeedPostItem(image: "ic_postImg1", userType: .student),
         FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
     ]
@@ -77,13 +87,24 @@ struct HomeView: View {
                     ForEach(feedItems) { item in
                         switch item.userType {
                         case .teacher:
-                            FeedPostView(image: item.image, showsLearnThis: item.showsLearnThis)
+                            FeedPostView(
+                                image: item.image,
+                                showsLearnThis: item.showsLearnThis,
+                                competitionStatusTitle: item.competitionStatusTitle
+                            )
                         case .artist:
-                            FeedPostViewArtist(image: item.image)
+                            FeedPostViewArtist(
+                                image: item.image,
+                                competitionStatusTitle: item.competitionStatusTitle
+                            )
                         case .student:
                             FeedPostViewStudent(image: item.image)
                         case .teacherAndArtist:
-                            FeedPostViewTeacherAndArtist(image: item.image, showsLearnThis: item.showsLearnThis)
+                            FeedPostViewTeacherAndArtist(
+                                image: item.image,
+                                showsLearnThis: item.showsLearnThis,
+                                competitionStatusTitle: item.competitionStatusTitle
+                            )
                         }
                     }
                     

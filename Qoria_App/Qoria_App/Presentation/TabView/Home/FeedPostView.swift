@@ -14,6 +14,7 @@ struct FeedPostView: View {
     @State private var showUnderDevelopment = false
     var image: String?
     var showsLearnThis: Bool = false
+    var competitionStatusTitle: String? = nil
 
     // MARK: - Body
 
@@ -97,17 +98,36 @@ struct FeedPostView: View {
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
                     .clipped()
-                    .overlay(alignment: .bottomTrailing) {
-                        Button {
-                            showUnderDevelopment = true
-                        } label: {
-                            Image("ic_volumeWithBG")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .padding(8)
+                    .overlay(alignment: .bottom) {
+                        ZStack {
+                            // Centered competition status button
+                            if let title = competitionStatusTitle {
+                                HStack {
+                                    Spacer()
+                                    CompetitionStatusButtonView(title: title) {
+                                        showUnderDevelopment = true
+                                    }
+                                    Spacer()
+                                }
+                            }
+
+                            // Volume button aligned to bottom trailing
+                            HStack {
+                                Spacer()
+                                Button {
+                                    showUnderDevelopment = true
+                                } label: {
+                                    Image("ic_volumeWithBG")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32, height: 32)
+                                        .padding(8)
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
-                        .buttonStyle(.plain)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                     }
                     .padding(.horizontal, -16)
 

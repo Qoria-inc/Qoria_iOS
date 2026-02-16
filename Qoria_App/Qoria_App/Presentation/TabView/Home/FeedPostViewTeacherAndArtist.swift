@@ -14,6 +14,7 @@ struct FeedPostViewTeacherAndArtist: View {
     @State private var showUnderDevelopment = false
     var image: String?
     var showsLearnThis: Bool = false
+    var competitionStatusTitle: String? = nil
 
     // MARK: - Body
 
@@ -72,8 +73,8 @@ struct FeedPostViewTeacherAndArtist: View {
                                 .background(
                                     LinearGradient(
                                         colors: [
-                                            Color.Profile.teacherArtistPurple.opacity(0.40),
-                                            Color.Gradient.proStart.opacity(0.30)
+                                            Color.Gradient.proStart.opacity(0.40),
+                                            Color.Profile.teacherArtistPurple.opacity(0.50)
                                         ],
                                         startPoint: .leading,
                                         endPoint: .trailing
@@ -127,17 +128,34 @@ struct FeedPostViewTeacherAndArtist: View {
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
                     .clipped()
-                    .overlay(alignment: .bottomTrailing) {
-                        Button {
-                            showUnderDevelopment = true
-                        } label: {
-                            Image("ic_volumeWithBG")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .padding(8)
+                    .overlay(alignment: .bottom) {
+                        ZStack {
+                            if let title = competitionStatusTitle {
+                                HStack {
+                                    Spacer()
+                                    CompetitionStatusButtonView(title: title) {
+                                        showUnderDevelopment = true
+                                    }
+                                    Spacer()
+                                }
+                            }
+
+                            HStack {
+                                Spacer()
+                                Button {
+                                    showUnderDevelopment = true
+                                } label: {
+                                    Image("ic_volumeWithBG")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 32, height: 32)
+                                        .padding(8)
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
-                        .buttonStyle(.plain)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                     }
                     .padding(.horizontal, -16)
 
