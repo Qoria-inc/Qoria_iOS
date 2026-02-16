@@ -55,7 +55,7 @@ Under `Qoria_App/Qoria_App/`:
 | Folder | Purpose |
 |--------|--------|
 | **App** | Entry point (`Qoria_AppApp.swift`), DI container (`AppContainer.swift`), shared `ContentView` placeholder. |
-| **Presentation** | UI only. `TabView/` → `QoriaTabView/`, `Home/` (HomeView, HomeViewModel; feed content views: FeedPostView [Teacher], FeedPostViewArtist, FeedPostViewStudent; PremiumBannerView, QoriaAppBarView). |
+| **Presentation** | UI only. `TabView/` → `QoriaTabView/`, `Home/` (HomeView, HomeViewModel; feed content views: FeedPostView [Teacher], FeedPostViewArtist, FeedPostViewStudent; FeedContentTypeView [content type badges]; PremiumCrownTag [unused]; PremiumBannerView, QoriaAppBarView). |
 | **Domain** | Feature-specific protocols and use cases. No UIKit/SwiftUI. Example: `Home/HomeRepository.swift`, `GetHomeDataUseCase.swift`. |
 | **Data** | Implementations of domain protocols and shared data types. Example: `Home/HomeRepositoryImpl.swift`, `DynamicJSON.swift`. |
 | **Network** | All HTTP/auth: `NetworkManager`, `NetworkCall` (and `NetworkCalling`), `AppUrl`, `AuthInterceptor`, `TokenRefresher`, `AuthTokenStore`, `NetworkError`, `NetworkLogger`. |
@@ -114,7 +114,7 @@ So: **constructor injection** for ViewModels and repositories; **container** onl
 
 ### 3.7 UI / Theming
 
-- **Colors**: Centralized in `AppColor.swift` as `Color` extensions with nested enums: `Surface`, `Text`, `Profile`, `Tag`, `Badge`, `Gradient`. Use these instead of ad-hoc `Color(red:green:blue:)` in views.
+- **Colors**: Centralized in `AppColor.swift` as `Color` extensions with nested enums: `Surface`, `Text`, `Profile`, `Tag`, `Badge`, `Premium`, `Gradient`. Use these instead of ad-hoc `Color(red:green:blue:)` in views. `Premium.crownTagBackground` is used for the premium crown tag next to user type.
 - **Layout**: SwiftUI layout with `VStack`/`HStack`/`ZStack`, `Spacer()`, `frame(maxWidth: .infinity)` where appropriate. Some views use `UIScreen.main.bounds` for full-width images (consider `GeometryReader` for flexibility).
 - **Placeholder tabs**: Learn, Post, Discover, Settings use a shared `ContentView(heading:)` with a test “Run Test Call” and optional auto-run; they are not yet feature-specific.
 

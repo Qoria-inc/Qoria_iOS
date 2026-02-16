@@ -48,7 +48,7 @@ struct FeedPostView: View {
                     .frame(width: 52, height: 52)
                     
                     VStack(alignment: .leading) {
-                        HStack {
+                        HStack(spacing: 6) {
                             Text("Sarah Morgan")
                                 .font(.system(size: 16, weight: .medium))
                                 .fontWeight(.semibold)
@@ -62,6 +62,8 @@ struct FeedPostView: View {
                                 .background(LinearGradient(colors: [Color.Gradient.tagLeft, Color.Gradient.tagRight], startPoint: .leading, endPoint: .trailing), in: Capsule())
                                 .overlay(
                                     Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
+
+                            FeedContentTypeView(isSingleTrophy: true)
                         }
                         
                         Text("2h ago")

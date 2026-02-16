@@ -59,6 +59,23 @@ extension Color {
         static let purple = Color(red: 0x58/255, green: 0x2E/255, blue: 0xA5/255)
     }
 
+    // MARK: - Premium
+    enum Premium {
+        /// Crown tag background (dark grey, rounded tag behind crown icon)
+        static let crownTagBackground = Color(red: 0x2C/255, green: 0x2C/255, blue: 0x30/255)
+    }
+
+    // MARK: - Content Type Border (FeedContentTypeView)
+    enum ContentTypeBorder {
+        /// Medal: 50% #D14742, 50% #790166
+        static let medalLeft  = Color(red: 0xD1/255, green: 0x47/255, blue: 0x42/255)
+        static let medalRight = Color(red: 0x79/255, green: 0x01/255, blue: 0x66/255)
+        /// Trophy: #FFE500 at 10% and 50% opacity
+        static let trophy = Color(red: 0xFF/255, green: 0xE5/255, blue: 0x00/255)
+        /// Crown: white at 10% and 50% opacity
+        static let crown = Color.white
+    }
+
     // MARK: - Gradients (colors only)
     enum Gradient {
         // Premium banner
