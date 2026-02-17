@@ -136,7 +136,7 @@ struct FeedPostViewArtist: View {
                     title: statusTitle,
                     style: styleForStatus(title: statusTitle)
                 )
-                .padding(.top, 2)
+                .padding(.top, -2)
             }
 
             VStack(spacing: 0) {

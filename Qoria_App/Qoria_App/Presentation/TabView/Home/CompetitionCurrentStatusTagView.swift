@@ -37,6 +37,10 @@ struct CompetitionCurrentStatusTagView: View {
             Capsule()
                 .fill(backgroundColor)
         )
+        .overlay(
+            Capsule()
+                .stroke(borderGradient, lineWidth: 0.5)
+        )
         .shadow(color: shadowColor, radius: 8, x: 0, y: 2)
     }
 
@@ -89,6 +93,21 @@ struct CompetitionCurrentStatusTagView: View {
         case .neutral:
             return Color.white.opacity(0.25)
         }
+    }
+
+    // MARK: - Border Gradient (matches app bar notification button)
+    private var borderGradient: LinearGradient {
+        LinearGradient(
+            colors: [
+                Color.Text.onDark.opacity(0.4),
+                Color.Text.onDark.opacity(0.2),
+                Color.Text.onDark.opacity(0.08),
+                Color.Text.onDark.opacity(0.2),
+                Color.Text.onDark.opacity(0.4)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 }
 
