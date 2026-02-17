@@ -39,6 +39,11 @@ struct FeedPostViewTeacherAndArtist: View {
         mediaItems.count == 2
     }
 
+    /// Card width: full width for normal feed, 24pt narrower when embedded (inside shared container)
+    private var cardWidth: CGFloat {
+        UIScreen.main.bounds.width - (isEmbedded ? 24 : 0)
+    }
+
     // MARK: - Helpers
 
     private func styleForStatus(title: String) -> CompetitionCurrentStatusTagView.Style {
@@ -248,7 +253,7 @@ struct FeedPostViewTeacherAndArtist: View {
         core
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
-            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+            .frame(width: cardWidth, alignment: .leading)
             .clipped()
             .background(Color.Surface.post)
     }

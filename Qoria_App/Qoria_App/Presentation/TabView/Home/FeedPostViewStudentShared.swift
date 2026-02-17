@@ -38,13 +38,13 @@ struct FeedPostViewStudentShared: View {
 
             // Shared post container – height purely driven by inner post
             innerPost
-                .padding(.horizontal, 4) // 4px from the post card edges
+                .clipShape(RoundedRectangle(cornerRadius: 12))   // inner post 12pt corner radius
                 .background(
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.Surface.iconButton)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.Text.onDark.opacity(0.12), lineWidth: 0.5)
+                                .stroke(Color.Text.onDark.opacity(0.12), lineWidth: 1)
                         )
                 )
         }
