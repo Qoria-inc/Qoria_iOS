@@ -14,6 +14,7 @@
 		FF8A6F1E2F3A699900F7008E /* QoriaAppBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */; };
 		FF8A6F202F3A69A100F7008E /* FeedPostViewArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1F2F3A69A100F7008E /* FeedPostViewArtist.swift */; };
 		FF8A6F222F3A69A200F7008E /* FeedPostViewStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F212F3A69A200F7008E /* FeedPostViewStudent.swift */; };
+		FFB7D9A22F4C123400ABCD01 /* FeedPostViewStudentShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */; };
 		FF8A6F282F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */; };
 		FF8A6F242F3A69B000F7008E /* PremiumCrownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */; };
 		FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */; };
@@ -73,6 +74,7 @@
 		FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaAppBarView.swift; sourceTree = "<group>"; };
 		FF8A6F1F2F3A69A100F7008E /* FeedPostViewArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewArtist.swift; sourceTree = "<group>"; };
 		FF8A6F212F3A69A200F7008E /* FeedPostViewStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudent.swift; sourceTree = "<group>"; };
+		FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudentShared.swift; sourceTree = "<group>"; };
 		FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacherAndArtist.swift; sourceTree = "<group>"; };
 		FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCrownTag.swift; sourceTree = "<group>"; };
 		FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentTypeView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				FF8A6F192F3A698100F7008E /* FeedPostView.swift */,
 				FF8A6F1F2F3A69A100F7008E /* FeedPostViewArtist.swift */,
 				FF8A6F212F3A69A200F7008E /* FeedPostViewStudent.swift */,
+				FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */,
 				FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */,
 				FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */,
 				FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */,
@@ -481,6 +484,7 @@
 				FF8A6F1A2F3A698100F7008E /* FeedPostView.swift in Sources */,
 				FF8A6F202F3A69A100F7008E /* FeedPostViewArtist.swift in Sources */,
 				FF8A6F222F3A69A200F7008E /* FeedPostViewStudent.swift in Sources */,
+				FFB7D9A22F4C123400ABCD01 /* FeedPostViewStudentShared.swift in Sources */,
 				FF8A6F282F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift in Sources */,
 				FF8A6F242F3A69B000F7008E /* PremiumCrownTag.swift in Sources */,
 				FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */,

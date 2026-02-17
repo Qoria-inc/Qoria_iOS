@@ -19,6 +19,10 @@ private struct FeedPostItem: Identifiable {
     let image: String
     let images: [String]? // Optional array for multiple images (e.g., side-by-side)
     let userType: FeedUserType
+    let sharedUserName: String?
+    let sharedUserTypeLabel: String?
+    let sharedTimeLabel: String?
+    let sharedText: String?
     let showsLearnThis: Bool
     let competitionStatusTitle: String?
     let competitionCurrentStatusTitle: String?
@@ -28,6 +32,10 @@ private struct FeedPostItem: Identifiable {
         image: String,
         images: [String]? = nil,
         userType: FeedUserType,
+        sharedUserName: String? = nil,
+        sharedUserTypeLabel: String? = nil,
+        sharedTimeLabel: String? = nil,
+        sharedText: String? = nil,
         showsLearnThis: Bool = false,
         competitionStatusTitle: String? = nil,
         competitionCurrentStatusTitle: String? = nil
@@ -36,6 +44,10 @@ private struct FeedPostItem: Identifiable {
         self.image = image
         self.images = images
         self.userType = userType
+        self.sharedUserName = sharedUserName
+        self.sharedUserTypeLabel = sharedUserTypeLabel
+        self.sharedTimeLabel = sharedTimeLabel
+        self.sharedText = sharedText
         self.showsLearnThis = showsLearnThis
         self.competitionStatusTitle = competitionStatusTitle
         self.competitionCurrentStatusTitle = competitionCurrentStatusTitle
@@ -60,6 +72,15 @@ struct HomeView: View {
             image: "ic_postImg1",
             images: ["ic_postImg1", "ic_postImg2"],
             userType: .student
+        ),
+        // Student shared post (new pattern)
+        FeedPostItem(
+            image: "ic_postImg1",
+            userType: .student,
+            sharedUserName: "Daniel Reyes",
+            sharedUserTypeLabel: "Teacher/Artist",
+            sharedTimeLabel: "1w ago",
+            sharedText: "Look, I'm trying to replicate the smooth movements of this winner! 🙌🏻"
         ),
         // Bottom 3 competition CTAs
         FeedPostItem(
@@ -131,10 +152,34 @@ struct HomeView: View {
                                 competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
                         case .student:
-                            FeedPostViewStudent(
-                                image: item.image,
-                                images: item.images
-                            )
+                            if
+                                let sharedUserName = item.sharedUserName,
+                                let sharedUserTypeLabel = item.sharedUserTypeLabel,
+                                let sharedTimeLabel = item.sharedTimeLabel,
+                                let sharedText = item.sharedText
+                            {
+                                FeedPostViewStudentShared(
+                                    sharedUserName: sharedUserName,
+                                    sharedUserTypeLabel: sharedUserTypeLabel,
+                                    sharedTimeLabel: sharedTimeLabel,
+                                    sharedText: sharedText,
+                                    innerPost: AnyView(
+                                        FeedPostViewTeacherAndArtist(
+                                            image: item.image,
+                                            images: item.images,
+                                            showsLearnThis: false,
+                                            competitionStatusTitle: nil,
+                                            competitionCurrentStatusTitle: nil,
+                                            isEmbedded: true
+                                        )
+                                    )
+                                )
+                            } else {
+                                FeedPostViewStudent(
+                                    image: item.image,
+                                    images: item.images
+                                )
+                            }
                         case .teacherAndArtist:
                             FeedPostViewTeacherAndArtist(
                                 image: item.image,

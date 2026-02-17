@@ -17,6 +17,9 @@ struct FeedPostViewTeacherAndArtist: View {
     var showsLearnThis: Bool = false
     var competitionStatusTitle: String? = nil
     var competitionCurrentStatusTitle: String? = nil
+    /// When `true`, this view is rendered inside another container (e.g. shared post)
+    /// and should not apply its own outer padding/background or show the top-right "more" button.
+    var isEmbedded: Bool = false
 
     // MARK: - Computed Properties
 
@@ -51,7 +54,17 @@ struct FeedPostViewTeacherAndArtist: View {
     // MARK: - Body
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        content
+            .alert("Under development", isPresented: $showUnderDevelopment) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("This feature is under development.")
+            }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        let core = VStack(alignment: .leading, spacing: 12) {
             HStack {
                 HStack {
                     ZStack(alignment: .bottomTrailing) {
@@ -138,15 +151,17 @@ struct FeedPostViewTeacherAndArtist: View {
 
                 Spacer()
 
-                Button {
-                    showUnderDevelopment = true
-                } label: {
-                    Image("ic_more")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
+                if !isEmbedded {
+                    Button {
+                        showUnderDevelopment = true
+                    } label: {
+                        Image("ic_more")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
 
             Text("Exploring trust and balance through simple partner movements.")
@@ -229,16 +244,13 @@ struct FeedPostViewTeacherAndArtist: View {
             .font(.system(size: 14))
             .padding(.top, 4)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-        .clipped()
-        .background(Color.Surface.post)
-        .alert("Under development", isPresented: $showUnderDevelopment) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("This feature is under development.")
-        }
+
+        core
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+            .clipped()
+            .background(Color.Surface.post)
     }
 
     // MARK: - Media View
