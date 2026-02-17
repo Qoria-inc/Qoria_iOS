@@ -13,9 +13,28 @@ struct FeedPostViewTeacherAndArtist: View {
 
     @State private var showUnderDevelopment = false
     var image: String?
+    var images: [String]? = nil
     var showsLearnThis: Bool = false
     var competitionStatusTitle: String? = nil
     var competitionCurrentStatusTitle: String? = nil
+
+    // MARK: - Computed Properties
+
+    /// Returns media array: prefers `images` if provided, otherwise wraps single `image` in array.
+    /// Currently supports up to 2 items (API can return 1 or 2).
+    private var mediaItems: [String] {
+        if let images, !images.isEmpty {
+            return Array(images.prefix(2))
+        } else if let image {
+            return [image]
+        } else {
+            return ["ic_postImg1"]
+        }
+    }
+
+    private var hasMultipleMedia: Bool {
+        mediaItems.count == 2
+    }
 
     // MARK: - Helpers
 
@@ -144,41 +163,7 @@ struct FeedPostViewTeacherAndArtist: View {
             }
 
             VStack(spacing: 0) {
-                Image(image ?? "ic_postImg1")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
-                    .clipped()
-                    .overlay(alignment: .bottom) {
-                        ZStack {
-                            if let title = competitionStatusTitle {
-                                HStack {
-                                    Spacer()
-                                    CompetitionStatusButtonView(title: title) {
-                                        showUnderDevelopment = true
-                                    }
-                                    Spacer()
-                                }
-                            }
-
-                            HStack {
-                                Spacer()
-                                Button {
-                                    showUnderDevelopment = true
-                                } label: {
-                                    Image("ic_volumeWithBG")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 32, height: 32)
-                                        .padding(8)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 8)
-                    }
-                    .padding(.horizontal, -16)
+                mediaView
 
                 if showsLearnThis {
                     LearnThisButtonView {
@@ -253,6 +238,102 @@ struct FeedPostViewTeacherAndArtist: View {
             Button("OK", role: .cancel) {}
         } message: {
             Text("This feature is under development.")
+        }
+    }
+
+    // MARK: - Media View
+
+    @ViewBuilder
+    private var mediaView: some View {
+        let containerSize = UIScreen.main.bounds.width
+
+        if hasMultipleMedia {
+            ZStack {
+                // Container BG #17171A
+                Color.Surface.appBar
+
+                HStack(spacing: 2) {
+                    ForEach(Array(mediaItems.enumerated()), id: \.offset) { _, media in
+                        Image(media)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(
+                                width: (containerSize - 6) / 2,     // 2px left + 2px right + 2px gap
+                                height: containerSize - 4           // 2px top + 2px bottom
+                            )
+                            .clipped()
+                            .cornerRadius(4)
+                    }
+                }
+                .padding(2)
+            }
+            .frame(width: containerSize, height: containerSize)
+            .overlay(alignment: .bottom) {
+                ZStack {
+                    if let title = competitionStatusTitle {
+                        HStack {
+                            Spacer()
+                            CompetitionStatusButtonView(title: title) {
+                                showUnderDevelopment = true
+                            }
+                            Spacer()
+                        }
+                    }
+
+                    HStack {
+                        Spacer()
+                        Button {
+                            showUnderDevelopment = true
+                        } label: {
+                            Image("ic_volumeWithBG")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                                .padding(8)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+            }
+            .padding(.horizontal, -16)
+        } else {
+            Image(mediaItems.first ?? "ic_postImg1")
+                .resizable()
+                .scaledToFill()
+                .frame(width: containerSize, height: containerSize, alignment: .center)
+                .clipped()
+                .overlay(alignment: .bottom) {
+                    ZStack {
+                        if let title = competitionStatusTitle {
+                            HStack {
+                                Spacer()
+                                CompetitionStatusButtonView(title: title) {
+                                    showUnderDevelopment = true
+                                }
+                                Spacer()
+                            }
+                        }
+
+                        HStack {
+                            Spacer()
+                            Button {
+                                showUnderDevelopment = true
+                            } label: {
+                                Image("ic_volumeWithBG")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32, height: 32)
+                                    .padding(8)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+                }
+                .padding(.horizontal, -16)
         }
     }
 }

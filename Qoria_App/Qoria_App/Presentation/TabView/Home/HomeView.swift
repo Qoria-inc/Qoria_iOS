@@ -64,12 +64,14 @@ struct HomeView: View {
         // Bottom 3 competition CTAs
         FeedPostItem(
             image: "ic_postImg2",
+            images: ["ic_postImg1", "ic_postImg2"],
             userType: .teacherAndArtist,
             competitionStatusTitle: "Winners Pending",
             competitionCurrentStatusTitle: "Voting is over"
         ),
         FeedPostItem(
             image: "ic_postImg1",
+            images: ["ic_postImg2", "ic_postImg1"],
             userType: .teacher,
             competitionStatusTitle: "See Winners",
             competitionCurrentStatusTitle: "Winners Announced"
@@ -116,6 +118,7 @@ struct HomeView: View {
                         case .teacher:
                             FeedPostView(
                                 image: item.image,
+                                images: item.images,
                                 showsLearnThis: item.showsLearnThis,
                                 competitionStatusTitle: item.competitionStatusTitle,
                                 competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
@@ -123,6 +126,7 @@ struct HomeView: View {
                         case .artist:
                             FeedPostViewArtist(
                                 image: item.image,
+                                images: item.images,
                                 competitionStatusTitle: item.competitionStatusTitle,
                                 competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
@@ -134,6 +138,7 @@ struct HomeView: View {
                         case .teacherAndArtist:
                             FeedPostViewTeacherAndArtist(
                                 image: item.image,
+                                images: item.images,
                                 showsLearnThis: item.showsLearnThis,
                                 competitionStatusTitle: item.competitionStatusTitle,
                                 competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
