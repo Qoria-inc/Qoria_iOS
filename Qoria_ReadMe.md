@@ -116,6 +116,7 @@ So: **constructor injection** for ViewModels and repositories; **container** onl
 
 - **Colors**: Centralized in `AppColor.swift` as `Color` extensions with nested enums: `Surface`, `Text`, `Profile`, `Tag`, `Badge`, `Premium`, `Gradient`. Use these instead of ad-hoc `Color(red:green:blue:)` in views. `Premium.crownTagBackground` is used for the premium crown tag next to user type.
 - **Layout**: SwiftUI layout with `VStack`/`HStack`/`ZStack`, `Spacer()`, `frame(maxWidth: .infinity)` where appropriate. Some views use `UIScreen.main.bounds` for full-width images (consider `GeometryReader` for flexibility).
+- **Feed media (Student)**: `FeedPostViewStudent` supports **single** media (full-width square, current behavior) and **two** media items side-by-side. For two items, it uses a **square black container** (width = screen width, height = width); each media takes **half width** and **full container height** (`scaledToFill` + `clipped`), so left/right sides may crop to keep height maxed.
 - **Placeholder tabs**: Learn, Post, Discover, Settings use a shared `ContentView(heading:)` with a test “Run Test Call” and optional auto-run; they are not yet feature-specific.
 
 ### 3.8 Error Handling & Null Safety

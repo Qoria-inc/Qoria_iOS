@@ -17,6 +17,7 @@ private enum FeedUserType: String, CaseIterable {
 private struct FeedPostItem: Identifiable {
     let id: UUID
     let image: String
+    let images: [String]? // Optional array for multiple images (e.g., side-by-side)
     let userType: FeedUserType
     let showsLearnThis: Bool
     let competitionStatusTitle: String?
@@ -25,6 +26,7 @@ private struct FeedPostItem: Identifiable {
     init(
         id: UUID = UUID(),
         image: String,
+        images: [String]? = nil,
         userType: FeedUserType,
         showsLearnThis: Bool = false,
         competitionStatusTitle: String? = nil,
@@ -32,6 +34,7 @@ private struct FeedPostItem: Identifiable {
     ) {
         self.id = id
         self.image = image
+        self.images = images
         self.userType = userType
         self.showsLearnThis = showsLearnThis
         self.competitionStatusTitle = competitionStatusTitle
@@ -52,6 +55,12 @@ struct HomeView: View {
         FeedPostItem(image: "ic_postImg1", userType: .teacher, showsLearnThis: true),
         FeedPostItem(image: "ic_postImg2", userType: .artist),
         FeedPostItem(image: "ic_postImg1", userType: .student),
+        // Student post with 2 images side-by-side
+        FeedPostItem(
+            image: "ic_postImg1",
+            images: ["ic_postImg1", "ic_postImg2"],
+            userType: .student
+        ),
         // Bottom 3 competition CTAs
         FeedPostItem(
             image: "ic_postImg2",
@@ -118,7 +127,10 @@ struct HomeView: View {
                                 competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
                         case .student:
-                            FeedPostViewStudent(image: item.image)
+                            FeedPostViewStudent(
+                                image: item.image,
+                                images: item.images
+                            )
                         case .teacherAndArtist:
                             FeedPostViewTeacherAndArtist(
                                 image: item.image,

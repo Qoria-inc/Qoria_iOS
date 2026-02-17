@@ -13,6 +13,24 @@ struct FeedPostViewStudent: View {
 
     @State private var showUnderDevelopment = false
     var image: String?
+    var images: [String]? = nil
+    
+    // MARK: - Computed Properties
+    
+    /// Returns images array: prefers `images` if provided, otherwise wraps single `image` in array
+    private var mediaItems: [String] {
+        if let images = images, !images.isEmpty {
+            return Array(images.prefix(2)) // Max 2 images
+        } else if let image = image {
+            return [image]
+        } else {
+            return ["ic_postImg1"] // Default fallback
+        }
+    }
+    
+    private var hasMultipleImages: Bool {
+        mediaItems.count == 2
+    }
 
     // MARK: - Body
 
@@ -79,24 +97,68 @@ struct FeedPostViewStudent: View {
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Image(image ?? "ic_postImg1")
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
-                .clipped()
-                .overlay(alignment: .bottomTrailing) {
-                    Button {
-                        showUnderDevelopment = true
-                    } label: {
-                        Image("ic_volumeWithBG")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                            .padding(8)
+            // MARK: - Media Content (Single or Side-by-Side)
+            if hasMultipleImages {
+                // Two images side-by-side inside a square container
+                let containerSize = UIScreen.main.bounds.width
+
+                ZStack {
+                    // Container background #17171A (reuses app bar surface)
+                    Color.Surface.appBar
+
+                    HStack(spacing: 2) {
+                        ForEach(Array(mediaItems.enumerated()), id: \.offset) { index, img in
+                            Image(img)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(
+                                    width: (containerSize - 6) / 2,     // 2px left + 2px right + 2px gap
+                                    height: containerSize - 4           // 2px top + 2px bottom
+                                )
+                                .clipped()
+                                .cornerRadius(6)
+                                .overlay(alignment: .bottomTrailing) {
+                                    // Volume button only on right image
+                                    if index == 1 {
+                                        Button {
+                                            showUnderDevelopment = true
+                                        } label: {
+                                            Image("ic_volumeWithBG")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 32, height: 32)
+                                                .padding(8)
+                                        }
+                                        .buttonStyle(.plain)
+                                    }
+                                }
+                        }
                     }
-                    .buttonStyle(.plain)
+                    .padding(2)
                 }
+                .frame(width: containerSize, height: containerSize)
                 .padding(.horizontal, -16)
+            } else {
+                // Single image (original behavior)
+                Image(mediaItems.first ?? "ic_postImg1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
+                    .clipped()
+                    .overlay(alignment: .bottomTrailing) {
+                        Button {
+                            showUnderDevelopment = true
+                        } label: {
+                            Image("ic_volumeWithBG")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                                .padding(8)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, -16)
+            }
 
             HStack(spacing: 20) {
 
