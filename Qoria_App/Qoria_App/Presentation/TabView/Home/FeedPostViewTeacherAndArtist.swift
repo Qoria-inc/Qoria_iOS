@@ -1,13 +1,13 @@
 //
-//  FeedPostView.swift
+//  FeedPostViewTeacherAndArtist.swift
 //  Qoria_App
 //
-//  Feed post content view for Teacher user type.
+//  Feed post content view for Teacher/Artist user type. Layout identical to Teacher (FeedPostView).
 //
 
 import SwiftUI
 
-struct FeedPostView: View {
+struct FeedPostViewTeacherAndArtist: View {
 
     // MARK: - State
 
@@ -17,6 +17,9 @@ struct FeedPostView: View {
     var showsLearnThis: Bool = false
     var competitionStatusTitle: String? = nil
     var competitionCurrentStatusTitle: String? = nil
+    /// When `true`, this view is rendered inside another container (e.g. shared post)
+    /// and should not apply its own outer padding/background or show the top-right "more" button.
+    var isEmbedded: Bool = false
 
     // MARK: - Computed Properties
 
@@ -36,6 +39,11 @@ struct FeedPostView: View {
         mediaItems.count == 2
     }
 
+    /// Card width: full width for normal feed, 24pt narrower when embedded (inside shared container)
+    private var cardWidth: CGFloat {
+        UIScreen.main.bounds.width - (isEmbedded ? 24 : 0)
+    }
+
     // MARK: - Helpers
 
     private func styleForStatus(title: String) -> CompetitionCurrentStatusTagView.Style {
@@ -51,74 +59,116 @@ struct FeedPostView: View {
     // MARK: - Body
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        content
+            .alert("Under development", isPresented: $showUnderDevelopment) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("This feature is under development.")
+            }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        let core = VStack(alignment: .leading, spacing: 12) {
             HStack {
                 HStack {
                     ZStack(alignment: .bottomTrailing) {
-                        
+
                         ZStack {
                             Circle()
                                 .fill(Color.clear)
                                 .frame(width: 52, height: 52)
-                            
+
                             Circle()
                                 .stroke(
-                                    LinearGradient(colors: [Color.Gradient.proStart, Color.Gradient.proEnd], startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                                    LinearGradient(
+                                        colors: [
+                                            Color.Profile.teacherArtistPurple.opacity(0.60),
+                                            Color.Gradient.proStart.opacity(0.50)
+                                        ],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    ),
+                                    lineWidth: 1
+                                )
                                 .frame(width: 52, height: 52)
-                            
+
                             Image("ic_proImg")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 44, height: 44)
                                 .clipShape(Circle())
                         }
-                        
-                        Image("ic_proBadgeBlue")
+
+                        Image("ic_proBadgePurple")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 26)
                             .offset(x: 3, y: 2)
                     }
                     .frame(width: 52, height: 52)
-                    
-                    VStack(alignment: .leading) {
+
+                    VStack(alignment: .leading, spacing: 4) {
                         HStack(spacing: 6) {
                             Text("Sarah Morgan")
                                 .font(.system(size: 16, weight: .medium))
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color.Text.onDark)
-                            
-                            Text("Teacher")
+
+                            Text("Teacher/Artist")
                                 .font(.system(size: 12))
                                 .foregroundStyle(Color.Text.onDark)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
-                                .background(LinearGradient(colors: [Color.Gradient.tagLeft, Color.Gradient.tagRight], startPoint: .leading, endPoint: .trailing), in: Capsule())
+                                .background(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.Gradient.proStart.opacity(0.40),
+                                            Color.Profile.teacherArtistPurple.opacity(0.50)
+                                        ],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    ),
+                                    in: Capsule()
+                                )
                                 .overlay(
-                                    Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
+                                    Capsule().stroke(
+                                        LinearGradient(
+                                            colors: [
+                                                Color.Profile.teacherArtistPurple.opacity(0.40),
+                                                Color.Gradient.proStart.opacity(0.30)
+                                            ],
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        ),
+                                        lineWidth: 0.5
+                                    )
+                                )
 
-                            FeedContentTypeView(isSingleTrophy: true)
+                            FeedContentTypeView(isCrown: true)
                         }
-                        
+
                         Text("2h ago")
                             .font(.system(size: 14))
                             .foregroundStyle(Color.Text.secondary)
                     }
                 }
-                
+
                 Spacer()
-                
-                Button {
-                    showUnderDevelopment = true
-                } label: {
-                    Image("ic_more")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
+
+                if !isEmbedded {
+                    Button {
+                        showUnderDevelopment = true
+                    } label: {
+                        Image("ic_more")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
-            
+
             Text("Exploring trust and balance through simple partner movements.")
                 .font(.body)
                 .foregroundStyle(Color.Text.onDark)
@@ -135,7 +185,6 @@ struct FeedPostView: View {
             VStack(spacing: 0) {
                 mediaView
 
-                // Learn This CTA sits BELOW the media (not over it)
                 if showsLearnThis {
                     LearnThisButtonView {
                         showUnderDevelopment = true
@@ -143,9 +192,9 @@ struct FeedPostView: View {
                     .padding(.horizontal, -16)
                 }
             }
-            
+
             HStack(spacing: 20) {
-                
+
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_clap")
@@ -158,7 +207,7 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-                
+
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_comment")
@@ -172,9 +221,9 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-                
+
                 Spacer(minLength: 0)
-                
+
                 Button { showUnderDevelopment = true } label: {
                     HStack(spacing: 4) {
                         Image("ic_share")
@@ -187,7 +236,7 @@ struct FeedPostView: View {
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
-                
+
                 Button { showUnderDevelopment = true } label: {
                     Image("ic_save")
                         .resizable()
@@ -200,18 +249,13 @@ struct FeedPostView: View {
             .font(.system(size: 14))
             .padding(.top, 4)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-        .clipped()
-        .background(Color.Surface.post)
-        .alert("Under development", isPresented: $showUnderDevelopment) {
-            Button("OK", role: .cancel) {
-                
-            }
-        } message: {
-            Text("This feature is under development.")
-        }
+
+        core
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(width: cardWidth, alignment: .leading)
+            .clipped()
+            .background(Color.Surface.post)
     }
 
     // MARK: - Media View
@@ -221,7 +265,6 @@ struct FeedPostView: View {
         let containerSize = UIScreen.main.bounds.width
 
         if hasMultipleMedia {
-            // Two media items side-by-side inside a square container
             ZStack {
                 // Container BG #17171A
                 Color.Surface.appBar
@@ -244,7 +287,6 @@ struct FeedPostView: View {
             .frame(width: containerSize, height: containerSize)
             .overlay(alignment: .bottom) {
                 ZStack {
-                    // Centered competition status button
                     if let title = competitionStatusTitle {
                         HStack {
                             Spacer()
@@ -255,7 +297,6 @@ struct FeedPostView: View {
                         }
                     }
 
-                    // Volume button aligned to bottom trailing
                     HStack {
                         Spacer()
                         Button {
@@ -282,7 +323,6 @@ struct FeedPostView: View {
                 .clipped()
                 .overlay(alignment: .bottom) {
                     ZStack {
-                        // Centered competition status button
                         if let title = competitionStatusTitle {
                             HStack {
                                 Spacer()
@@ -293,7 +333,6 @@ struct FeedPostView: View {
                             }
                         }
 
-                        // Volume button aligned to bottom trailing
                         HStack {
                             Spacer()
                             Button {
@@ -319,7 +358,7 @@ struct FeedPostView: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        FeedPostView(image: "ic_postImg1")
+        FeedPostViewTeacherAndArtist(image: "ic_postImg1")
             .padding(.top, 16)
             .padding(.horizontal, 0)
     }
