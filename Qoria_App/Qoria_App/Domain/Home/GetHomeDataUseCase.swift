@@ -15,7 +15,7 @@ struct GetHomeDataUseCase {
         self.repository = repository
     }
 
-    func execute() async throws -> dynamicJSON {
-        try await repository.fetchHomeData()
+    func execute(page: Int, pageSize: Int = 20) async throws -> dynamicJSON {
+        try await repository.fetchHomeData(page: page, pageSize: pageSize)
     }
 }

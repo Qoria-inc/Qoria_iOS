@@ -19,6 +19,14 @@ final class AuthInterceptor: RequestInterceptor {
 
         var req = urlRequest
 
+        // Don't add Authorization header for refresh token requests
+        // The refresh endpoint only needs the refresh token in the body
+        if let urlString = req.url?.absoluteString,
+           urlString.contains("/api/auth/token/refresh/") {
+            completion(.success(req))
+            return
+        }
+
         if let token = store.accessToken, !token.isEmpty {
             req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
@@ -32,7 +40,14 @@ final class AuthInterceptor: RequestInterceptor {
                dueTo error: Error,
                completion: @escaping (RetryResult) -> Void) {
 
-        // No response? don’t retry.
+        // Don't retry refresh token requests - they should fail if invalid
+        if let urlString = request.request?.url?.absoluteString,
+           urlString.contains("/api/auth/token/refresh/") {
+            completion(.doNotRetry)
+            return
+        }
+
+        // No response? don't retry.
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)
             return

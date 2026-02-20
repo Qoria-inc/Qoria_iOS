@@ -9,5 +9,5 @@
 import Foundation
 
 protocol HomeRepository {
-    func fetchHomeData() async throws -> dynamicJSON
+    func fetchHomeData(page: Int, pageSize: Int) async throws -> dynamicJSON
 }

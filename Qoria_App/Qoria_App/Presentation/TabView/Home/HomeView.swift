@@ -189,10 +189,18 @@ struct HomeView: View {
                                 competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
                             )
                         }
+                    
+                    ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, item in
+                        FeedPostView(image: images[index % images.count])
+                            .onAppear {
+                                Task {
+                                    await viewModel.loadNextPageIfNeeded(currentIndex: index)
+                                }
+                            }
                     }
                     
                     // Optional debug section to verify Home API
-                    if viewModel.isLoading {
+                    if viewModel.isLoading && viewModel.items.isEmpty {
                         ProgressView("Loading feed…")
                             .frame(maxWidth: .infinity)
                     } else if let error = viewModel.errorMessage {
@@ -200,10 +208,8 @@ struct HomeView: View {
                             .foregroundColor(.red)
                             .font(.footnote)
                             .frame(maxWidth: .infinity)
-                    } else if let data = viewModel.homeData {
-                        Text(data.description)
-                            .font(.footnote.monospaced())
-                            .foregroundColor(.gray)
+                    } else if viewModel.isLoadingMore {
+                        ProgressView()
                             .frame(maxWidth: .infinity)
                     }
                 }
@@ -212,9 +218,6 @@ struct HomeView: View {
             .scrollIndicators(.hidden)
         }
         .background(Color.Surface.appBar)
-        .task {
-            self.viewModel.loadHome()
-        }
     }
 }
 

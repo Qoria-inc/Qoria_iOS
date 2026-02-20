@@ -44,7 +44,7 @@ struct ContentView: View {
                 .padding()
 
             Button {
-                Task { await runTestCall() }
+                
             } label: {
                 Text("Run Test Call")
                     .frame(maxWidth: .infinity)
@@ -58,28 +58,9 @@ struct ContentView: View {
         .task {
             guard !didAutoRun else { return }
             didAutoRun = true
-            await runTestCall()
         }
     }
 
-    @MainActor
-    private func runTestCall() async {
-        isLoading = true
-        errorText = nil
-        output = ""
-
-        do {
-            let json = try await NetworkCall.shared.getTestTodo()
-            output = json.description
-        } catch let NetworkError.httpStatus(code, data) {
-            let body = data.flatMap { String(data: $0, encoding: .utf8) } ?? ""
-            errorText = "HTTP \(code)\n\(body)"
-        } catch {
-            errorText = (error as? LocalizedError)?.errorDescription
-                ?? error.localizedDescription
-        }
-        isLoading = false
-    }
 }
 
 #Preview {
