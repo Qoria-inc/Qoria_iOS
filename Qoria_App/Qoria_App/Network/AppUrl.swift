@@ -12,21 +12,22 @@ final class AppUrl {
     static let shared = AppUrl()
     private init() {}
 
-    // Example base
-    private let baseURL = "https://apple.com"
+    // base url staging
+    private let baseURL = "https://staging.api.qoria.app"
+    
+    // base url production
+    // private let baseURL = ""
     
     public func refreshURL() -> String {
-        return baseURL + "/auth/refresh"
+        return baseURL + "/api/auth/token/refresh/"
     }
 
-    public func loginURL() -> String {
-        // TODO: Replace with your real API
-        return baseURL + "/ohohohoohoo"
+    public func loginWithEmailURL() -> String {
+        return baseURL + "/api/auth/login/"
     }
 
-    // Quick test endpoint that returns JSON
-    public func testTodoURL() -> String {
-        return "https://jsonplaceholder.typicode.com/todos/1"
+    public func homeFeedURL() -> String {
+        return baseURL + "/api/post/feed/"
     }
 
     public func privacyPolicyURL() -> String { baseURL + "/privacy" }

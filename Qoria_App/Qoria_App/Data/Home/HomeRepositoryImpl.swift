@@ -6,6 +6,7 @@
 //  uses the existing NetworkCall / NetworkManager stack.
 //
 
+import Alamofire
 final class HomeRepositoryImpl: HomeRepository {
 
     private let networkCall: NetworkCalling
@@ -14,7 +15,15 @@ final class HomeRepositoryImpl: HomeRepository {
         self.networkCall = networkCall
     }
 
-    func fetchHomeData() async throws -> dynamicJSON {
-        try await networkCall.getTestTodo()
+    func fetchHomeData(page: Int, pageSize: Int) async throws -> dynamicJSON {
+        let json = try await NetworkManager.shared.requestJSON(
+            url: AppUrl.shared.homeFeedURL(),
+            method: .get,
+            parameters: [
+                "page": page,
+                "page_size": pageSize
+            ]
+        )
+        return json
     }
 }

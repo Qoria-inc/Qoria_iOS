@@ -37,6 +37,10 @@ struct QoriaTabView: View {
                 .padding(.horizontal, 18)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
+        .task {
+            await homeViewModel.performHardcodedLogin()
+            homeViewModel.loadHome()
+        }
     }
 }
 

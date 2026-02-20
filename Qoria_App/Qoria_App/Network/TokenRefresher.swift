@@ -17,8 +17,7 @@ final class TokenRefresher {
     private var isRefreshing = false
     private var waiters: [(Result<String, Error>) -> Void] = []
 
-    /// Replace with your real refresh endpoint + parsing
-    /// Returns new access token
+    /// Uses the backend refresh endpoint and returns a new access token.
     func refreshAccessToken(session: Session) async throws -> String {
 
         // If already refreshing, wait
@@ -58,40 +57,45 @@ final class TokenRefresher {
         guard let refresh = AuthTokenStore.shared.refreshToken, !refresh.isEmpty else {
             throw NetworkError.unauthorized("Refresh token missing.")
         }
-
-        // Example refresh call; replace URL + params to match your backend
+        
         let url = AppUrl.shared.refreshURL()
-        let params: Parameters = ["refreshToken": refresh]
-
-        let response = await session.request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
-            .validate()
-            .serializingData()
-            .response
-
-        if response.error != nil {
-            let status = response.response?.statusCode
-            throw NetworkError.httpStatus(status ?? -1, response.data)
+        let params: Parameters = ["refresh": refresh]
+        
+        let response = await session.request(
+            url,
+            method: .post,
+            parameters: params,
+            encoding: JSONEncoding.default
+        )
+        .serializingData()
+        .response
+        
+//        if let error = response.error {
+//            let status = response.response?.statusCode ?? -1
+//            throw NetworkError.httpStatus(status, response.data)
+//        }
+        
+        guard let data = response.data else {
+            throw NetworkError.emptyResponse
         }
-
-        guard let data = response.data else { throw NetworkError.emptyResponse }
+        
         let json = try JSON(data: data)
-
-        // Adjust these keys to match your API
-        guard let newAccess =
-                json["data"]["accessToken"].string
-             ?? json["accessToken"].string
-        else {
+        
+        // Use "result" for both success and error
+        let result = json["result"].string
+        if result != "success" {
+            let message = json["message"].string ?? "Token refresh failed."
+            throw NetworkError.unauthorized(message)
+        }
+        
+        guard let newAccess = json["data"]["access"].string else {
             throw NetworkError.invalidJSON
         }
-
-        // If backend also returns a new refresh token, store it
-        if let newRefresh =
-                json["data"]["refreshToken"].string
-             ?? json["refreshToken"].string
-        {
+        
+        if let newRefresh = json["data"]["refresh"].string {
             AuthTokenStore.shared.refreshToken = newRefresh
         }
-
+        
         AuthTokenStore.shared.accessToken = newAccess
         return newAccess
     }
