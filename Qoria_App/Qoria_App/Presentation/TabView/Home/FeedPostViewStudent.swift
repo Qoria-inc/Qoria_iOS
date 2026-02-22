@@ -104,7 +104,7 @@ struct FeedPostViewStudent: View {
 
                 ZStack {
                     // Container background #17171A (reuses app bar surface)
-                    Color.Surface.appBar
+                    Color.Surface.appBackground
 
                     HStack(spacing: 2) {
                         ForEach(Array(mediaItems.enumerated()), id: \.offset) { index, img in
@@ -140,7 +140,8 @@ struct FeedPostViewStudent: View {
                 .padding(.horizontal, -16)
             } else {
                 // Single image (original behavior)
-                Image(mediaItems.first ?? "ic_postImg1")
+                //FeedMediaImage(source: mediaItems.first ?? "ic_postImg1")
+                Image("ic_postImg1")
                     .resizable()
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)

@@ -96,7 +96,8 @@ struct QoriaAppBarView: View {
                 .frame(maxWidth: .infinity, maxHeight: 24)
         }
         .frame(height: 48)
-        .background(Color.Surface.appBar)
+        .padding(.bottom, 14)
+        .background(Color.Surface.appBackground)
         .alert("Under development", isPresented: $showProfileUnderDevelopment) {
             Button("OK", role: .cancel) {}
         } message: {
@@ -160,5 +161,5 @@ struct QoriaAppBarView: View {
         QoriaAppBarView()
         Spacer()
     }
-    .background(Color.Surface.appBar)
+    .background(Color.Surface.appBackground)
 }

@@ -12,7 +12,7 @@ extension Color {
     // MARK: - App Surface & Background
     enum Surface {
         /// App bar background #17171A
-        static let appBar = Color(red: 0x17/255, green: 0x17/255, blue: 0x1A/255)
+        static let appBackground = Color(red: 0x17/255, green: 0x17/255, blue: 0x1A/255)
 
         /// Post / card background #232328
         static let post = Color(red: 0x23/255, green: 0x23/255, blue: 0x28/255)

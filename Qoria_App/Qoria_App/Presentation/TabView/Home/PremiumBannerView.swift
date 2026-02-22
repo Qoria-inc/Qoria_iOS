@@ -78,5 +78,5 @@ struct PremiumBannerView: View {
 
 #Preview {
     PremiumBannerView(onDismiss: {})
-        .background(Color.Surface.appBar)
+        .background(Color.Surface.appBackground)
 }

@@ -5,124 +5,39 @@
 
 import SwiftUI
 
-// MARK: - Dummy feed model (replace with API model later)
-
-private enum FeedUserType: String, CaseIterable {
-    case teacher
-    case artist
-    case student
-    case teacherAndArtist
+// MARK: - Post view mapping (API item → UI)
+private enum UserCategory {
+    case pro, nonPro, none
 }
 
-private struct FeedPostItem: Identifiable {
-    let id: UUID
-    let image: String
-    let images: [String]? // Optional array for multiple images (e.g., side-by-side)
-    let userType: FeedUserType
-    let sharedUserName: String?
-    let sharedUserTypeLabel: String?
-    let sharedTimeLabel: String?
-    let sharedText: String?
-    let showsLearnThis: Bool
-    let competitionStatusTitle: String?
-    let competitionCurrentStatusTitle: String?
+private enum proUserFeed {
+    case teacher, artist, teacherAndArtist, none
+}
 
-    init(
-        id: UUID = UUID(),
-        image: String,
-        images: [String]? = nil,
-        userType: FeedUserType,
-        sharedUserName: String? = nil,
-        sharedUserTypeLabel: String? = nil,
-        sharedTimeLabel: String? = nil,
-        sharedText: String? = nil,
-        showsLearnThis: Bool = false,
-        competitionStatusTitle: String? = nil,
-        competitionCurrentStatusTitle: String? = nil
-    ) {
-        self.id = id
-        self.image = image
-        self.images = images
-        self.userType = userType
-        self.sharedUserName = sharedUserName
-        self.sharedUserTypeLabel = sharedUserTypeLabel
-        self.sharedTimeLabel = sharedTimeLabel
-        self.sharedText = sharedText
-        self.showsLearnThis = showsLearnThis
-        self.competitionStatusTitle = competitionStatusTitle
-        self.competitionCurrentStatusTitle = competitionCurrentStatusTitle
-    }
+private enum nonProUserFeed {
+    case student, fan, studentAndFan, none
 }
 
 struct HomeView: View {
-
+    
     // MARK: - State
-
     @StateObject private var viewModel: HomeViewModel
     @State private var isBannerVisible = true
-
-    /// Dummy feed items: mix of teacher, artist, student, teacherAndArtist posts.
-    /// Bottom 3 show competition CTA buttons with different labels.
-    private let feedItems: [FeedPostItem] = [
-        FeedPostItem(image: "ic_postImg1", userType: .teacher, showsLearnThis: true),
-        FeedPostItem(image: "ic_postImg2", userType: .artist),
-        FeedPostItem(image: "ic_postImg1", userType: .student),
-        // Student post with 2 images side-by-side
-        FeedPostItem(
-            image: "ic_postImg1",
-            images: ["ic_postImg1", "ic_postImg2"],
-            userType: .student
-        ),
-        // Student shared post (new pattern)
-        FeedPostItem(
-            image: "ic_postImg1",
-            userType: .student,
-            sharedUserName: "Daniel Reyes",
-            sharedUserTypeLabel: "Teacher/Artist",
-            sharedTimeLabel: "1w ago",
-            sharedText: "Look, I'm trying to replicate the smooth movements of this winner! 🙌🏻"
-        ),
-        // Bottom 3 competition CTAs
-        FeedPostItem(
-            image: "ic_postImg2",
-            images: ["ic_postImg1", "ic_postImg2"],
-            userType: .teacherAndArtist,
-            competitionStatusTitle: "Winners Pending",
-            competitionCurrentStatusTitle: "Voting is over"
-        ),
-        FeedPostItem(
-            image: "ic_postImg1",
-            images: ["ic_postImg2", "ic_postImg1"],
-            userType: .teacher,
-            competitionStatusTitle: "See Winners",
-            competitionCurrentStatusTitle: "Winners Announced"
-        ),
-        FeedPostItem(
-            image: "ic_postImg2",
-            userType: .artist,
-            competitionStatusTitle: "See the Competition",
-            competitionCurrentStatusTitle: "Voting ends in 4h"
-        ),
-        FeedPostItem(image: "ic_postImg1", userType: .student),
-        FeedPostItem(image: "ic_postImg2", userType: .teacherAndArtist),
-    ]
-    
-    // MARK: - Init (simple manual DI)
     
     init(viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     // MARK: - Body
-    
     var body: some View {
         VStack(spacing: 0) {
+            
             QoriaAppBarView(
                 onProfileTap: {},
                 onNotificationTap: {},
                 onChatTap: {}
             )
-            Color.clear.frame(height: 14)
+            
             ScrollView {
                 LazyVStack(spacing: 20) {
                     if isBannerVisible {
@@ -132,74 +47,15 @@ struct HomeView: View {
                             }
                         })
                     }
-                    // ForEach(0..<images.count, id: \.self) { i in
-                    //     FeedPostView(image: images[i])}
-                    ForEach(feedItems) { item in
-                        switch item.userType {
-                        case .teacher:
-                            FeedPostView(
-                                image: item.image,
-                                images: item.images,
-                                showsLearnThis: item.showsLearnThis,
-                                competitionStatusTitle: item.competitionStatusTitle,
-                                competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
-                            )
-                        case .artist:
-                            FeedPostViewArtist(
-                                image: item.image,
-                                images: item.images,
-                                competitionStatusTitle: item.competitionStatusTitle,
-                                competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
-                            )
-                        case .student:
-                            if
-                                let sharedUserName = item.sharedUserName,
-                                let sharedUserTypeLabel = item.sharedUserTypeLabel,
-                                let sharedTimeLabel = item.sharedTimeLabel,
-                                let sharedText = item.sharedText
-                            {
-                                FeedPostViewStudentShared(
-                                    sharedUserName: sharedUserName,
-                                    sharedUserTypeLabel: sharedUserTypeLabel,
-                                    sharedTimeLabel: sharedTimeLabel,
-                                    sharedText: sharedText,
-                                    innerPost: AnyView(
-                                        FeedPostViewTeacherAndArtist(
-                                            image: item.image,
-                                            images: item.images,
-                                            showsLearnThis: false,
-                                            competitionStatusTitle: nil,
-                                            competitionCurrentStatusTitle: nil,
-                                            isEmbedded: true
-                                        )
-                                    )
-                                )
-                            } else {
-                                FeedPostViewStudent(
-                                    image: item.image,
-                                    images: item.images
-                                )
-                            }
-                        case .teacherAndArtist:
-                            FeedPostViewTeacherAndArtist(
-                                image: item.image,
-                                images: item.images,
-                                showsLearnThis: item.showsLearnThis,
-                                competitionStatusTitle: item.competitionStatusTitle,
-                                competitionCurrentStatusTitle: item.competitionCurrentStatusTitle
-                            )
-                        }
-                    
                     ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, item in
-                        FeedPostView(image: images[index % images.count])
+                        postView(for: item)
                             .onAppear {
                                 Task {
                                     await viewModel.loadNextPageIfNeeded(currentIndex: index)
                                 }
                             }
                     }
-                    
-                    // Optional debug section to verify Home API
+
                     if viewModel.isLoading && viewModel.items.isEmpty {
                         ProgressView("Loading feed…")
                             .frame(maxWidth: .infinity)
@@ -214,10 +70,102 @@ struct HomeView: View {
                     }
                 }
                 .padding(.bottom, 24)
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
+            .background(Color.Surface.appBackground)
         }
-        .background(Color.Surface.appBar)
+    }
+
+    // Mark: - Dynamic Post Type
+    @ViewBuilder
+    private func postView(for json: dynamicJSON) -> some View {
+        
+        let userCategory: UserCategory = {
+            switch json.owner_info.user_type.int ?? 0 {
+            case 1: return .pro
+            case 2: return .nonPro
+            default: return .none
+            }
+        }()
+        
+        let proFeedType: proUserFeed = {
+            switch json.owner_info.teachable.int ?? 0 {
+            case 0: return .artist
+            case 1: return .teacher
+            case 2: return .teacherAndArtist
+            default: return .none
+            }
+        }()
+        
+        let nonProFeedType: nonProUserFeed = {
+            switch json.owner_info.student_type.int ?? 0 {
+            case 1: return .student
+            case 2: return .fan
+            case 3: return .studentAndFan
+            default: return .none
+            }
+        }()
+        
+        let postID = json.id.string ?? ""
+
+        let userName = json.owner_info.name.string ?? ""
+        let userProfileImage = json.owner_info.avatar.string ?? ""
+        let userId = json.owner_id.string ?? ""
+        let postTitle = json.title.string ?? ""
+        let postTime = json.created_at.string ?? ""
+        //let competationStatus = ""
+        
+        let images = [json.photo1.string ?? "", json.photo2.string ?? "", json.photo3.string ?? ""]
+        let firstVideo = json.processed_video_hls.string ?? ""
+        let firstVideoThumbnail = json.processed_video_thumbnail.string ?? ""
+        let secondVideo = json.processed_after_video_hls.string ?? ""
+        let secondVideoThumbnail = json.processed_after_video_thumbnail.string ?? ""
+        
+        let reactCount = json.like_count.int ?? 0
+        let commentCount = json.comment_count.int ?? 0
+        let shareCount = json.share_count.int ?? 0
+        
+        let trophieCount = json.trophies.int ?? 0
+        
+        let isPostReacted = json.is_liked.bool
+        let isPostSaved = json.is_saved.bool
+        let isPostShared = json.is_shared.bool
+        let isPostReported = json.is_reported.bool
+        let isPostRestricted = json.is_restricted.bool
+        
+        //let sharedByInFollowing = [json.shared_by_in_following]
+        
+        let isFeedbackEnable = json.enable_feedback.bool
+        let isFromTeacher = json.is_from_teacher.bool
+        
+        let isChallenge = json.is_challenge.bool
+        let isChallengeWinner = json.is_challenge_winner.bool
+        let isChallengeOpen = json.is_challenge_open.bool
+
+        if userCategory == .pro {
+            switch proFeedType {
+            case .teacher:
+                FeedPostViewTeacher()
+            case .artist:
+                FeedPostViewArtist()
+            case .teacherAndArtist:
+                FeedPostViewTeacherAndArtist()
+            case .none:
+                EmptyView()
+            }
+        }
+        else {
+            switch nonProFeedType {
+            case .student:
+                FeedPostViewStudent()
+            case .fan:
+                FeedPostViewStudent()
+            case .studentAndFan:
+                FeedPostViewStudent()
+            case .none:
+                EmptyView()
+            }
+        }
     }
 }
 

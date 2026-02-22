@@ -267,7 +267,7 @@ struct FeedPostViewTeacherAndArtist: View {
         if hasMultipleMedia {
             ZStack {
                 // Container BG #17171A
-                Color.Surface.appBar
+                Color.Surface.appBackground
 
                 HStack(spacing: 2) {
                     ForEach(Array(mediaItems.enumerated()), id: \.offset) { _, media in
@@ -316,7 +316,8 @@ struct FeedPostViewTeacherAndArtist: View {
             }
             .padding(.horizontal, -16)
         } else {
-            Image(mediaItems.first ?? "ic_postImg1")
+            //FeedMediaImage(source: mediaItems.first ?? "ic_postImg1")
+            Image("ic_postImg1")
                 .resizable()
                 .scaledToFill()
                 .frame(width: containerSize, height: containerSize, alignment: .center)

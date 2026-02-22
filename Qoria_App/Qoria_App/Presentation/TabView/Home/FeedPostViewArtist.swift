@@ -10,17 +10,18 @@ import SwiftUI
 struct FeedPostViewArtist: View {
 
     // MARK: - State
-
     @State private var showUnderDevelopment = false
     var image: String?
     var images: [String]? = nil
-    var competitionStatusTitle: String? = nil
-    var competitionCurrentStatusTitle: String? = nil
+    var username: String?
+    var postTitle: String?
+    var statusTitle: String?
+    var postTime: String?
+    var reactCount: String?
+    var commentCount: String?
+    var shareCount: String? 
 
     // MARK: - Computed Properties
-
-    /// Returns media array: prefers `images` if provided, otherwise wraps single `image` in array.
-    /// Currently supports up to 2 items (API can return 1 or 2).
     private var mediaItems: [String] {
         if let images, !images.isEmpty {
             return Array(images.prefix(2))
@@ -88,7 +89,7 @@ struct FeedPostViewArtist: View {
 
                     VStack(alignment: .leading, spacing: 4) {
                         HStack(spacing: 6) {
-                            Text("Sarah Morgan")
+                            Text(self.username ?? "")
                                 .font(.system(size: 16, weight: .medium))
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color.Text.onDark)
@@ -126,7 +127,7 @@ struct FeedPostViewArtist: View {
                             FeedContentTypeView(isCrown: true)
                         }
 
-                        Text("2h ago")
+                        Text(self.postTime ?? "")
                             .font(.system(size: 14))
                             .foregroundStyle(Color.Text.secondary)
                     }
@@ -145,12 +146,12 @@ struct FeedPostViewArtist: View {
                 .buttonStyle(.plain)
             }
 
-            Text("Exploring trust and balance through simple partner movements.")
+            Text(self.postTitle ?? "")
                 .font(.body)
                 .foregroundStyle(Color.Text.onDark)
                 .fixedSize(horizontal: false, vertical: true)
 
-            if let statusTitle = competitionCurrentStatusTitle {
+            if let statusTitle = statusTitle {
                 CompetitionCurrentStatusTagView(
                     title: statusTitle,
                     style: styleForStatus(title: statusTitle)
@@ -170,7 +171,7 @@ struct FeedPostViewArtist: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)
-                        Text("128")
+                        Text(self.reactCount ?? "")
                             .font(.system(size: 14))
                     }
                 }
@@ -183,7 +184,7 @@ struct FeedPostViewArtist: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)
-                        Text("24")
+                        Text(self.commentCount ?? "")
                             .font(.system(size: 14))
                             .padding(.leading, 5)
                     }
@@ -199,7 +200,7 @@ struct FeedPostViewArtist: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)
-                        Text("9")
+                        Text(self.shareCount ?? "")
                             .font(.system(size: 14))
                     }
                 }
@@ -239,7 +240,7 @@ struct FeedPostViewArtist: View {
         if hasMultipleMedia {
             ZStack {
                 // Container BG #17171A
-                Color.Surface.appBar
+                Color.Surface.appBackground
 
                 HStack(spacing: 2) {
                     ForEach(Array(mediaItems.enumerated()), id: \.offset) { _, media in
@@ -259,7 +260,7 @@ struct FeedPostViewArtist: View {
             .frame(width: containerSize, height: containerSize)
             .overlay(alignment: .bottom) {
                 ZStack {
-                    if let title = competitionStatusTitle {
+                    if let title = postTitle {
                         HStack {
                             Spacer()
                             CompetitionStatusButtonView(title: title) {
@@ -288,14 +289,15 @@ struct FeedPostViewArtist: View {
             }
             .padding(.horizontal, -16)
         } else {
-            Image(mediaItems.first ?? "ic_postImg1")
+            //FeedMediaImage(source: mediaItems.first ?? "ic_postImg1")
+            Image("ic_postImg1")
                 .resizable()
                 .scaledToFill()
                 .frame(width: containerSize, height: containerSize, alignment: .center)
                 .clipped()
                 .overlay(alignment: .bottom) {
                     ZStack {
-                        if let title = competitionStatusTitle {
+                        if let title = postTitle {
                             HStack {
                                 Spacer()
                                 CompetitionStatusButtonView(title: title) {

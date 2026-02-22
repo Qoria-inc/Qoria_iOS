@@ -1,5 +1,5 @@
 //
-//  FeedPostView.swift
+//  FeedPostViewTeacher.swift
 //  Qoria_App
 //
 //  Feed post content view for Teacher user type.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct FeedPostView: View {
+struct FeedPostViewTeacher: View {
 
     // MARK: - State
-
     @State private var showUnderDevelopment = false
     var image: String?
     var images: [String]? = nil
@@ -224,10 +223,11 @@ struct FeedPostView: View {
             // Two media items side-by-side inside a square container
             ZStack {
                 // Container BG #17171A
-                Color.Surface.appBar
+                Color.Surface.appBackground
 
                 HStack(spacing: 2) {
                     ForEach(Array(mediaItems.enumerated()), id: \.offset) { _, media in
+                        //FeedMediaImage(source: media)
                         Image(media)
                             .resizable()
                             .scaledToFill()
@@ -275,7 +275,8 @@ struct FeedPostView: View {
             }
             .padding(.horizontal, -16)
         } else {
-            Image(mediaItems.first ?? "ic_postImg1")
+            //FeedMediaImage(source: mediaItems.first ?? "ic_postImg1")
+            Image("ic_postImg1")
                 .resizable()
                 .scaledToFill()
                 .frame(width: containerSize, height: containerSize, alignment: .center)
@@ -319,7 +320,7 @@ struct FeedPostView: View {
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        FeedPostView(image: "ic_postImg1")
+        FeedPostViewTeacher(image: "ic_postImg1")
             .padding(.top, 16)
             .padding(.horizontal, 0)
     }

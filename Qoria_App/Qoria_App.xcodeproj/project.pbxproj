@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF85ADA02F48D17B00A5827C /* FeedMediaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */; };
 		FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F132F3A693200F7008E /* QoriaTabView.swift */; };
 		FF8A6F182F3A697400F7008E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F172F3A697400F7008E /* HomeView.swift */; };
-		FF8A6F1A2F3A698100F7008E /* FeedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F192F3A698100F7008E /* FeedPostView.swift */; };
+		FF8A6F1A2F3A698100F7008E /* FeedPostViewTeacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F192F3A698100F7008E /* FeedPostViewTeacher.swift */; };
 		FF8A6F1C2F3A698F00F7008E /* PremiumBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */; };
 		FF8A6F1E2F3A699900F7008E /* QoriaAppBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */; };
 		FF8A6F202F3A69A100F7008E /* FeedPostViewArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F1F2F3A69A100F7008E /* FeedPostViewArtist.swift */; };
 		FF8A6F222F3A69A200F7008E /* FeedPostViewStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F212F3A69A200F7008E /* FeedPostViewStudent.swift */; };
-		FFB7D9A22F4C123400ABCD01 /* FeedPostViewStudentShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */; };
-		FF8A6F282F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */; };
 		FF8A6F242F3A69B000F7008E /* PremiumCrownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */; };
 		FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */; };
+		FF8A6F282F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */; };
 		FF8A6F2A2F3A69E000F7008E /* LearnThisButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F292F3A69E000F7008E /* LearnThisButtonView.swift */; };
 		FF8A6F2C2F3A69F000F7008E /* CompetitionStatusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F2B2F3A69F000F7008E /* CompetitionStatusButtonView.swift */; };
 		FF8A6F2E2F3A6A0000F7008E /* CompetitionCurrentStatusTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F2D2F3A6A0000F7008E /* CompetitionCurrentStatusTagView.swift */; };
@@ -47,6 +47,7 @@
 		FFA494D52F3D0CB5007D1B90 /* GetHomeDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494D02F3D0CB5007D1B90 /* GetHomeDataUseCase.swift */; };
 		FFA494D72F3D0E3A007D1B90 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */; };
 		FFA494DF2F3D12C6007D1B90 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA494DE2F3D12C3007D1B90 /* AppContainer.swift */; };
+		FFB7D9A22F4C123400ABCD01 /* FeedPostViewStudentShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,17 +68,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMediaImage.swift; sourceTree = "<group>"; };
 		FF8A6F132F3A693200F7008E /* QoriaTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaTabView.swift; sourceTree = "<group>"; };
 		FF8A6F172F3A697400F7008E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		FF8A6F192F3A698100F7008E /* FeedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostView.swift; sourceTree = "<group>"; };
+		FF8A6F192F3A698100F7008E /* FeedPostViewTeacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacher.swift; sourceTree = "<group>"; };
 		FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumBannerView.swift; sourceTree = "<group>"; };
 		FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaAppBarView.swift; sourceTree = "<group>"; };
 		FF8A6F1F2F3A69A100F7008E /* FeedPostViewArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewArtist.swift; sourceTree = "<group>"; };
 		FF8A6F212F3A69A200F7008E /* FeedPostViewStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudent.swift; sourceTree = "<group>"; };
-		FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudentShared.swift; sourceTree = "<group>"; };
-		FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacherAndArtist.swift; sourceTree = "<group>"; };
 		FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumCrownTag.swift; sourceTree = "<group>"; };
 		FF8A6F252F3A69C000F7008E /* FeedContentTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentTypeView.swift; sourceTree = "<group>"; };
+		FF8A6F272F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacherAndArtist.swift; sourceTree = "<group>"; };
 		FF8A6F292F3A69E000F7008E /* LearnThisButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnThisButtonView.swift; sourceTree = "<group>"; };
 		FF8A6F2B2F3A69F000F7008E /* CompetitionStatusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionStatusButtonView.swift; sourceTree = "<group>"; };
 		FF8A6F2D2F3A6A0000F7008E /* CompetitionCurrentStatusTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionCurrentStatusTagView.swift; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		FFA494D12F3D0CB5007D1B90 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		FFA494DE2F3D12C3007D1B90 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudentShared.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -154,9 +156,10 @@
 		FF8A6F122F3A693200F7008E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */,
 				FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */,
 				FF8A6F172F3A697400F7008E /* HomeView.swift */,
-				FF8A6F192F3A698100F7008E /* FeedPostView.swift */,
+				FF8A6F192F3A698100F7008E /* FeedPostViewTeacher.swift */,
 				FF8A6F1F2F3A69A100F7008E /* FeedPostViewArtist.swift */,
 				FF8A6F212F3A69A200F7008E /* FeedPostViewStudent.swift */,
 				FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */,
@@ -481,7 +484,8 @@
 				FF8CD8922F38E98300017908 /* TokenRefresher.swift in Sources */,
 				FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */,
 				FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */,
-				FF8A6F1A2F3A698100F7008E /* FeedPostView.swift in Sources */,
+				FF85ADA02F48D17B00A5827C /* FeedMediaImage.swift in Sources */,
+				FF8A6F1A2F3A698100F7008E /* FeedPostViewTeacher.swift in Sources */,
 				FF8A6F202F3A69A100F7008E /* FeedPostViewArtist.swift in Sources */,
 				FF8A6F222F3A69A200F7008E /* FeedPostViewStudent.swift in Sources */,
 				FFB7D9A22F4C123400ABCD01 /* FeedPostViewStudentShared.swift in Sources */,
