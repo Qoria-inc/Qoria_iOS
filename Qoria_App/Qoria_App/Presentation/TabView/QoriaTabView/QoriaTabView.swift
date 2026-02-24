@@ -22,7 +22,7 @@ struct QoriaTabView: View {
                     NavigationStack { HomeView(viewModel: homeViewModel) }
                 case .learn:
                     //NavigationStack { ContentView(heading: "Learn") }
-                    NavigationStack { FeedPostViewTeacher(image: "ic_postImg1") }
+                    NavigationStack { FeedPostViewTeacher() }
                 case .post:
                     NavigationStack { ContentView(heading: "Post") }
                 case .discover:

@@ -18,11 +18,16 @@ private enum nonProUserFeed {
     case student, fan, studentAndFan, none
 }
 
+private enum feedPostType {
+    case regular, challenge, submission, lounge, premiumArtist, premiumTutorial, system, gallery, sharedCourse, none
+}
+
 struct HomeView: View {
     
     // MARK: - State
     @StateObject private var viewModel: HomeViewModel
     @State private var isBannerVisible = true
+    @State private var focusedMediaPostIndex: Int? = nil
     
     init(viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -48,7 +53,7 @@ struct HomeView: View {
                         })
                     }
                     ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, item in
-                        postView(for: item)
+                        postView(for: item, index: index, focusedMediaPostIndex: focusedMediaPostIndex)
                             .onAppear {
                                 Task {
                                     await viewModel.loadNextPageIfNeeded(currentIndex: index)
@@ -69,16 +74,24 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity)
                     }
                 }
+                .onPreferenceChange(MediaFramesPreferenceKey.self) { frames in
+                    let screenMidY = UIScreen.main.bounds.midY
+                    let threshold: CGFloat = UIScreen.main.bounds.height * 0.35
+                    focusedMediaPostIndex = frames
+                        .filter { abs($0.value.midY - screenMidY) < threshold }
+                        .min(by: { abs($0.value.midY - screenMidY) < abs($1.value.midY - screenMidY) })
+                        .map(\.key)
+                }
                 .padding(.bottom, 24)
-                .scrollIndicators(.hidden)
             }
+            .scrollIndicators(.hidden)
             .background(Color.Surface.appBackground)
         }
     }
 
     // Mark: - Dynamic Post Type
     @ViewBuilder
-    private func postView(for json: dynamicJSON) -> some View {
+    private func postView(for json: dynamicJSON, index: Int, focusedMediaPostIndex: Int?) -> some View {
         
         let userCategory: UserCategory = {
             switch json.owner_info.user_type.int ?? 0 {
@@ -106,6 +119,21 @@ struct HomeView: View {
             }
         }()
         
+        let postType: feedPostType = {
+            switch json.post_type.int ?? 0 {
+            case 0: return .regular
+            case 1: return .challenge
+            case 2: return .submission
+            case 3: return .lounge
+            case 4: return .premiumArtist
+            case 5: return .premiumTutorial
+            case 6: return .system
+            case 7: return .gallery
+            case 8: return .sharedCourse
+            default: return .none
+            }
+        }()
+        
         let postID = json.id.string ?? ""
 
         let userName = json.owner_info.name.string ?? ""
@@ -115,7 +143,7 @@ struct HomeView: View {
         let postTime = json.created_at.string ?? ""
         //let competationStatus = ""
         
-        let images = [json.photo1.string ?? "", json.photo2.string ?? "", json.photo3.string ?? ""]
+        let images = (json.images.array ?? []).compactMap { $0.url.string }.filter { !$0.isEmpty }
         let firstVideo = json.processed_video_hls.string ?? ""
         let firstVideoThumbnail = json.processed_video_thumbnail.string ?? ""
         let secondVideo = json.processed_after_video_hls.string ?? ""
@@ -145,11 +173,38 @@ struct HomeView: View {
         if userCategory == .pro {
             switch proFeedType {
             case .teacher:
-                FeedPostViewTeacher()
+                switch postType {
+                case .regular:
+                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                case .challenge:
+                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                case .premiumTutorial:
+                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                default:
+                    EmptyView()
+                }
             case .artist:
-                FeedPostViewArtist()
+                switch postType {
+                case .regular:
+                    FeedPostViewArtist()
+                case .challenge:
+                    FeedPostViewArtist()
+                case .premiumArtist:
+                    FeedPostViewArtist()
+                default:
+                    EmptyView()
+                }
             case .teacherAndArtist:
-                FeedPostViewTeacherAndArtist()
+                switch postType {
+                case .regular:
+                    FeedPostViewTeacherAndArtist()
+                case .challenge:
+                    FeedPostViewTeacherAndArtist()
+                case .premiumTutorial, .premiumArtist:
+                    FeedPostViewTeacherAndArtist()
+                default:
+                    EmptyView()
+                }
             case .none:
                 EmptyView()
             }
@@ -157,11 +212,30 @@ struct HomeView: View {
         else {
             switch nonProFeedType {
             case .student:
-                FeedPostViewStudent()
+                switch postType {
+                case .regular:
+                    FeedPostViewStudent()
+                case .submission:
+                    FeedPostViewStudent()
+                default:
+                    EmptyView()
+                }
             case .fan:
-                FeedPostViewStudent()
+                switch postType {
+                case .regular:
+                    FeedPostViewStudent()
+                default:
+                    EmptyView()
+                }
             case .studentAndFan:
-                FeedPostViewStudent()
+                switch postType {
+                case .regular:
+                    FeedPostViewStudent()
+                case .submission:
+                    FeedPostViewStudent()
+                default:
+                    EmptyView()
+                }
             case .none:
                 EmptyView()
             }

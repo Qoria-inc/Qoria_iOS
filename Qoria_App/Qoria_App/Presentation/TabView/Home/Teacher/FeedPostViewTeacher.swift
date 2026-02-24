@@ -9,27 +9,6 @@ import SwiftUI
 import AVFoundation
 import AVKit
 
-// MARK: - Audio session for feed video (ambient, mix with others – reduces HAL/Simulator noise)
-private enum FeedVideoAudioSession {
-    private static var didConfigure = false
-    static func configureOnce() {
-        guard !didConfigure else { return }
-        didConfigure = true
-        let session = AVAudioSession.sharedInstance()
-        do {
-            try session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
-            try session.setActive(true, options: [])
-        } catch { }
-    }
-}
-
-// MARK: - Feed Post Media Kind (1: images 1–3, 2: single HLS video, 3: two HLS videos side by side)
-enum FeedPostMediaKind {
-    case images([String])
-    case singleVideo(hlsURL: String, thumbnailURL: String?)
-    case twoVideos(left: String, right: String, leftThumbnail: String?, rightThumbnail: String?)
-}
-
 // MARK: - Preference key for scroll-based play (post index -> media frame in global coords)
 struct MediaFramesPreferenceKey: PreferenceKey {
     static var defaultValue: [Int: CGRect] { [:] }
@@ -131,7 +110,7 @@ private extension FeedPostViewTeacher {
                 FeedContentTypeView(isSingleTrophy: true)
             }
 
-            Text(createdAtDisplayText(from: json.created_at.string ?? ""))
+            Text(FeedPostDateHelpers.createdAtDisplayText(from: json.created_at.string ?? ""))
                 .font(.system(size: 14))
                 .foregroundStyle(Color.Text.secondary)
         }
@@ -160,7 +139,7 @@ private extension FeedPostViewTeacher {
            statusTitle.isEmpty == false {
             CompetitionCurrentStatusTagView(
                 title: statusTitle,
-                style: styleForStatus(title: statusTitle)
+                style: FeedPostCompetitionStatusHelpers.styleForStatus(title: statusTitle)
             )
             .padding(.top, -2)
         }
@@ -169,7 +148,7 @@ private extension FeedPostViewTeacher {
     var mediaSection: some View {
         VStack(spacing: 0) {
             FeedPostMediaView(
-                media: mediaKind,
+                media: FeedPostMediaKind.from(json),
                 competitionStatusTitle: json.challenge_status_title.string,
                 isInCenter: focusedMediaPostIndex == postIndex
             )
@@ -245,90 +224,6 @@ private extension FeedPostViewTeacher {
     }
 }
 
-// MARK: - FeedPostViewTeacher Helpers
-private extension FeedPostViewTeacher {
-    func createdAtDisplayText(from rawTimestamp: String) -> String {
-        guard let createdAt = parseISO8601Date(rawTimestamp) else {
-            return rawTimestamp
-        }
-
-        let now = Date()
-        let seconds = Int(now.timeIntervalSince(createdAt))
-        if seconds < 60 {
-            return "Just now"
-        }
-
-        let minutes = seconds / 60
-        if minutes < 60 {
-            return minutes == 1 ? "1 min ago" : "\(minutes) mins ago"
-        }
-
-        let hours = minutes / 60
-        if hours < 24 {
-            return hours == 1 ? "1 hour ago" : "\(hours) hours ago"
-        }
-
-        let calendar = Calendar.current
-        if calendar.isDateInYesterday(createdAt) {
-            return "yesterday"
-        }
-
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "dd-MM-yyyy"
-        return formatter.string(from: createdAt)
-    }
-
-    func parseISO8601Date(_ value: String) -> Date? {
-        let formatterWithFraction = ISO8601DateFormatter()
-        formatterWithFraction.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        if let date = formatterWithFraction.date(from: value) {
-            return date
-        }
-
-        let formatterWithoutFraction = ISO8601DateFormatter()
-        formatterWithoutFraction.formatOptions = [.withInternetDateTime]
-        return formatterWithoutFraction.date(from: value)
-    }
-
-    /// Resolved media kind: two videos → side-by-side, one video → single, else images (1–3).
-    var mediaKind: FeedPostMediaKind {
-        let first = json.processed_video_hls.string ?? ""
-        let second = json.processed_after_video_hls.string ?? ""
-        let single = json.processed_video_hls.string ?? ""
-
-        let firstThumb = json.processed_video_thumbnail.string ?? ""
-        let secondThumb = json.processed_after_video_thumbnail.string ?? ""
-
-        if !first.isEmpty && !second.isEmpty {
-            return .twoVideos(left: first, right: second, leftThumbnail: firstThumb.isEmpty ? nil : firstThumb, rightThumbnail: secondThumb.isEmpty ? nil : secondThumb)
-        }
-        if !single.isEmpty {
-            return .singleVideo(hlsURL: single, thumbnailURL: firstThumb.isEmpty ? nil : firstThumb)
-        }
-        if !first.isEmpty {
-            return .singleVideo(hlsURL: first, thumbnailURL: firstThumb.isEmpty ? nil : firstThumb)
-        }
-        // Images: 1, 2, or max 3
-        let imageList = [json.photo1.string ?? "", json.photo2.string ?? "", json.photo3.string ?? ""]
-            .filter { !$0.isEmpty }
-        if !imageList.isEmpty {
-            return .images(Array(imageList.prefix(3)))
-        }
-        return .images([])
-    }
-
-    func styleForStatus(title: String) -> CompetitionCurrentStatusTagView.Style {
-        if title.lowercased().contains("winners announced") {
-            return .winnersAnnounced
-        } else if title.lowercased().contains("voting ends") {
-            return .votingEndsSoon
-        } else {
-            return .neutral
-        }
-    }
-}
-
 // MARK: - Feed Post Media View (images 1–3, single HLS video, or two HLS videos side by side)
 
 private struct FeedPostMediaView: View {
@@ -339,6 +234,7 @@ private struct FeedPostMediaView: View {
     @State private var singleIsMuted = true
     @State private var leftIsMuted = true
     @State private var rightIsMuted = true
+    @State private var currentImageIndex = 0
 
     private let containerSize = UIScreen.main.bounds.width
     private let twoVideosLeadingTrailingPadding: CGFloat = 4
@@ -362,7 +258,7 @@ private struct FeedPostMediaView: View {
         .padding(.horizontal, -16)
     }
 
-    // MARK: - Case 1: 1, 2, or 3 images (same screen space)
+    // MARK: - Case 1: Images – single full width; multiple as side-by-side carousel with page indicator
     @ViewBuilder
     private func imagesLayout(items: [String]) -> some View {
         let safeItems = Array(items.prefix(3))
@@ -376,39 +272,33 @@ private struct FeedPostMediaView: View {
                 FeedMediaImage(source: safeItems[0])
                     .frame(width: containerSize, height: containerSize)
                     .clipped()
-            } else if safeItems.count == 2 {
-                HStack(spacing: 2) {
-                    ForEach(Array(safeItems.enumerated()), id: \.offset) { _, src in
-                        FeedMediaImage(source: src)
-                            .frame(width: (containerSize - 4) / 2, height: containerSize)
-                            .clipped()
-                            .cornerRadius(4)
-                    }
-                }
-                .padding(2)
             } else {
-                // 3 images: top row 2, bottom row 1 (same total height as container)
-                let rowHeight = (containerSize - 2) / 2
-                let halfW = (containerSize - 4) / 2
-                VStack(spacing: 2) {
-                    HStack(spacing: 2) {
-                        FeedMediaImage(source: safeItems[0])
-                            .frame(width: halfW, height: rowHeight)
+                TabView(selection: $currentImageIndex) {
+                    ForEach(Array(safeItems.enumerated()), id: \.offset) { index, src in
+                        FeedMediaImage(source: src)
+                            .frame(width: containerSize, height: containerSize)
                             .clipped()
-                            .cornerRadius(4)
-                        FeedMediaImage(source: safeItems[1])
-                            .frame(width: halfW, height: rowHeight)
-                            .clipped()
-                            .cornerRadius(4)
+                            .tag(index)
                     }
-                    FeedMediaImage(source: safeItems[2])
-                        .frame(width: containerSize - 4, height: rowHeight)
-                        .clipped()
-                        .cornerRadius(4)
                 }
-                .padding(2)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .frame(width: containerSize, height: containerSize)
+                .overlay(alignment: .bottom) {
+                    imagePageIndicator(count: safeItems.count)
+                }
             }
         }
+    }
+
+    private func imagePageIndicator(count: Int) -> some View {
+        HStack(spacing: 6) {
+            ForEach(0..<count, id: \.self) { index in
+                Circle()
+                    .fill(index == currentImageIndex ? Color.white : Color.white.opacity(0.5))
+                    .frame(width: 6, height: 6)
+            }
+        }
+        .padding(.vertical, 8)
     }
 
     // MARK: - Case 2: Single HLS video (full width, same space)

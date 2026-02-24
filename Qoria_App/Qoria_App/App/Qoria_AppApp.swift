@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct Qoria_AppApp: App {
-    
+
     @AppStorage("isDarkMode") private var isDarkMode = true
-    
+
+    init() {
+        let cache = URLCache(memoryCapacity: 50 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024)
+        URLCache.shared = cache
+    }
+
     var body: some Scene {
         WindowGroup {
             QoriaTabView()

@@ -23,8 +23,8 @@ final class NetworkCall: NetworkCalling {
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
         let parameters: Parameters = [
-            "email": "umairkmehmood789@gmail.com",
-            "password": "TestPassword123"
+            "email": "umairkmehmood789+7@gmail.com",
+            "password": "password123"
         ]
 
         return try await NetworkManager.shared.requestJSON(
