@@ -79,15 +79,22 @@ enum FeedPostDateHelpers {
             return hours == 1 ? "1 hour ago" : "\(hours) hours ago"
         }
 
-        let calendar = Calendar.current
-        if calendar.isDateInYesterday(createdAt) {
-            return "Yesterday"
+        let days = seconds / 86400
+        if days < 7 {
+            return days == 1 ? "1d ago" : "\(days)d ago"
         }
 
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "dd-MM-yyyy"
-        return formatter.string(from: createdAt)
+        let weeks = days / 7
+        if weeks < 4 {
+            return weeks == 1 ? "1w ago" : "\(weeks)w ago"
+        }
+
+        let months = days / 30
+        if months < 12 {
+            return months == 1 ? "1 month ago" : "\(months) months ago"
+        }
+        let years = days / 365
+        return years == 1 ? "1 year ago" : "\(years) years ago"
     }
 
     static func parseISO8601Date(_ value: String) -> Date? {

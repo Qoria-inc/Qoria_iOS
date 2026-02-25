@@ -89,7 +89,7 @@ private extension FeedPostViewTeacher {
         }
         .frame(width: 52, height: 52)
     }
-
+    
     var profileMetaSection: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 6) {
@@ -107,7 +107,9 @@ private extension FeedPostViewTeacher {
                     .overlay(
                         Capsule().stroke(AngularGradient(colors: [.white, .white, Color.Gradient.tagRight, .white], center: .center), lineWidth: 0.5))
 
-                FeedContentTypeView(isSingleTrophy: true)
+                FeedContentTypeView(isSingleTrophy: json.post_type.int == 1
+                                    ? true : false,
+                                    isLock: json.post_type.int == 5 ? true : false)
             }
 
             Text(FeedPostDateHelpers.createdAtDisplayText(from: json.created_at.string ?? ""))
