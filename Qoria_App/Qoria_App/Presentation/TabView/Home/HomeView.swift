@@ -134,41 +134,41 @@ struct HomeView: View {
             }
         }()
         
-        let postID = json.id.string ?? ""
-
-        let userName = json.owner_info.name.string ?? ""
-        let userProfileImage = json.owner_info.avatar.string ?? ""
-        let userId = json.owner_id.string ?? ""
-        let postTitle = json.title.string ?? ""
-        let postTime = json.created_at.string ?? ""
-        //let competationStatus = ""
-        
-        let images = (json.images.array ?? []).compactMap { $0.url.string }.filter { !$0.isEmpty }
-        let firstVideo = json.processed_video_hls.string ?? ""
-        let firstVideoThumbnail = json.processed_video_thumbnail.string ?? ""
-        let secondVideo = json.processed_after_video_hls.string ?? ""
-        let secondVideoThumbnail = json.processed_after_video_thumbnail.string ?? ""
-        
-        let reactCount = json.like_count.int ?? 0
-        let commentCount = json.comment_count.int ?? 0
-        let shareCount = json.share_count.int ?? 0
-        
-        let trophieCount = json.trophies.int ?? 0
-        
-        let isPostReacted = json.is_liked.bool
-        let isPostSaved = json.is_saved.bool
-        let isPostShared = json.is_shared.bool
-        let isPostReported = json.is_reported.bool
-        let isPostRestricted = json.is_restricted.bool
-        
-        //let sharedByInFollowing = [json.shared_by_in_following]
-        
-        let isFeedbackEnable = json.enable_feedback.bool
-        let isFromTeacher = json.is_from_teacher.bool
-        
-        let isChallenge = json.is_challenge.bool
-        let isChallengeWinner = json.is_challenge_winner.bool
-        let isChallengeOpen = json.is_challenge_open.bool
+//        let postID = json.id.string ?? ""
+//
+//        let userName = json.owner_info.name.string ?? ""
+//        let userProfileImage = json.owner_info.avatar.string ?? ""
+//        let userId = json.owner_id.string ?? ""
+//        let postTitle = json.title.string ?? ""
+//        let postTime = json.created_at.string ?? ""
+//        //let competationStatus = ""
+//        
+//        let images = (json.images.array ?? []).compactMap { $0.url.string }.filter { !$0.isEmpty }
+//        let firstVideo = json.processed_video_hls.string ?? ""
+//        let firstVideoThumbnail = json.processed_video_thumbnail.string ?? ""
+//        let secondVideo = json.processed_after_video_hls.string ?? ""
+//        let secondVideoThumbnail = json.processed_after_video_thumbnail.string ?? ""
+//        
+//        let reactCount = json.like_count.int ?? 0
+//        let commentCount = json.comment_count.int ?? 0
+//        let shareCount = json.share_count.int ?? 0
+//        
+//        let trophieCount = json.trophies.int ?? 0
+//        
+//        let isPostReacted = json.is_liked.bool
+//        let isPostSaved = json.is_saved.bool
+//        let isPostShared = json.is_shared.bool
+//        let isPostReported = json.is_reported.bool
+//        let isPostRestricted = json.is_restricted.bool
+//        
+//        //let sharedByInFollowing = [json.shared_by_in_following]
+//        
+//        let isFeedbackEnable = json.enable_feedback.bool
+//        let isFromTeacher = json.is_from_teacher.bool
+//        
+//        let isChallenge = json.is_challenge.bool
+//        let isChallengeWinner = json.is_challenge_winner.bool
+//        let isChallengeOpen = json.is_challenge_open.bool
 
         if userCategory == .pro {
             switch proFeedType {

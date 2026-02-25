@@ -24,6 +24,9 @@ struct FeedContentTypeView: View {
 
     /// Shows crown asset (ic_crownWithBG)
     var isCrown: Bool = false
+    
+    /// Shows lock asset (ic_lockWithBG)
+    var isLock: Bool = false
 
     // MARK: - Computed Properties
 
@@ -32,6 +35,7 @@ struct FeedContentTypeView: View {
         if isSingleTrophy { return "ic_singleTrophyWithBG" }
         if isCountTrophy { return "ic_trophyWithBG" }
         if isCrown { return "ic_crownWithBG" }
+        if isLock { return "ic_lockWithBG" }
         return nil
     }
 
@@ -44,6 +48,7 @@ struct FeedContentTypeView: View {
                 endPoint: .trailing
             )
         }
+        
         if isSingleTrophy || isCountTrophy {
             return LinearGradient(
                 colors: [
@@ -54,6 +59,7 @@ struct FeedContentTypeView: View {
                 endPoint: .trailing
             )
         }
+        
         if isCrown {
             return LinearGradient(
                 colors: [
@@ -62,6 +68,20 @@ struct FeedContentTypeView: View {
                 ],
                 startPoint: .leading,
                 endPoint: .trailing
+            )
+        }
+        
+        if isLock {
+            return LinearGradient(
+                colors: [
+                    Color.ContentTypeBorder.lock.opacity(0.55),
+                    Color.ContentTypeBorder.lock.opacity(0.25),
+                    Color.ContentTypeBorder.lock.opacity(0.08),
+                    Color.black.opacity(0.2),
+                    Color.black.opacity(0.4)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
             )
         }
         return LinearGradient(colors: [.clear], startPoint: .leading, endPoint: .trailing)

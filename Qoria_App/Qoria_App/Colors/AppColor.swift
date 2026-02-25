@@ -88,6 +88,7 @@ extension Color {
         static let trophy = Color(red: 0xFF/255, green: 0xE5/255, blue: 0x00/255)
         /// Crown: white at 10% and 50% opacity
         static let crown = Color.white
+        static let lock = Color.white
     }
 
     // MARK: - Gradients (colors only)
