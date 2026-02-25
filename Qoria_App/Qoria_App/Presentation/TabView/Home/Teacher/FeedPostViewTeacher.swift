@@ -27,15 +27,25 @@ struct FeedPostViewTeacher: View {
 
     var json: dynamicJSON = dynamicJSON()
     var showsLearnThis: Bool = false
+    /// When true, show premium lock overlay over the main content.
+    var showsPremiumOverlay: Bool = false
 
     // MARK: - Body
     var body: some View {
-        content
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-            .clipped()
-            .background(Color.Surface.post)
+        ZStack {
+            content
+                .blur(radius: showsPremiumOverlay ? 3 : 0)
+
+            if showsPremiumOverlay {
+                PremiumLockedOverlayView()
+                    .transition(.opacity)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+        .clipped()
+        .background(Color.Surface.post)
     }
 }
 
@@ -223,6 +233,60 @@ private extension FeedPostViewTeacher {
         }
         .font(.system(size: 14))
         .padding(.top, 4)
+    }
+}
+
+// MARK: - Premium Locked Overlay
+
+private struct PremiumLockedOverlayView: View {
+
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .overlay(Color.black.opacity(0.35))
+
+            VStack(spacing: 18) {
+                Image("LockForPremium")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+
+                Text("This is premium content. Up to 10 posts per month are free – follow premium for unlimited access.")
+                    .font(.system(size: 14))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color.Text.onDark)
+                    .padding(.horizontal, 24)
+
+                VStack(spacing: 10) {
+                    Button(action: {}) {
+                        Text("View Post")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 44)
+                    }
+                    .foregroundStyle(Color.black)
+                    .background(Color.white.opacity(0.9), in: Capsule())
+                    .buttonStyle(.plain)
+
+                    Button(action: {}) {
+                        Text("Follow Premium Content")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 44)
+                    }
+                    .foregroundStyle(Color.white)
+                    .background(Color.white.opacity(0.08), in: Capsule())
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.white.opacity(0.4), lineWidth: 1)
+                    )
+                    .buttonStyle(.plain)
+                }
+                .padding(.horizontal, 24)
+            }
+            .padding(.vertical, 32)
+        }
     }
 }
 

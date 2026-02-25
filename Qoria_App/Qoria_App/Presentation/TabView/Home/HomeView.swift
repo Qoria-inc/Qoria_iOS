@@ -175,11 +175,26 @@ struct HomeView: View {
             case .teacher:
                 switch postType {
                 case .regular:
-                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                    FeedPostViewTeacher(
+                        focusedMediaPostIndex: focusedMediaPostIndex,
+                        postIndex: index,
+                        json: json,
+                        showsPremiumOverlay: index == 0
+                    )
                 case .challenge:
-                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                    FeedPostViewTeacher(
+                        focusedMediaPostIndex: focusedMediaPostIndex,
+                        postIndex: index,
+                        json: json,
+                        showsPremiumOverlay: index == 0
+                    )
                 case .premiumTutorial:
-                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                    FeedPostViewTeacher(
+                        focusedMediaPostIndex: focusedMediaPostIndex,
+                        postIndex: index,
+                        json: json,
+                        showsPremiumOverlay: index == 0
+                    )
                 default:
                     EmptyView()
                 }

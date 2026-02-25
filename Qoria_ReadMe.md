@@ -120,6 +120,12 @@ So: **constructor injection** for ViewModels and repositories; **container** onl
 - **Shared posts (Student)**: A student can share another user’s post. `FeedPostViewStudentShared` renders an outer student post header + caption, then shows a **shared post preview** inside a bordered container (author header + text + media). The shared preview supports 1 or 2 media items (same container rules) and keeps the volume button on the shared media.
 - **Placeholder tabs**: Learn, Post, Discover, Settings use a shared `ContentView(heading:)` with a test “Run Test Call” and optional auto-run; they are not yet feature-specific.
 
+#### 3.7.1 Premium lock overlay (Teacher feed)
+
+- **Premium overlay**: `FeedPostViewTeacher` now supports a premium overlay via `showsPremiumOverlay: Bool`.
+- **Usage**: Wrap the normal content in a `ZStack`; when `showsPremiumOverlay == true`, the `PremiumLockedOverlayView` is drawn above the post, and the base content is slightly blurred.
+- **Design**: The overlay uses a blurred material (`.ultraThinMaterial`) plus a subtle dark tint so the underlying post remains visible. It shows the `LockForPremium` asset, explanatory copy, and two CTA buttons: “View Post” and “Follow Premium Content”.
+
 ### 3.8 Error Handling & Null Safety
 
 - **Errors**: Use `throws` and `do/catch` in async code; map to `LocalizedError` or a single `String?` in the ViewModel. Handle `CancellationError` (e.g. ignore when task is cancelled).
