@@ -32,20 +32,12 @@ struct FeedPostViewTeacher: View {
 
     // MARK: - Body
     var body: some View {
-        ZStack {
-            content
-                .blur(radius: showsPremiumOverlay ? 3 : 0)
-
-            if showsPremiumOverlay {
-                PremiumLockedOverlayView()
-                    .transition(.opacity)
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-        .clipped()
-        .background(Color.Surface.post)
+        content
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+            .clipped()
+            .background(Color.Surface.post)
     }
 }
 
@@ -159,16 +151,24 @@ private extension FeedPostViewTeacher {
 
     var mediaSection: some View {
         VStack(spacing: 0) {
-            FeedPostMediaView(
-                media: FeedPostMediaKind.from(json),
-                competitionStatusTitle: json.challenge_status_title.string,
-                isInCenter: focusedMediaPostIndex == postIndex
-            )
-            .background(
-                GeometryReader { geo in
-                    Color.clear.preference(key: MediaFramesPreferenceKey.self, value: [postIndex: geo.frame(in: .global)])
+            ZStack {
+                FeedPostMediaView(
+                    media: FeedPostMediaKind.from(json),
+                    competitionStatusTitle: json.challenge_status_title.string,
+                    isInCenter: focusedMediaPostIndex == postIndex
+                )
+                .blur(radius: showsPremiumOverlay ? 0.5 : 0)
+                .background(
+                    GeometryReader { geo in
+                        Color.clear.preference(key: MediaFramesPreferenceKey.self, value: [postIndex: geo.frame(in: .global)])
+                    }
+                )
+
+                if showsPremiumOverlay {
+                    PremiumLockedOverlayView()
+                        .transition(.opacity)
                 }
-            )
+            }
 
             // Learn This CTA sits BELOW the media (not over it)
             if showsLearnThis {
@@ -247,10 +247,11 @@ private struct PremiumLockedOverlayView: View {
                 .overlay(Color.black.opacity(0.35))
 
             VStack(spacing: 18) {
-                Image("LockForPremium")
+                Image("ic_lockForPremium")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 80, height: 80)
+                    .frame(width: 100, height: 120)
+                    .offset(x: 10)
 
                 Text("This is premium content. Up to 10 posts per month are free – follow premium for unlimited access.")
                     .font(.system(size: 14))
@@ -283,6 +284,8 @@ private struct PremiumLockedOverlayView: View {
                     )
                     .buttonStyle(.plain)
                 }
+                .frame(maxWidth: 260)
+                .frame(maxWidth: .infinity)
                 .padding(.horizontal, 24)
             }
             .padding(.vertical, 32)
