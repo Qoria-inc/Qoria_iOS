@@ -9,7 +9,8 @@ import SwiftUI
 import AVFoundation
 import AVKit
 
-// MARK: - Preference key for scroll-based play (post index -> media frame in global coords)
+// MARK: - Preference Key
+
 struct MediaFramesPreferenceKey: PreferenceKey {
     static var defaultValue: [Int: CGRect] { [:] }
     static func reduce(value: inout [Int: CGRect], nextValue: () -> [Int: CGRect]) {
@@ -17,12 +18,15 @@ struct MediaFramesPreferenceKey: PreferenceKey {
     }
 }
 
+// MARK: - FeedPostViewTeacher
+
 struct FeedPostViewTeacher: View {
 
-    // MARK: - Inputs
-    /// When non-nil, the post at this index is considered “in center” for auto-play (set by HomeView from scroll).
+    // MARK: Inputs
+
+    /// When non-nil, the post at this index is considered "in center" for auto-play (set by HomeView from scroll).
     var focusedMediaPostIndex: Int? = nil
-    /// This post’s index in the feed (used to report frame and to compare with focusedMediaPostIndex).
+    /// This post's index in the feed (used to report frame and to compare with focusedMediaPostIndex).
     var postIndex: Int = 0
 
     var json: dynamicJSON = dynamicJSON()
@@ -30,7 +34,8 @@ struct FeedPostViewTeacher: View {
     /// When true, show premium lock overlay over the main content.
     var showsPremiumOverlay: Bool = false
 
-    // MARK: - Body
+    // MARK: Body
+
     var body: some View {
         content
             .padding(.horizontal, 16)
@@ -42,6 +47,7 @@ struct FeedPostViewTeacher: View {
 }
 
 // MARK: - FeedPostViewTeacher Layout
+
 private extension FeedPostViewTeacher {
     var content: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -91,7 +97,7 @@ private extension FeedPostViewTeacher {
         }
         .frame(width: 52, height: 52)
     }
-    
+
     var profileMetaSection: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 6) {
@@ -232,8 +238,8 @@ private extension FeedPostViewTeacher {
     }
 }
 
-
 // MARK: - Premium Locked Overlay
+
 private struct PremiumLockedOverlayView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -307,9 +313,9 @@ private struct PremiumLockedOverlayView: View {
     }
 }
 
+// MARK: - Feed Post Media View
 
-// MARK: - Feed Post Media View (images 1–3, single HLS video, or two HLS videos side by side)
-
+/// Images 1–3, single HLS video, or two HLS videos side by side.
 private struct FeedPostMediaView: View {
     var media: FeedPostMediaKind
     var competitionStatusTitle: String?
@@ -349,7 +355,8 @@ private struct FeedPostMediaView: View {
         .padding(.horizontal, -16)
     }
 
-    // MARK: - Case 1: Images – single full width; multiple as side-by-side carousel with page indicator
+    // MARK: Images Layout
+
     @ViewBuilder
     private func imagesLayout(items: [String]) -> some View {
         let safeItems = Array(items.prefix(3))
@@ -400,7 +407,8 @@ private struct FeedPostMediaView: View {
         .padding(.vertical, 8)
     }
 
-    // MARK: - Case 2: Single HLS video (full width, same space)
+    // MARK: Single Video Layout
+
     private func singleVideoLayout(hlsURL: String, thumbnailURL: String?) -> some View {
         FeedVideoCellView(
             urlString: hlsURL,
@@ -412,7 +420,9 @@ private struct FeedPostMediaView: View {
         .frame(width: containerSize, height: containerSize)
     }
 
-    // MARK: - Case 3: Two videos side by side; leading/trailing 5pt, 3pt between
+    // MARK: Two Videos Layout
+
+    /// Leading/trailing 5pt padding, 3pt spacing between videos.
     private func twoVideosLayout(left: String, right: String, leftThumbnail: String?, rightThumbnail: String?) -> some View {
         let totalHorizontalPadding = twoVideosLeadingTrailingPadding * 2 + twoVideosMiddleSpacing
         let halfWidth = (containerSize - totalHorizontalPadding) / 2
@@ -444,6 +454,8 @@ private struct FeedPostMediaView: View {
             .padding(.trailing, twoVideosLeadingTrailingPadding)
         }
     }
+
+    // MARK: Media Overlay
 
     @ViewBuilder
     private var mediaOverlay: some View {
@@ -492,7 +504,9 @@ private struct FeedPostMediaView: View {
     }
 }
 
-// MARK: - Single video cell: thumbnail until loaded, then video; auto-play when in center; optional volume in cell
+// MARK: - Feed Video Cell View
+
+/// Single video cell: thumbnail until loaded, then video; auto-play when in center; optional volume in cell.
 private struct FeedVideoCellView: View {
     let urlString: String
     var thumbnailURL: String? = nil
@@ -544,7 +558,9 @@ private struct FeedVideoCellView: View {
     }
 }
 
-// MARK: - HLS Video Player (AVPlayer) – play/pause from scroll position, mute by default
+// MARK: - HLS Video Player
+
+/// AVPlayer wrapper – play/pause from scroll position, mute by default.
 private struct FeedHLSVideoPlayer: View {
     let urlString: String
     var shouldPlay: Bool = true
@@ -555,6 +571,8 @@ private struct FeedHLSVideoPlayer: View {
         FeedHLSVideoPlayerRepresentable(urlString: urlString, shouldPlay: shouldPlay, isMuted: isMuted, isReadyForDisplay: $isReadyForDisplay)
     }
 }
+
+// MARK: - HLS Video Player Representable
 
 private struct FeedHLSVideoPlayerRepresentable: UIViewRepresentable {
     let urlString: String
@@ -625,6 +643,8 @@ private struct FeedHLSVideoPlayerRepresentable: UIViewRepresentable {
     }
 }
 
+// MARK: - Player View (AVPlayer UIKit Bridge)
+
 private final class PlayerView: UIView {
     private var playerLayer: AVPlayerLayer?
     private var player: AVPlayer?
@@ -637,6 +657,8 @@ private final class PlayerView: UIView {
     var onReadyForDisplay: (() -> Void)?
 
     override static var layerClass: AnyClass { AVPlayerLayer.self }
+
+    // MARK: Init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -652,6 +674,8 @@ private final class PlayerView: UIView {
         super.layoutSubviews()
         playerLayer?.frame = bounds
     }
+
+    // MARK: Configuration
 
     func configure(urlString: String, shouldPlay: Bool = false) {
         guard let url = URL(string: urlString), urlString.hasPrefix("http") else {
@@ -698,6 +722,8 @@ private final class PlayerView: UIView {
         }
     }
 
+    // MARK: Teardown
+
     private func removeEndObserver() {
         if let o = endObserver {
             NotificationCenter.default.removeObserver(o)
@@ -740,6 +766,8 @@ private final class PlayerView: UIView {
         performTearDown()
     }
 
+    // MARK: Playback
+
     private func replayFromBeginning() {
         guard pendingShouldPlay else { return }
         player?.seek(to: .zero) { [weak self] finished in
@@ -776,6 +804,8 @@ private final class PlayerView: UIView {
         playerLayer?.player = nil
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     ZStack {
