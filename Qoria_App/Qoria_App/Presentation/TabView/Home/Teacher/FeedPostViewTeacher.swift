@@ -209,27 +209,29 @@ private extension FeedPostViewTeacher {
 
             Spacer(minLength: 0)
 
-            Button {} label: {
-                HStack(spacing: 4) {
-                    Image("ic_share")
+            if !showsPremiumOverlay {
+                Button {} label: {
+                    HStack(spacing: 4) {
+                        Image("ic_share")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Text("\(json.share_count.int ?? 0)")
+                            .font(.system(size: 14))
+                    }
+                }
+                .foregroundStyle(Color.Text.secondary)
+                .buttonStyle(.plain)
+
+                Button {} label: {
+                    Image("ic_save")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 18, height: 18)
-                    Text("\(json.share_count.int ?? 0)")
-                        .font(.system(size: 14))
                 }
+                .foregroundStyle(Color.Text.secondary)
+                .buttonStyle(.plain)
             }
-            .foregroundStyle(Color.Text.secondary)
-            .buttonStyle(.plain)
-
-            Button {} label: {
-                Image("ic_save")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 18, height: 18)
-            }
-            .foregroundStyle(Color.Text.secondary)
-            .buttonStyle(.plain)
         }
         .font(.system(size: 14))
         .padding(.top, 4)
@@ -284,12 +286,11 @@ private struct PremiumLockedOverlayView: View {
                     )
                     .buttonStyle(.plain)
                 }
-                .frame(maxWidth: 260)
-                .frame(maxWidth: .infinity)
+//                .frame(width: UIScreen.screenWidth)
                 .padding(.horizontal, 24)
             }
             .padding(.vertical, 32)
-        }
+        }.frame(width: UIScreen.screenWidth)
     }
 }
 
