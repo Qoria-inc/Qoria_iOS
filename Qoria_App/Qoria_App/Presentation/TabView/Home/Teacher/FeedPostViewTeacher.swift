@@ -151,24 +151,12 @@ private extension FeedPostViewTeacher {
 
     var mediaSection: some View {
         VStack(spacing: 0) {
-            ZStack {
-                FeedPostMediaView(
-                    media: FeedPostMediaKind.from(json),
-                    competitionStatusTitle: json.challenge_status_title.string,
-                    isInCenter: focusedMediaPostIndex == postIndex
-                )
-                .blur(radius: showsPremiumOverlay ? 0.5 : 0)
-                .background(
-                    GeometryReader { geo in
-                        Color.clear.preference(key: MediaFramesPreferenceKey.self, value: [postIndex: geo.frame(in: .global)])
-                    }
-                )
-
-                if showsPremiumOverlay {
-                    PremiumLockedOverlayView()
-                        .transition(.opacity)
-                }
-            }
+            FeedPostMediaView(
+                media: FeedPostMediaKind.from(json),
+                competitionStatusTitle: json.challenge_status_title.string,
+                isInCenter: focusedMediaPostIndex == postIndex,
+                showsPremiumOverlay: showsPremiumOverlay
+            )
 
             // Learn This CTA sits BELOW the media (not over it)
             if showsLearnThis {
@@ -210,7 +198,7 @@ private extension FeedPostViewTeacher {
             Spacer(minLength: 0)
 
             if !showsPremiumOverlay {
-                Button {} label: {
+                Button { } label: {
                     HStack(spacing: 4) {
                         Image("ic_share")
                             .resizable()
@@ -238,61 +226,81 @@ private extension FeedPostViewTeacher {
     }
 }
 
+
 // MARK: - Premium Locked Overlay
-
 private struct PremiumLockedOverlayView: View {
-
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
             Rectangle()
                 .fill(.ultraThinMaterial)
-                .overlay(Color.black.opacity(0.35))
+                .overlay(Color.black.opacity(0.15))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            VStack(spacing: 18) {
-                Image("ic_lockForPremium")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 120)
-                    .offset(x: 10)
+            VStack {
+                Spacer()
 
-                Text("This is premium content. Up to 10 posts per month are free – follow premium for unlimited access.")
-                    .font(.system(size: 14))
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(Color.Text.onDark)
-                    .padding(.horizontal, 24)
+                VStack(spacing: 18) {
+                    Image("ic_lockForPremium")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 55, height: 90)
 
-                VStack(spacing: 10) {
-                    Button(action: {}) {
-                        Text("View Post")
-                            .font(.system(size: 16, weight: .semibold))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 44)
+                    Text("This is premium content. Up to 10 posts per month are free – follow premium for unlimited access.")
+                        .font(.system(size: 14))
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(Color.Text.onDark)
+                        .padding(.horizontal, 24)
+
+                    VStack(spacing: 10) {
+                        Button(action: {
+                            print("View Post Tapped")
+                        }) {
+                            Text("View Post")
+                                .font(.system(size: 16, weight: .semibold))
+                                .frame(width: UIScreen.screenWidth * 0.7, height: 44)
+                        }
+                        .foregroundStyle(Color.black)
+                        .background(Color.white.opacity(0.9), in: Capsule())
+                        .buttonStyle(.plain)
+
+                        Button(action: {
+                            print("Follow Premium Content Tapped")
+                        }) {
+                            Text("Follow Premium Content")
+                                .font(.system(size: 16, weight: .semibold))
+                                .frame(width: UIScreen.screenWidth * 0.7, height: 44)
+                        }
+                        .foregroundStyle(Color.white)
+                        .background(Color.white.opacity(0.08), in: Capsule())
+                        .overlay(Capsule().stroke(Color.white.opacity(0.4), lineWidth: 1))
+                        .buttonStyle(.plain)
                     }
-                    .foregroundStyle(Color.black)
-                    .background(Color.white.opacity(0.9), in: Capsule())
-                    .buttonStyle(.plain)
-
-                    Button(action: {}) {
-                        Text("Follow Premium Content")
-                            .font(.system(size: 16, weight: .semibold))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 44)
-                    }
-                    .foregroundStyle(Color.white)
-                    .background(Color.white.opacity(0.08), in: Capsule())
-                    .overlay(
-                        Capsule()
-                            .stroke(Color.white.opacity(0.4), lineWidth: 1)
-                    )
-                    .buttonStyle(.plain)
                 }
-//                .frame(width: UIScreen.screenWidth)
-                .padding(.horizontal, 24)
+                Spacer()
             }
-            .padding(.vertical, 32)
-        }.frame(width: UIScreen.screenWidth)
+
+            // badge with count
+            HStack(spacing: 4) {
+                Image(systemName: "lock.open.fill")
+                    .padding(.trailing, 1)
+                Text("0/10")
+            }
+            .font(.system(size: 14))
+            .foregroundColor(.white)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(
+                Capsule()
+                    .fill(Color.white.opacity(0.15))
+                    .overlay(Capsule().stroke(Color.white.opacity(0.4), lineWidth: 1))
+            )
+            .padding(.top, 16)
+            .padding(.trailing, 16)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
+
 
 // MARK: - Feed Post Media View (images 1–3, single HLS video, or two HLS videos side by side)
 
@@ -300,6 +308,7 @@ private struct FeedPostMediaView: View {
     var media: FeedPostMediaKind
     var competitionStatusTitle: String?
     var isInCenter: Bool = false
+    var showsPremiumOverlay: Bool = false
 
     @State private var singleIsMuted = true
     @State private var leftIsMuted = true
@@ -324,6 +333,11 @@ private struct FeedPostMediaView: View {
         .frame(width: containerSize, height: containerSize)
         .overlay(alignment: .bottom) {
             mediaOverlay
+        }
+        .overlay {
+            if showsPremiumOverlay {
+                PremiumLockedOverlayView()
+            }
         }
         .padding(.horizontal, -16)
     }
@@ -376,7 +390,7 @@ private struct FeedPostMediaView: View {
         FeedVideoCellView(
             urlString: hlsURL,
             thumbnailURL: thumbnailURL,
-            isInCenter: isInCenter,
+            isInCenter: isInCenter && !showsPremiumOverlay,
             isMuted: $singleIsMuted,
             showVolumeButton: true
         )
@@ -393,7 +407,7 @@ private struct FeedPostMediaView: View {
                 FeedVideoCellView(
                     urlString: left,
                     thumbnailURL: leftThumbnail,
-                    isInCenter: isInCenter,
+                    isInCenter: isInCenter && !showsPremiumOverlay,
                     isMuted: $leftIsMuted,
                     showVolumeButton: false
                 )
@@ -403,7 +417,7 @@ private struct FeedPostMediaView: View {
                 FeedVideoCellView(
                     urlString: right,
                     thumbnailURL: rightThumbnail,
-                    isInCenter: isInCenter,
+                    isInCenter: isInCenter && !showsPremiumOverlay,
                     isMuted: $rightIsMuted,
                     showVolumeButton: false
                 )
@@ -749,11 +763,12 @@ private final class PlayerView: UIView {
 }
 
 #Preview {
-    ZStack {
-        Color.black.ignoresSafeArea()
-        FeedPostViewTeacher()
-            .padding(.top, 16)
-            .padding(.horizontal, 0)
-    }
+//    ZStack {
+//        Color.black.ignoresSafeArea()
+//        FeedPostViewTeacher()
+//            .padding(.top, 16)
+//            .padding(.horizontal, 0)
+//    }
+    PremiumLockedOverlayView()
     .preferredColorScheme(.dark)
 }
