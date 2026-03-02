@@ -23,15 +23,11 @@ struct MediaFramesPreferenceKey: PreferenceKey {
 struct FeedPostViewTeacher: View {
 
     // MARK: Inputs
-
-    /// When non-nil, the post at this index is considered "in center" for auto-play (set by HomeView from scroll).
     var focusedMediaPostIndex: Int? = nil
-    /// This post's index in the feed (used to report frame and to compare with focusedMediaPostIndex).
     var postIndex: Int = 0
 
     var json: dynamicJSON = dynamicJSON()
     var showsLearnThis: Bool = false
-    /// When true, show premium lock overlay over the main content.
     var showsPremiumOverlay: Bool = false
 
     // MARK: Body
@@ -316,7 +312,7 @@ private struct PremiumLockedOverlayView: View {
 // MARK: - Feed Post Media View
 
 /// Images 1–3, single HLS video, or two HLS videos side by side.
-private struct FeedPostMediaView: View {
+struct FeedPostMediaView: View {
     var media: FeedPostMediaKind
     var competitionStatusTitle: String?
     var isInCenter: Bool = false

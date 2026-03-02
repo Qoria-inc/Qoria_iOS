@@ -187,11 +187,11 @@ struct HomeView: View {
             case .artist:
                 switch postType {
                 case .regular:
-                    FeedPostViewArtist()
+                    FeedPostViewArtist(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 case .challenge:
-                    FeedPostViewArtist()
+                    FeedPostViewArtist(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 case .premiumArtist:
-                    FeedPostViewArtist()
+                    FeedPostViewArtist(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json, showsPremiumOverlay: json.is_restricted.bool ?? false)
                 default:
                     EmptyView()
                 }

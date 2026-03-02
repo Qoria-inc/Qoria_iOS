@@ -192,9 +192,9 @@
 		FF8A6F122F3A693200F7008E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FF8A6F172F3A697400F7008E /* HomeView.swift */,
 				B095E32A2F55167A0048E0FC /* Student */,
 				B095E3292F5516680048E0FC /* Artist */,
-				FF8A6F172F3A697400F7008E /* HomeView.swift */,
 				FF2A22E72F4E47E00070E0B2 /* Teacher */,
 				B095E3202F5515940048E0FC /* Teacher&Artist */,
 				FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */,
