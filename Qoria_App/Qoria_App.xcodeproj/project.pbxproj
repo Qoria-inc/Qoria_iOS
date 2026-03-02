@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B06092042F55186500D328A1 /* FeedPostViewStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06092032F55186500D328A1 /* FeedPostViewStudent.swift */; };
 		FF2A22EB2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2A22EA2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift */; };
 		FF85ADA02F48D17B00A5827C /* FeedMediaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */; };
 		FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F132F3A693200F7008E /* QoriaTabView.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B06092032F55186500D328A1 /* FeedPostViewStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudent.swift; sourceTree = "<group>"; };
 		FF2A22EA2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacherHelpers.swift; sourceTree = "<group>"; };
 		FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMediaImage.swift; sourceTree = "<group>"; };
 		FF8A6F132F3A693200F7008E /* QoriaTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaTabView.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				FFB7D9A12F4C123400ABCD01 /* FeedPostViewStudentShared.swift */,
+				B06092032F55186500D328A1 /* FeedPostViewStudent.swift */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				FF8A6F202F3A69A100F7008E /* FeedPostViewArtist.swift in Sources */,
 				FFB7D9A22F4C123400ABCD01 /* FeedPostViewStudentShared.swift in Sources */,
 				FF8A6F282F3A69D000F7008E /* FeedPostViewTeacherAndArtist.swift in Sources */,
+				B06092042F55186500D328A1 /* FeedPostViewStudent.swift in Sources */,
 				FF8A6F242F3A69B000F7008E /* PremiumCrownTag.swift in Sources */,
 				FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */,
 				FF8A6F2A2F3A69E000F7008E /* LearnThisButtonView.swift in Sources */,
