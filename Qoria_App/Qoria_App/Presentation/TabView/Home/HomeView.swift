@@ -179,7 +179,7 @@ struct HomeView: View {
                 case .challenge:
                     FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 case .premiumTutorial:
-                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
+                    FeedPostViewTeacher(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json, showsLearnThis: true, showsPremiumOverlay: json.is_restricted.bool ?? false)
                 default:
                     EmptyView()
                 }
@@ -200,7 +200,9 @@ struct HomeView: View {
                     FeedPostViewTeacherAndArtist()
                 case .challenge:
                     FeedPostViewTeacherAndArtist()
-                case .premiumTutorial, .premiumArtist:
+                case .premiumTutorial:
+                    FeedPostViewTeacherAndArtist()
+                case .premiumArtist:
                     FeedPostViewTeacherAndArtist()
                 default:
                     EmptyView()

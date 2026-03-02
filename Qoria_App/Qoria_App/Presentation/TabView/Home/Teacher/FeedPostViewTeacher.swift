@@ -320,7 +320,7 @@ private struct FeedPostMediaView: View {
     var media: FeedPostMediaKind
     var competitionStatusTitle: String?
     var isInCenter: Bool = false
-    var showsPremiumOverlay: Bool = false
+    var showsPremiumOverlay: Bool
 
     @State private var singleIsMuted = true
     @State private var leftIsMuted = true
