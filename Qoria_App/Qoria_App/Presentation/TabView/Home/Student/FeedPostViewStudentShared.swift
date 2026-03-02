@@ -20,9 +20,6 @@ struct FeedPostViewStudentShared: View {
     let sharedTimeLabel: String
     let sharedText: String
 
-    /// Inner post view (one of the existing FeedPostView*), rendered inside the container.
-    /// This should be created with `isEmbedded: true` so it has no outer padding/background
-    /// and hides its own top-right "more" button.
     let innerPost: AnyView
 
     // MARK: - Body
