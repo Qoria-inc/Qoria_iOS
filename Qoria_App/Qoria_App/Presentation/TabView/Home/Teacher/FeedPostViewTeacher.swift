@@ -198,7 +198,7 @@ private extension FeedPostViewTeacher {
                     Image("ic_comment")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 22, height: 22)
                     Text("\(json.comment_count.int ?? 0)")
                         .font(.system(size: 14))
                         .padding(.leading, 5)

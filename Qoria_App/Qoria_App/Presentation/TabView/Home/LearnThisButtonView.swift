@@ -11,7 +11,7 @@ struct LearnThisButtonView: View {
 
     // MARK: - Constants
 
-    static let height: CGFloat = 48
+    static let height: CGFloat = 40
 
     // MARK: - Properties
 

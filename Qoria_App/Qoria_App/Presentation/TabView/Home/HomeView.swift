@@ -54,6 +54,7 @@ struct HomeView: View {
                     }
                     ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, item in
                         postView(for: item, index: index, focusedMediaPostIndex: focusedMediaPostIndex)
+                            .padding(.bottom, index == viewModel.items.count - 1 ? 60 : 0)
                             .onAppear {
                                 Task {
                                     await viewModel.loadNextPageIfNeeded(currentIndex: index)
