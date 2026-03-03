@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B06092042F55186500D328A1 /* FeedPostViewStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06092032F55186500D328A1 /* FeedPostViewStudent.swift */; };
+		B0F2E7B12F56CAE30035D3DE /* PremiumLockedOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F2E7B02F56CAE30035D3DE /* PremiumLockedOverlayView.swift */; };
+		B0F2E7B32F56CBA10035D3DE /* MediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F2E7B22F56CBA10035D3DE /* MediaHandler.swift */; };
 		FF2A22EB2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2A22EA2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift */; };
 		FF85ADA02F48D17B00A5827C /* FeedMediaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */; };
 		FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F132F3A693200F7008E /* QoriaTabView.swift */; };
@@ -70,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		B06092032F55186500D328A1 /* FeedPostViewStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewStudent.swift; sourceTree = "<group>"; };
+		B0F2E7B02F56CAE30035D3DE /* PremiumLockedOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumLockedOverlayView.swift; sourceTree = "<group>"; };
+		B0F2E7B22F56CBA10035D3DE /* MediaHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaHandler.swift; sourceTree = "<group>"; };
 		FF2A22EA2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacherHelpers.swift; sourceTree = "<group>"; };
 		FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMediaImage.swift; sourceTree = "<group>"; };
 		FF8A6F132F3A693200F7008E /* QoriaTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaTabView.swift; sourceTree = "<group>"; };
@@ -180,6 +184,14 @@
 			path = Student;
 			sourceTree = "<group>";
 		};
+		B0F2E7AD2F56CA7C0035D3DE /* Media+Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B0F2E7B22F56CBA10035D3DE /* MediaHandler.swift */,
+			);
+			path = "Media+Helper";
+			sourceTree = "<group>";
+		};
 		FF2A22E72F4E47E00070E0B2 /* Teacher */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +218,7 @@
 				FF8A6F2D2F3A6A0000F7008E /* CompetitionCurrentStatusTagView.swift */,
 				FF8A6F1B2F3A698F00F7008E /* PremiumBannerView.swift */,
 				FF8A6F1D2F3A699900F7008E /* QoriaAppBarView.swift */,
+				B0F2E7B02F56CAE30035D3DE /* PremiumLockedOverlayView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -306,6 +319,7 @@
 				FFA494D32F3D0CB5007D1B90 /* Domain */,
 				FF8CD85F2F38DAB100017908 /* App */,
 				FF8CD8652F38DAB100017908 /* Presentation */,
+				B0F2E7AD2F56CA7C0035D3DE /* Media+Helper */,
 				FF8CD8642F38DAB100017908 /* Network */,
 				FF8CD8612F38DAB100017908 /* Constants + Extensions */,
 				FF8CD8602F38DAB100017908 /* Colors */,
@@ -509,6 +523,7 @@
 				FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */,
 				FF8CD8942F38E9BD00017908 /* AuthInterceptor.swift in Sources */,
 				FFA494D42F3D0CB5007D1B90 /* HomeRepository.swift in Sources */,
+				B0F2E7B32F56CBA10035D3DE /* MediaHandler.swift in Sources */,
 				FFA494D52F3D0CB5007D1B90 /* GetHomeDataUseCase.swift in Sources */,
 				FF8CD87E2F38DCD400017908 /* AppColor.swift in Sources */,
 				FF8CD8722F38DBE100017908 /* NetworkManager.swift in Sources */,
@@ -520,6 +535,7 @@
 				FF8CD8682F38DAB100017908 /* ContentView.swift in Sources */,
 				FF8CD8692F38DAB100017908 /* Qoria_AppApp.swift in Sources */,
 				FF85ADA02F48D17B00A5827C /* FeedMediaImage.swift in Sources */,
+				B0F2E7B12F56CAE30035D3DE /* PremiumLockedOverlayView.swift in Sources */,
 				FF2A22EB2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift in Sources */,
 				FF8A6F1A2F3A698100F7008E /* FeedPostViewTeacher.swift in Sources */,
 				FF8A6F202F3A69A100F7008E /* FeedPostViewArtist.swift in Sources */,
