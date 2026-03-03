@@ -137,13 +137,7 @@ struct FeedPostViewStudentShared: View {
             sharedTimeLabel: "1w ago",
             sharedText: "Exploring trust and balance through simple partner movements.",
             innerPost: AnyView(
-                FeedPostViewTeacherAndArtist(
-                    image: "ic_postImg2",
-                    showsLearnThis: false,
-                    competitionStatusTitle: nil,
-                    competitionCurrentStatusTitle: nil,
-                    isEmbedded: true
-                )
+                FeedPostViewTeacherAndArtist(isEmbedded: true)
             )
         )
         .padding(.top, 16)

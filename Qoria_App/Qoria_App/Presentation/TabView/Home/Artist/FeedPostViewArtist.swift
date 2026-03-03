@@ -30,7 +30,7 @@ struct FeedPostViewArtist: View {
     }
 }
 
-// MARK: - FeedPostViewTeacher Layout
+// MARK: - FeedPostViewArtist Layout
 
 private extension FeedPostViewArtist {
     var content: some View {

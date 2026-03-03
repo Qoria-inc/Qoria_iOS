@@ -23,7 +23,7 @@ final class NetworkCall: NetworkCalling {
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
         let parameters: Parameters = [
-            "email": "umairkmehmood789+8@gmail.com",
+            "email": "umairkmehmood789+9@gmail.com",
             "password": "password123"
         ]
 
