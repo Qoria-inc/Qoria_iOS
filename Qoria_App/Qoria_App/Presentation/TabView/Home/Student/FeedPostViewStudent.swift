@@ -8,204 +8,192 @@
 import SwiftUI
 
 struct FeedPostViewStudent: View {
-
-    // MARK: - State
-
-    @State private var showUnderDevelopment = false
-    var image: String?
-    var images: [String]? = nil
     
-    // MARK: - Computed Properties
-    
-    /// Returns images array: prefers `images` if provided, otherwise wraps single `image` in array
-    private var mediaItems: [String] {
-        if let images = images, !images.isEmpty {
-            return Array(images.prefix(2)) // Max 2 images
-        } else if let image = image {
-            return [image]
-        } else {
-            return ["ic_postImg1"] // Default fallback
-        }
-    }
-    
-    private var hasMultipleImages: Bool {
-        mediaItems.count == 2
-    }
+    // MARK: Inputs
+    var focusedMediaPostIndex: Int? = nil
+    var postIndex: Int = 0
 
-    // MARK: - Body
+    var json: dynamicJSON = dynamicJSON()
+    var showsPremiumOverlay: Bool = false
+
+    // MARK: Body
 
     var body: some View {
+        content
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+            .clipped()
+            .background(Color.Surface.post)
+    }
+}
+
+// MARK: - FeedPostViewStudent Layout
+
+private extension FeedPostViewStudent {
+    var content: some View {
         VStack(alignment: .leading, spacing: 12) {
+            headerSection
+            captionSection
+            currentCompetitionStatusSection
+            mediaSection
+            actionsSection
+        }
+    }
+
+    var headerSection: some View {
+        HStack {
             HStack {
-                HStack {
-                    ZStack {
-                        Circle()
-                            .fill(Color.clear)
-                            .frame(width: 52, height: 52)
+                profileImageSection
+                profileMetaSection
+            }
 
-                        Circle()
-                            .stroke(
-                                AngularGradient(
-                                    colors: [
-                                        Color.Profile.borderWhiteBase.opacity(1),
-                                        Color.Profile.borderBlueBase.opacity(0.5),
-                                        Color.Profile.borderWhiteBase.opacity(1),
-                                        Color.Profile.borderBlueBase.opacity(0.5),
-                                        Color.Profile.borderWhiteBase.opacity(1)
-                                    ],
-                                    center: .center
-                                ),
-                                lineWidth: 1
-                            )
-                            .frame(width: 52, height: 52)
+            Spacer()
 
-                        Image("ic_proImg")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 44, height: 44)
-                            .clipShape(Circle())
-                    }
+            moreButton
+        }
+    }
+
+    var profileImageSection: some View {
+        ZStack(alignment: .bottomTrailing) {
+            ZStack {
+                Circle()
+                    .fill(Color.clear)
                     .frame(width: 52, height: 52)
 
-                    VStack(alignment: .leading) {
-                        Text("Sarah Morgan")
-                            .font(.system(size: 16, weight: .medium))
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color.Text.onDark)
+                Circle()
+                    .stroke(
+                        AngularGradient(
+                            colors: [
+                                Color.Profile.borderWhiteBase.opacity(1),
+                                Color.Profile.borderBlueBase.opacity(0.5),
+                                Color.Profile.borderWhiteBase.opacity(1),
+                                Color.Profile.borderBlueBase.opacity(0.5),
+                                Color.Profile.borderWhiteBase.opacity(1)
+                            ],
+                            center: .center
+                        ), lineWidth: 1)
+                    .frame(width: 52, height: 52)
 
-                        Text("2h ago")
-                            .font(.system(size: 14))
-                            .foregroundStyle(Color.Text.secondary)
-                    }
+                FeedMediaImage(source: json.owner_info.avatar.string ?? "")
+                    .frame(width: 44, height: 44)
+                    .clipShape(Circle())
+            }
+        }
+        .frame(width: 52, height: 52)
+    }
+
+    var profileMetaSection: some View {
+        VStack(alignment: .leading) {
+            HStack(spacing: 6) {
+                Text(json.owner_info.name.string ?? "")
+                    .font(.system(size: 16, weight: .medium))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.Text.onDark)
+
+                FeedContentTypeView(isSingleTrophy: json.post_type.int == 1
+                                    ? true : false,
+                                    isLock: json.post_type.int == 5 ? true : false)
+            }
+
+            Text(FeedPostDateHelpers.createdAtDisplayText(from: json.created_at.string ?? ""))
+                .font(.system(size: 14))
+                .foregroundStyle(Color.Text.secondary)
+        }
+    }
+
+    var moreButton: some View {
+        Button {} label: {
+            Image("ic_more")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+        }
+        .buttonStyle(.plain)
+    }
+
+    var captionSection: some View {
+        Text(json.title.string ?? "")
+            .font(.body)
+            .foregroundStyle(Color.Text.onDark)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+
+    @ViewBuilder
+    var currentCompetitionStatusSection: some View {
+        if let statusTitle = json.challenge_current_status_title.string,
+           statusTitle.isEmpty == false {
+            CompetitionCurrentStatusTagView(
+                title: statusTitle,
+                style: FeedPostCompetitionStatusHelpers.styleForStatus(title: statusTitle)
+            )
+            .padding(.top, -2)
+        }
+    }
+
+    var mediaSection: some View {
+        VStack(spacing: 0) {
+            FeedPostMediaView(
+                media: FeedPostMediaKind.from(json),
+                competitionStatusTitle: json.challenge_status_title.string,
+                isInCenter: focusedMediaPostIndex == postIndex,
+                showsPremiumOverlay: showsPremiumOverlay
+            )
+            .background(
+                GeometryReader { geo in
+                    Color.clear
+                        .preference(key: MediaFramesPreferenceKey.self, value: [postIndex: geo.frame(in: .global)])
                 }
+            )
+        }
+    }
 
-                Spacer()
-
-                Button {
-                    showUnderDevelopment = true
-                } label: {
-                    Image("ic_more")
+    var actionsSection: some View {
+        HStack(spacing: 20) {
+            Button {} label: {
+                HStack(spacing: 4) {
+                    Image("ic_clap")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
+                    Text("\(json.like_count.int ?? 0)")
+                        .font(.system(size: 14))
                 }
-                .buttonStyle(.plain)
             }
+            .foregroundStyle(Color.Text.secondary)
+            .buttonStyle(.plain)
 
-            Text("Exploring trust and balance through simple partner movements.")
-                .font(.body)
-                .foregroundStyle(Color.Text.onDark)
-                .fixedSize(horizontal: false, vertical: true)
-
-            // MARK: - Media Content (Single or Side-by-Side)
-            if hasMultipleImages {
-                // Two images side-by-side inside a square container
-                let containerSize = UIScreen.main.bounds.width
-
-                ZStack {
-                    // Container background #17171A (reuses app bar surface)
-                    Color.Surface.appBackground
-
-                    HStack(spacing: 2) {
-                        ForEach(Array(mediaItems.enumerated()), id: \.offset) { index, img in
-                            Image(img)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(
-                                    width: (containerSize - 6) / 2,     // 2px left + 2px right + 2px gap
-                                    height: containerSize - 4           // 2px top + 2px bottom
-                                )
-                                .clipped()
-                                .cornerRadius(6)
-                                .overlay(alignment: .bottomTrailing) {
-                                    // Volume button only on right image
-                                    if index == 1 {
-                                        Button {
-                                            showUnderDevelopment = true
-                                        } label: {
-                                            Image("ic_volumeWithBG")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 32, height: 32)
-                                                .padding(8)
-                                        }
-                                        .buttonStyle(.plain)
-                                    }
-                                }
-                        }
-                    }
-                    .padding(2)
+            Button {} label: {
+                HStack(spacing: 4) {
+                    Image("ic_comment")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 22, height: 22)
+                    Text("\(json.comment_count.int ?? 0)")
+                        .font(.system(size: 14))
+                        .padding(.leading, 5)
                 }
-                .frame(width: containerSize, height: containerSize)
-                .padding(.horizontal, -16)
-            } else {
-                // Single image (original behavior)
-                //FeedMediaImage(source: mediaItems.first ?? "ic_postImg1")
-                Image("ic_postImg1")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: .center)
-                    .clipped()
-                    .overlay(alignment: .bottomTrailing) {
-                        Button {
-                            showUnderDevelopment = true
-                        } label: {
-                            Image("ic_volumeWithBG")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .padding(8)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    .padding(.horizontal, -16)
             }
+            .foregroundStyle(Color.Text.secondary)
+            .buttonStyle(.plain)
 
-            HStack(spacing: 20) {
+            Spacer(minLength: 0)
 
-                Button { showUnderDevelopment = true } label: {
-                    HStack(spacing: 4) {
-                        Image("ic_clap")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                        Text("128")
-                            .font(.system(size: 14))
-                    }
-                }
-                .foregroundStyle(Color.Text.secondary)
-                .buttonStyle(.plain)
-
-                Button { showUnderDevelopment = true } label: {
-                    HStack(spacing: 4) {
-                        Image("ic_comment")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 18, height: 18)
-                        Text("24")
-                            .font(.system(size: 14))
-                            .padding(.leading, 5)
-                    }
-                }
-                .foregroundStyle(Color.Text.secondary)
-                .buttonStyle(.plain)
-
-                Spacer(minLength: 0)
-
-                Button { showUnderDevelopment = true } label: {
+            if !showsPremiumOverlay {
+                Button { } label: {
                     HStack(spacing: 4) {
                         Image("ic_share")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)
-                        Text("9")
+                        Text("\(json.share_count.int ?? 0)")
                             .font(.system(size: 14))
                     }
                 }
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
 
-                Button { showUnderDevelopment = true } label: {
+                Button {} label: {
                     Image("ic_save")
                         .resizable()
                         .scaledToFit()
@@ -214,26 +202,16 @@ struct FeedPostViewStudent: View {
                 .foregroundStyle(Color.Text.secondary)
                 .buttonStyle(.plain)
             }
-            .font(.system(size: 14))
-            .padding(.top, 4)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-        .clipped()
-        .background(Color.Surface.post)
-        .alert("Under development", isPresented: $showUnderDevelopment) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("This feature is under development.")
-        }
+        .font(.system(size: 14))
+        .padding(.top, 4)
     }
 }
 
 #Preview {
     ZStack {
         Color.black.ignoresSafeArea()
-        FeedPostViewStudent(image: "ic_postImg1")
+        FeedPostViewStudent()
             .padding(.top, 16)
             .padding(.horizontal, 0)
     }

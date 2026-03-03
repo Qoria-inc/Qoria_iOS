@@ -217,25 +217,25 @@ struct HomeView: View {
             case .student:
                 switch postType {
                 case .regular:
-                    FeedPostViewStudent()
+                    FeedPostViewStudent(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 case .submission:
-                    FeedPostViewStudent()
+                    FeedPostViewStudent(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 default:
                     EmptyView()
                 }
             case .fan:
                 switch postType {
                 case .regular:
-                    FeedPostViewStudent()
+                    FeedPostViewStudent(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 default:
                     EmptyView()
                 }
             case .studentAndFan:
                 switch postType {
                 case .regular:
-                    FeedPostViewStudent()
+                    FeedPostViewStudent(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 case .submission:
-                    FeedPostViewStudent()
+                    FeedPostViewStudent(focusedMediaPostIndex: focusedMediaPostIndex, postIndex: index, json: json)
                 default:
                     EmptyView()
                 }
