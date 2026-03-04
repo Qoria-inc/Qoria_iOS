@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsAuthView: View {
+    var onLoginSuccess: (() -> Void)? = nil
+
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isLoading: Bool = false
@@ -100,6 +102,7 @@ struct SettingsAuthView: View {
             AuthTokenStore.shared.refreshToken = refreshToken
             isLoggedIn = true
             statusText = "Login successful."
+            onLoginSuccess?()
         } catch {
             isLoggedIn = false
             statusText = "Login failed: \(error.localizedDescription)"

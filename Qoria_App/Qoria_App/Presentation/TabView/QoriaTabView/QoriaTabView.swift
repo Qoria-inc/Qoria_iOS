@@ -27,7 +27,12 @@ struct QoriaTabView: View {
                 case .discover:
                     NavigationStack { ContentView(heading: "Discover") }
                 case .settings:
-                    NavigationStack { SettingsAuthView() }
+                    NavigationStack {
+                        SettingsAuthView {
+                            selection = .home
+                            homeViewModel.loadHome()
+                        }
+                    }
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
@@ -38,7 +43,6 @@ struct QoriaTabView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .task {
-            await homeViewModel.performHardcodedLogin()
             homeViewModel.loadHome()
         }
     }

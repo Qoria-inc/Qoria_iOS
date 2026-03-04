@@ -52,6 +52,9 @@ final class NetworkLogger: EventMonitor {
             }
 
             if let err = response.error {
+                if err.isExplicitlyCancelledError {
+                    return
+                }
                 print("❌ error:", err)
             }
         }

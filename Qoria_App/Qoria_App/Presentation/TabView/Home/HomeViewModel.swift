@@ -41,8 +41,7 @@ final class HomeViewModel: ObservableObject {
     func refreshFeed() async {
         currentPage = 1
         hasNextPage = true
-        items = []
-        await loadNextPage()
+        await loadNextPage(replacingExistingItems: true)
     }
 
     func loadNextPageIfNeeded(currentIndex: Int) async {
@@ -52,10 +51,10 @@ final class HomeViewModel: ObservableObject {
         await loadNextPage()
     }
 
-    private func loadNextPage() async {
-        guard hasNextPage, !isLoadingMore else { return }
+    private func loadNextPage(replacingExistingItems: Bool = false) async {
+        guard hasNextPage, !isLoading, !isLoadingMore else { return }
 
-        if items.isEmpty {
+        if items.isEmpty || replacingExistingItems {
             isLoading = true
         } else {
             isLoadingMore = true
@@ -68,7 +67,7 @@ final class HomeViewModel: ObservableObject {
             self.homeData = json
 
             let newItems = json["data"]["results"].array ?? []
-            if currentPage == 1 {
+            if replacingExistingItems || currentPage == 1 {
                 self.items = newItems
             } else {
                 self.items.append(contentsOf: newItems)
@@ -89,32 +88,5 @@ final class HomeViewModel: ObservableObject {
 
         isLoading = false
         isLoadingMore = false
-    }
-    
-    // MARK:- Temporary login solution since we don't have any login screen yet. #DevNote.
-    func performHardcodedLogin() async {
-        do {
-            let json = try await NetworkCall.shared.loginWithEmail()
-            
-            let data = json["data"]
-            let accessToken = data["access"].string ?? data["access_token"].string
-            let refreshToken = data["refresh"].string ?? data["refresh_token"].string
-            
-            AuthTokenStore.shared.accessToken = accessToken
-            AuthTokenStore.shared.refreshToken = refreshToken
-            
-            if let access = accessToken, let refresh = refreshToken {
-                print("LoginWithEmail success. Access token prefix: \(access.prefix(10)), Refresh token prefix: \(refresh.prefix(10))")
-            } else {
-                print("LoginWithEmail success but tokens missing or malformed. Full JSON: \(json)")
-            }
-            
-            // Optionally inspect user:
-            // let user = data["user"]
-            // let email = user["email"].string
-        } catch {
-            // TODO: you can set an errorMessage property if you want
-            print("Login failed: \(error)")
-        }
     }
 }

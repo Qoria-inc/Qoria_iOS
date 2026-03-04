@@ -77,6 +77,7 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity)
                         } else if viewModel.isLoadingMore {
                             ProgressView()
+                                .controlSize(.small)
                                 .frame(maxWidth: .infinity)
                         }
                     }
@@ -92,6 +93,9 @@ struct HomeView: View {
                 .padding(.bottom, 24)
             }
             .scrollIndicators(.hidden)
+            .refreshable {
+                await viewModel.refreshFeed()
+            }
             .background(Color.Surface.appBackground)
         }
     }
