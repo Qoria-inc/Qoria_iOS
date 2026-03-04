@@ -76,22 +76,6 @@ final class TokenRefresher {
         }
         
         guard (200...299).contains(statusCode) else {
-            // Handle error response
-            let errorMessage: String?
-            if let data = response.data {
-                if let json = try? JSON(data: data) {
-                    // Try to extract error message from different possible structures
-                    errorMessage = json["detail"].string 
-                        ?? json["message"].string
-                        ?? json["messages"].array?.first?["message"].string
-                } else if let text = String(data: data, encoding: .utf8) {
-                    errorMessage = text
-                } else {
-                    errorMessage = nil
-                }
-            } else {
-                errorMessage = nil
-            }
             throw NetworkError.httpStatus(statusCode, response.data)
         }
         

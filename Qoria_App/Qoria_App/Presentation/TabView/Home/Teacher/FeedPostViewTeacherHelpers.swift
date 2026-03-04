@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-// MARK: - Audio session for feed video (ambient, mix with others – reduces HAL/Simulator noise)
+// MARK: - Audio session for feed video (playback so sound works even in silent mode)
 enum FeedVideoAudioSession {
     private static var didConfigure = false
     static func configureOnce() {
@@ -17,7 +17,7 @@ enum FeedVideoAudioSession {
         didConfigure = true
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
+            try session.setCategory(.playback, mode: .moviePlayback, options: [.mixWithOthers])
             try session.setActive(true, options: [])
         } catch { }
     }

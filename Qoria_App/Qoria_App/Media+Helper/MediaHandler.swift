@@ -249,9 +249,6 @@ private struct FeedVideoCellView: View {
                 }
             }
         }
-        .onChange(of: isInCenter) { inCenter, _ in
-            if !inCenter { isVideoReady = false }
-        }
     }
 }
 
@@ -289,13 +286,10 @@ private struct FeedHLSVideoPlayerRepresentable: UIViewRepresentable {
                 coord.isReadyForDisplay.wrappedValue = true
             }
         }
-        if shouldPlay {
-            view.configure(urlString: urlString, shouldPlay: true)
-            view.setMuted(isMuted)
-            DispatchQueue.main.async {
-                view.applyPlayPause(shouldPlay: true)
-            }
-        }
+        // Configure immediately to start loading/buffering before the cell reaches center.
+        view.configure(urlString: urlString, shouldPlay: shouldPlay)
+        view.setMuted(isMuted)
+        view.applyPlayPause(shouldPlay: shouldPlay)
         return view
     }
 
@@ -313,15 +307,13 @@ private struct FeedHLSVideoPlayerRepresentable: UIViewRepresentable {
                 playerView.configure(urlString: urlString, shouldPlay: true)
             }
             playerView.setMuted(isMuted)
-            DispatchQueue.main.async {
-                playerView.applyPlayPause(shouldPlay: true)
-            }
+            playerView.applyPlayPause(shouldPlay: true)
         } else {
-            DispatchQueue.main.async {
-                context.coordinator.isReadyForDisplay.wrappedValue = false
-            }
-            // Avoid aggressive create/destroy churn while scrolling; pause in place.
             playerView.cancelTearDown()
+            if playerView.currentURLString != urlString {
+                playerView.configure(urlString: urlString, shouldPlay: false)
+            }
+            playerView.setMuted(isMuted)
             playerView.applyPlayPause(shouldPlay: false)
         }
     }
@@ -390,8 +382,11 @@ private final class PlayerView: UIView {
         pendingShouldPlay = shouldPlay
         FeedVideoAudioSession.configureOnce()
         let item = AVPlayerItem(url: url)
-        item.preferredForwardBufferDuration = 10
+        // Prioritize quick startup over deep prebuffer.
+        item.preferredForwardBufferDuration = 0
+        item.canUseNetworkResourcesForLiveStreamingWhilePaused = true
         let newPlayer = AVPlayer(playerItem: item)
+        newPlayer.automaticallyWaitsToMinimizeStalling = false
         newPlayer.isMuted = true
         playerLayer?.player = newPlayer
         playerLayer?.videoGravity = .resizeAspectFill
@@ -482,7 +477,7 @@ private final class PlayerView: UIView {
         pendingShouldPlay = shouldPlay
         guard player != nil else { return }
         if shouldPlay {
-            player?.play()
+            player?.playImmediately(atRate: 1.0)
         } else {
             player?.pause()
         }
