@@ -57,7 +57,10 @@ final class NetworkManager {
         .serializingData()
         .response
 
-        if response.error != nil {
+        if let afError = response.error {
+            if afError.isExplicitlyCancelledError {
+                throw CancellationError()
+            }
             let statusCode = response.response?.statusCode
             throw NetworkError.httpStatus(statusCode ?? -1, response.data)
         }
