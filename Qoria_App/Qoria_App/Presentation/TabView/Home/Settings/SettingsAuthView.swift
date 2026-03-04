@@ -90,8 +90,16 @@ struct SettingsAuthView: View {
             )
 
             let data = json["data"]
-            let accessToken = data["access"].string ?? data["access_token"].string
-            let refreshToken = data["refresh"].string ?? data["refresh_token"].string
+            let accessToken =
+                data["access"].string
+                ?? data["access_token"].string
+                ?? json["access"].string
+                ?? json["access_token"].string
+            let refreshToken =
+                data["refresh"].string
+                ?? data["refresh_token"].string
+                ?? json["refresh"].string
+                ?? json["refresh_token"].string
 
             guard let accessToken, !accessToken.isEmpty else {
                 statusText = "Login succeeded but access token was missing."

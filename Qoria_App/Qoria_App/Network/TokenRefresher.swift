@@ -94,12 +94,12 @@ final class TokenRefresher {
         
         if let result = json["result"].string, result == "success" {
             // Format 1: nested in data
-            newAccess = json["data"]["access"].string
-            newRefresh = json["data"]["refresh"].string
+            newAccess = json["data"]["access"].string ?? json["data"]["access_token"].string
+            newRefresh = json["data"]["refresh"].string ?? json["data"]["refresh_token"].string
         } else {
             // Format 2: direct access
-            newAccess = json["access"].string
-            newRefresh = json["refresh"].string
+            newAccess = json["access"].string ?? json["access_token"].string
+            newRefresh = json["refresh"].string ?? json["refresh_token"].string
         }
         
         guard let accessToken = newAccess else {
