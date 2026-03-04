@@ -101,6 +101,8 @@ private extension FeedPostViewTeacher {
                     .font(.system(size: 16, weight: .medium))
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.Text.onDark)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
 
                 Text("Teacher")
                     .font(.system(size: 12))

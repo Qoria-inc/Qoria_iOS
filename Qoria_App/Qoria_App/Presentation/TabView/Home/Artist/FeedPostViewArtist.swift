@@ -89,6 +89,8 @@ private extension FeedPostViewArtist {
                     .font(.system(size: 16, weight: .medium))
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.Text.onDark)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
 
                 Text("Artist")
                     .font(.system(size: 12))

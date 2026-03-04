@@ -90,6 +90,8 @@ private extension FeedPostViewStudent {
                     .font(.system(size: 16, weight: .medium))
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.Text.onDark)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
 
                 FeedContentTypeView(isSingleTrophy: json.post_type.int == 1
                                     ? true : false,

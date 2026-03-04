@@ -32,6 +32,10 @@ struct HomeView: View {
     init(viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
+
+    private var isInitialLoading: Bool {
+        viewModel.items.isEmpty && viewModel.errorMessage == nil && viewModel.homeData == nil
+    }
     
     // MARK: - Body
     var body: some View {
@@ -52,27 +56,29 @@ struct HomeView: View {
                             }
                         })
                     }
-                    ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, item in
-                        postView(for: item, index: index, focusedMediaPostIndex: focusedMediaPostIndex)
-                            .padding(.bottom, index == viewModel.items.count - 1 ? 60 : 0)
-                            .onAppear {
-                                Task {
-                                    await viewModel.loadNextPageIfNeeded(currentIndex: index)
-                                }
-                            }
-                    }
 
-                    if viewModel.isLoading && viewModel.items.isEmpty {
-                        ProgressView("Loading feed…")
-                            .frame(maxWidth: .infinity)
-                    } else if let error = viewModel.errorMessage {
-                        Text(error)
-                            .foregroundColor(.red)
-                            .font(.footnote)
-                            .frame(maxWidth: .infinity)
-                    } else if viewModel.isLoadingMore {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
+                    if isInitialLoading {
+                        skeletonFeedSection
+                    } else {
+                        ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, item in
+                            postView(for: item, index: index, focusedMediaPostIndex: focusedMediaPostIndex)
+                                .padding(.bottom, index == viewModel.items.count - 1 ? 60 : 0)
+                                .onAppear {
+                                    Task {
+                                        await viewModel.loadNextPageIfNeeded(currentIndex: index)
+                                    }
+                                }
+                        }
+
+                        if let error = viewModel.errorMessage {
+                            Text(error)
+                                .foregroundColor(.red)
+                                .font(.footnote)
+                                .frame(maxWidth: .infinity)
+                        } else if viewModel.isLoadingMore {
+                            ProgressView()
+                                .frame(maxWidth: .infinity)
+                        }
                     }
                 }
                 .onPreferenceChange(MediaFramesPreferenceKey.self) { frames in
@@ -88,6 +94,70 @@ struct HomeView: View {
             .scrollIndicators(.hidden)
             .background(Color.Surface.appBackground)
         }
+    }
+
+    var skeletonFeedSection: some View {
+        VStack(spacing: 20) {
+            ForEach(0..<4, id: \.self) { _ in
+                skeletonPostCard
+            }
+        }
+    }
+
+    var skeletonPostCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                Circle()
+                    .fill(Color.white.opacity(0.12))
+                    .frame(width: 52, height: 52)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.white.opacity(0.12))
+                        .frame(width: 140, height: 14)
+
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.white.opacity(0.10))
+                        .frame(width: 90, height: 12)
+                }
+
+                Spacer()
+            }
+
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color.white.opacity(0.10))
+                .frame(height: 14)
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color.white.opacity(0.08))
+                .frame(width: UIScreen.main.bounds.width * 0.62, height: 14)
+
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white.opacity(0.10))
+                .frame(width: UIScreen.main.bounds.width - 32, height: UIScreen.main.bounds.width)
+
+            HStack(spacing: 20) {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.white.opacity(0.10))
+                    .frame(width: 54, height: 14)
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.white.opacity(0.10))
+                    .frame(width: 54, height: 14)
+                Spacer()
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.white.opacity(0.10))
+                    .frame(width: 44, height: 14)
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.white.opacity(0.10))
+                    .frame(width: 20, height: 14)
+            }
+            .padding(.top, 2)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+        .background(Color.Surface.post)
+        .redacted(reason: .placeholder)
+        .modifier(ShimmerModifier())
     }
 
     // Mark: - Dynamic Post Type
@@ -243,6 +313,39 @@ struct HomeView: View {
                 EmptyView()
             }
         }
+    }
+}
+
+private struct ShimmerModifier: ViewModifier {
+    @State private var phase: CGFloat = 0.0
+
+    func body(content: Content) -> some View {
+        content
+            .overlay {
+                GeometryReader { geo in
+                    let width = geo.size.width
+                    LinearGradient(
+                        colors: [
+                            Color.clear,
+                            Color.white.opacity(0.22),
+                            Color.clear
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(width: width * 0.36)
+                    .rotationEffect(.degrees(20))
+                    .offset(x: phase * width)
+                    .blendMode(.plusLighter)
+                    .allowsHitTesting(false)
+                }
+            }
+            .mask(content)
+            .onAppear {
+                withAnimation(.linear(duration: 1.1).repeatForever(autoreverses: false)) {
+                    phase = 1.2
+                }
+            }
     }
 }
 
