@@ -27,7 +27,7 @@ struct QoriaTabView: View {
                 case .discover:
                     NavigationStack { ContentView(heading: "Discover") }
                 case .settings:
-                    NavigationStack { ContentView(heading: "Settings") }
+                    NavigationStack { SettingsAuthView() }
                 }
             }
             .toolbar(.hidden, for: .navigationBar)

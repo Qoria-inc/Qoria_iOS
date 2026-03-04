@@ -11,6 +11,7 @@
 		B0F2E7B12F56CAE30035D3DE /* PremiumLockedOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F2E7B02F56CAE30035D3DE /* PremiumLockedOverlayView.swift */; };
 		B0F2E7B32F56CBA10035D3DE /* MediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F2E7B22F56CBA10035D3DE /* MediaHandler.swift */; };
 		FF2A22EB2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2A22EA2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift */; };
+		FF577D822F58A03B00E9D5E8 /* SettingsAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF577D802F58A03B00E9D5E8 /* SettingsAuthView.swift */; };
 		FF85ADA02F48D17B00A5827C /* FeedMediaImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */; };
 		FF8A6F162F3A693200F7008E /* QoriaTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F132F3A693200F7008E /* QoriaTabView.swift */; };
 		FF8A6F182F3A697400F7008E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8A6F172F3A697400F7008E /* HomeView.swift */; };
@@ -75,6 +76,7 @@
 		B0F2E7B02F56CAE30035D3DE /* PremiumLockedOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumLockedOverlayView.swift; sourceTree = "<group>"; };
 		B0F2E7B22F56CBA10035D3DE /* MediaHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaHandler.swift; sourceTree = "<group>"; };
 		FF2A22EA2F4E47F00070E0B2 /* FeedPostViewTeacherHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostViewTeacherHelpers.swift; sourceTree = "<group>"; };
+		FF577D802F58A03B00E9D5E8 /* SettingsAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAuthView.swift; sourceTree = "<group>"; };
 		FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMediaImage.swift; sourceTree = "<group>"; };
 		FF8A6F132F3A693200F7008E /* QoriaTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QoriaTabView.swift; sourceTree = "<group>"; };
 		FF8A6F172F3A697400F7008E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,14 @@
 			path = Teacher;
 			sourceTree = "<group>";
 		};
+		FF577D812F58A03B00E9D5E8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FF577D802F58A03B00E9D5E8 /* SettingsAuthView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		FF8A6F122F3A693200F7008E /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +219,7 @@
 				B095E3292F5516680048E0FC /* Artist */,
 				FF2A22E72F4E47E00070E0B2 /* Teacher */,
 				B095E3202F5515940048E0FC /* Teacher&Artist */,
+				FF577D812F58A03B00E9D5E8 /* Settings */,
 				FF85AD9F2F48D17B00A5827C /* FeedMediaImage.swift */,
 				FFA494D62F3D0E3A007D1B90 /* HomeViewModel.swift */,
 				FF8A6F232F3A69B000F7008E /* PremiumCrownTag.swift */,
@@ -546,6 +557,7 @@
 				FF8A6F262F3A69C000F7008E /* FeedContentTypeView.swift in Sources */,
 				FF8A6F2A2F3A69E000F7008E /* LearnThisButtonView.swift in Sources */,
 				FF8A6F2C2F3A69F000F7008E /* CompetitionStatusButtonView.swift in Sources */,
+				FF577D822F58A03B00E9D5E8 /* SettingsAuthView.swift in Sources */,
 				FF8A6F2E2F3A6A0000F7008E /* CompetitionCurrentStatusTagView.swift in Sources */,
 				FF8CD8742F38DBEC00017908 /* NetworkCall.swift in Sources */,
 				FF8A6F1E2F3A699900F7008E /* QoriaAppBarView.swift in Sources */,
